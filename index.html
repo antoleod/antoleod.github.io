@@ -1,42 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>ORYXEN — The Future of Applications</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="We design and build modern digital products: mobile apps, web platforms, and cloud solutions.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Libraries -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
 
+  <header data-aos="fade-down" data-aos-duration="1000">
+    <div class="logo">ORYXEN</div>
+    <nav>
+      <a href="pitch.html" class="nav-link" data-i18n="nav_pitch">Investors</a>
+      <div class="lang-switch">
+        <button class="lang-toggle active" data-lang="en">EN</button>
+        <span class="divider">/</span>
+        <button class="lang-toggle" data-lang="es">ES</button>
+      </div>
+    </nav>
+  </header>
+
   <main class="hero">
-    <span class="brand">ORYXEN</span>
-    <h1>The future of applications starts here.</h1>
-    <p class="subtitle">Empowering the future with scalable digital solutions.</p>
+    <div class="hero-content">
+      <span class="brand-tag" data-aos="fade-up">ORYXEN</span>
+      <h1 data-i18n="hero_title" data-aos="fade-up" data-aos-delay="100">The future of applications starts here.</h1>
+      <p class="subtitle" data-i18n="hero_subtitle" data-aos="fade-up" data-aos-delay="200">Empowering the future with
+        scalable digital solutions.</p>
 
-    <p class="description">
-      We design and build modern digital products: mobile apps, web platforms, and cloud solutions.
-      From concept to launch, ORYXEN builds technology for the future.
-    </p>
+      <p class="description" data-i18n="hero_desc" data-aos="fade-up" data-aos-delay="300">
+        We design and build modern digital products: mobile apps, web platforms, and cloud solutions.
+        From concept to launch, ORYXEN builds technology for the future.
+      </p>
 
-    <div class="actions">
-      <a href="mailto:contact@oryxen.tech" class="btn primary">Start your app project</a>
-      <a href="#contact" class="btn secondary">Contact ORYXEN</a>
+      <div class="actions" data-aos="fade-up" data-aos-delay="400">
+        <a href="mailto:contact@oryxen.tech" class="btn primary" data-i18n="btn_start">Start your app project</a>
+        <a href="#contact" class="btn secondary" data-i18n="btn_contact">Contact ORYXEN</a>
+      </div>
     </div>
   </main>
 
-  <section id="contact" class="contact">
-    <h2>Get in touch</h2>
-    <p>One single contact for all inquiries.</p>
+  <section id="contact" class="contact" data-aos="fade-up">
+    <h2 data-i18n="contact_title">Get in touch</h2>
+    <p data-i18n="contact_desc">One single contact for all inquiries.</p>
 
-    <form action="mailto:contact@oryxen.tech" method="POST" enctype="text/plain">
-      <input type="text" name="name" placeholder="Your name" required />
-      <input type="email" name="email" placeholder="Your email" required />
-      <textarea name="message" placeholder="Your message" required></textarea>
-      <button type="submit" class="btn primary">Send message</button>
+    <!-- Replace YOUR_FORM_ID with actual Formspree ID later -->
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <input type="text" name="name" data-i18n="placeholder_name" placeholder="Your name" required />
+      <input type="email" name="email" data-i18n="placeholder_email" placeholder="Your email" required />
+      <textarea name="message" data-i18n="placeholder_message" placeholder="Your message" required></textarea>
+      <button type="submit" class="btn primary" data-i18n="btn_send">Send message</button>
     </form>
 
-    <p class="email">contact@oryxen.tech</p>
+    <p class="email-display" data-i18n="footer_email">contact@oryxen.tech</p>
   </section>
 
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="locales.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
