@@ -2,33 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>ORYXEN</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      background: #0b0e14;
-      color: #ffffff;
-      font-family: Arial, Helvetica, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
-    h1 {
-      font-size: 3rem;
-      letter-spacing: 4px;
-    }
-    p {
-      opacity: 0.7;
-    }
-  </style>
+  <title>ORYXEN — The Future of Applications</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div>
-    <h1>ORYXEN</h1>
-    <p>Building the future of digital products</p>
-  </div>
+
+  <main class="hero">
+    <span class="brand">ORYXEN</span>
+    <h1>The future of applications starts here.</h1>
+    <p class="subtitle">Empowering the future with scalable digital solutions.</p>
+
+    <p class="description">
+      We design and build modern digital products: mobile apps, web platforms, and cloud solutions.
+      From concept to launch, ORYXEN builds technology for the future.
+    </p>
+
+    <div class="actions">
+      <a href="mailto:contact@oryxen.tech" class="btn primary">Start your app project</a>
+      <a href="#contact" class="btn secondary">Contact ORYXEN</a>
+    </div>
+  </main>
+
+  <section id="contact" class="contact">
+    <h2>Get in touch</h2>
+    <p>One single contact for all inquiries.</p>
+
+    <form action="mailto:contact@oryxen.tech" method="POST" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your name" required />
+      <input type="email" name="email" placeholder="Your email" required />
+      <textarea name="message" placeholder="Your message" required></textarea>
+      <button type="submit" class="btn primary">Send message</button>
+    </form>
+
+    <p class="email">contact@oryxen.tech</p>
+  </section>
+
 </body>
 </html>
