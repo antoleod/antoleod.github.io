@@ -314,6 +314,71 @@ textarea.contact__input { min-height: 160px; resize: vertical; }
 .form-status { text-align: center; color: var(--muted); min-height: 1.25rem; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(16,22,36,0.9), rgba(12,17,28,0.95));
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card:hover {
+  border-color: rgba(140,198,255,0.6);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.project-card__icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-card__icon {
+  transform: scale(1.1);
+}
+
+.project-card__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.project-card__description {
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+  line-height: 1.6;
+}
+
+.project-card__link {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: gap 0.3s ease;
+}
+
+.project-card:hover .project-card__link {
+  gap: 0.75rem;
+}
+
 .footer {
   padding: 2.2rem 0 2.6rem;
   color: var(--muted);
@@ -367,4 +432,7 @@ textarea.contact__input { min-height: 160px; resize: vertical; }
   .nav__cta { display: none; }
   .hero__eyebrow { font-size: 0.85rem; }
   .hero__title { font-size: clamp(2rem, 6vw, 2.6rem); }
+  .projects__grid { grid-template-columns: 1fr; }
+  .project-card { padding: 1.5rem 1.25rem; }
+  .project-card__icon { font-size: 2.5rem; }
 }
