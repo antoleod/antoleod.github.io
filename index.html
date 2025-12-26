@@ -9,6 +9,107 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Form Enhancements - Minimalist & Functional */
+    .contact__form { 
+      position: relative; 
+      width: 100%;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      transition-delay: 0.2s;
+    }
+    .section.visible .contact__form { opacity: 1; transform: translateY(0); }
+    
+    /* Staggered Animation for Inputs */
+    .contact__form .input-wrapper,
+    .contact__form .contact__button {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .section.visible .contact__form .input-wrapper,
+    .section.visible .contact__form .contact__button {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Delays */
+    .section.visible .contact__form .contact__group .input-wrapper:nth-child(1) { transition-delay: 0.4s; }
+    .section.visible .contact__form .contact__group .input-wrapper:nth-child(2) { transition-delay: 0.5s; }
+    .section.visible .contact__form > .input-wrapper { transition-delay: 0.6s; }
+    .section.visible .contact__form .contact__button { transition-delay: 0.7s; }
+
+    .input-wrapper { position: relative; width: 100%; margin-bottom: 1rem; }
+    
+    /* Validation Icon */
+    .input-check-icon {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%) scale(0.5);
+      color: #10b981;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+    }
+    .input-wrapper.valid .input-check-icon { opacity: 1; transform: translateY(-50%) scale(1); }
+    .input-wrapper textarea + .input-check-icon { top: 1.5rem; transform: scale(0.5); }
+    .input-wrapper.valid textarea + .input-check-icon { transform: scale(1); }
+
+    /* Visual Validation States */
+    .contact__input { 
+      width: 100%; 
+      padding-right: 3rem;
+      transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; 
+    }
+    .contact__input.error { 
+      border-color: #ef4444 !important; 
+      background-color: var(--bg-error) !important; 
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+    }
+    .contact__input:focus { 
+      outline: none; 
+      border-color: var(--accent); 
+      box-shadow: 0 0 0 4px var(--glow); 
+    }
+
+    /* Button States & Micro-interactions */
+    .contact__button { 
+      position: relative; 
+      overflow: hidden; 
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 160px; /* Ensure consistent width during state changes */
+    }
+    
+    /* Loading State */
+    .contact__button.loading { pointer-events: none; opacity: 0.9; }
+    .contact__button.loading .btn-text { opacity: 0; transform: translateY(-10px); }
+    .contact__button.loading .btn-loader { opacity: 1; visibility: visible; }
+
+    /* Success State */
+    .contact__button.success { background-color: #10b981 !important; border-color: #10b981 !important; color: white !important; pointer-events: none; }
+
+    /* Error State */
+    .contact__button.error { background-color: #ef4444 !important; border-color: #ef4444 !important; color: white !important; }
+
+    /* Elements */
+    .btn-text { transition: all 0.3s ease; display: block; }
+    .btn-loader {
+      position: absolute; left: 50%; top: 50%; margin-left: -10px; margin-top: -10px;
+      width: 20px; height: 20px;
+      border: 2px solid rgba(255,255,255,0.3); border-top-color: currentColor;
+      border-radius: 50%; animation: spin 0.8s linear infinite;
+      opacity: 0; visibility: hidden; transition: all 0.3s;
+    }
+    .btn-success-icon {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(0.5);
+      opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
 </head>
 <body>
   <header class="header">
@@ -241,18 +342,46 @@
           <h2 class="section__title" data-i18n="contact.title">Tell us your idea. We will listen, advise, and build it with you.</h2>
           <p class="section__subtitle" data-i18n="contact.subtitle">No need for a perfect brief. Share where you are and what you want to achieve. We respond within one business day.</p>
         </div>
-        <form action="mailto:contact@oryxen.tech" method="POST" class="contact__form" aria-label="Contact form">
+        
+        <!-- Enhanced Form: Functional, Minimalist, Mobile-First -->
+        <!-- IMPORTANT: Replace 'https://formspree.io/f/YOUR_FORM_ID' with your actual Formspree endpoint -->
+        <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact__form" novalidate>
+          <!-- Honeypot for anti-spam (invisible) -->
+          <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off">
+          
           <div class="contact__group">
-            <label class="sr-only" for="name">Name</label>
-            <input type="text" id="name" name="name" class="contact__input" placeholder="Name" required data-i18n-placeholder="contact.form.name">
-            <label class="sr-only" for="email">Email</label>
-            <input type="email" id="email" name="email" class="contact__input" placeholder="Email" required data-i18n-placeholder="contact.form.email">
+            <div class="input-wrapper">
+              <label class="sr-only" for="name">Name</label>
+              <input type="text" id="name" name="name" class="contact__input" placeholder="Name" required autocomplete="name" data-i18n-placeholder="contact.form.name">
+              <span class="input-check-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+            </div>
+            <div class="input-wrapper">
+              <label class="sr-only" for="email">Email</label>
+              <input type="email" id="email" name="email" class="contact__input" placeholder="Email" required autocomplete="email" inputmode="email" data-i18n-placeholder="contact.form.email">
+              <span class="input-check-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+            </div>
           </div>
-          <label class="sr-only" for="idea">Tell us about your idea</label>
-          <textarea id="idea" name="idea" class="contact__input" placeholder="Tell us about your idea" required data-i18n-placeholder="contact.form.idea"></textarea>
-          <button type="submit" class="contact__button button" data-i18n="contact.form.submit">Send message</button>
+          <div class="input-wrapper">
+            <label class="sr-only" for="idea">Tell us about your idea</label>
+            <textarea id="idea" name="message" class="contact__input" placeholder="Tell us about your idea" required data-i18n-placeholder="contact.form.idea" rows="4"></textarea>
+            <span class="input-check-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+          </div>
+          
+          <button type="submit" id="submit-btn" class="contact__button button">
+            <span class="btn-text" data-i18n="contact.form.submit">Send message</span>
+            <span class="btn-loader" aria-hidden="true"></span>
+            <span class="btn-success-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+          </button>
         </form>
-        <p class="form-status" role="status" aria-live="polite"></p>
+        
         <a href="mailto:contact@oryxen.tech" class="contact__email-link">contact@oryxen.tech</a>
       </div>
     </section>
@@ -265,6 +394,11 @@
     </svg>
   </a>
 
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+    <svg class="theme-icon-light" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    <svg class="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+  </button>
+
   <footer class="footer">
     <div class="container footer__grid">
       <p data-i18n="footer.line1">ORYXEN TECH — Quietly Engineering Bold Futures.</p>
@@ -274,5 +408,105 @@
   </footer>
 
   <script src="js/script.js"></script>
+  <script>
+    // Contact Form Logic - Minimalist & Robust
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contact-form');
+      const btn = document.getElementById('submit-btn');
+      const btnText = btn.querySelector('.btn-text');
+      
+      // Helper: Validate Email
+      const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      // Real-time validation logic
+      const validateInput = (input) => {
+        const wrapper = input.closest('.input-wrapper');
+        const val = input.value.trim();
+        let isValid = false;
+        
+        if (input.type === 'email') isValid = isValidEmail(val);
+        else isValid = val.length > 0;
+
+        if (isValid) wrapper.classList.add('valid');
+        else wrapper.classList.remove('valid');
+      };
+
+      // Real-time error clearing
+      form.querySelectorAll('.contact__input').forEach(input => {
+        input.addEventListener('input', () => {
+          input.classList.remove('error');
+          validateInput(input);
+        });
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        let hasError = false;
+
+        // 1. Validate Fields
+        const name = form.querySelector('#name');
+        const email = form.querySelector('#email');
+        const message = form.querySelector('#idea');
+
+        if (!name.value.trim()) { name.classList.add('error'); hasError = true; }
+        if (!email.value.trim() || !isValidEmail(email.value)) { email.classList.add('error'); hasError = true; }
+        if (!message.value.trim()) { message.classList.add('error'); hasError = true; }
+
+        if (hasError) return; // Stop if validation fails
+
+        // 2. Set Sending State
+        btn.classList.add('loading');
+        
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (response.ok) {
+            // 3. Success State
+            btn.classList.remove('loading');
+            
+            // Smooth text transition with i18n support
+            const originalText = btnText.innerText;
+            const lang = document.documentElement.lang || 'en';
+            const successMsg = { en: 'Sent', fr: 'Envoyé', es: 'Enviado' }[lang] || 'Sent';
+
+            btnText.style.opacity = '0';
+            setTimeout(() => {
+              btn.classList.add('success');
+              btnText.innerText = successMsg;
+              btnText.style.opacity = '1';
+            }, 300);
+
+            form.reset();
+            form.querySelectorAll('.input-wrapper').forEach(w => w.classList.remove('valid'));
+            
+            setTimeout(() => {
+              btnText.style.opacity = '0';
+              setTimeout(() => {
+                btn.classList.remove('success');
+                btnText.innerText = originalText;
+                btnText.style.opacity = '1';
+              }, 300);
+            }, 4000);
+          } else {
+            throw new Error('Submission failed');
+          }
+        } catch (error) {
+          // 4. Error State
+          btn.classList.remove('loading');
+          btn.classList.add('error');
+          const originalText = btnText.innerText;
+          btnText.innerText = "Error — Retry";
+          setTimeout(() => { 
+            btn.classList.remove('error'); 
+            btnText.innerText = originalText; 
+          }, 3000);
+        }
+      });
+    });
+  </script>
 </body>
 </html>

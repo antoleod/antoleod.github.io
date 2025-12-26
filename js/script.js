@@ -311,44 +311,23 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => setLang(btn.dataset.lang));
   });
 
-  const form = document.querySelector('.contact__form');
-  const formStatus = document.querySelector('.form-status');
-  if (form) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const action = form.getAttribute('action') || '';
-      const data = new FormData(form);
+  // Theme Toggle Logic
+  const themeToggle = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  
+  const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  const savedTheme = localStorage.getItem('oryxen-theme');
+  
+  if (savedTheme) {
+    html.setAttribute('data-theme', savedTheme);
+  }
 
-      if (action.startsWith('mailto:')) {
-        const to = action.replace('mailto:', '');
-        const name = data.get('name') || 'ORYXEN contact';
-        const email = data.get('email') || '';
-        const idea = data.get('idea') || '';
-        const subject = encodeURIComponent(`Project idea — ${name}`);
-        const body = encodeURIComponent(
-          `Name: ${name}\nEmail: ${email}\n\nIdea:\n${idea}`
-        );
-        formStatus.textContent = 'Opening your email client...';
-        window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
-        return;
-      }
-
-      formStatus.textContent = 'Sending...';
-      try {
-        const response = await fetch(action, {
-          method: form.method,
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-        if (response.ok) {
-          formStatus.textContent = 'Thank you. We will respond within one business day.';
-          form.reset();
-        } else {
-          formStatus.textContent = 'We could not send the form. Please email contact@oryxen.tech.';
-        }
-      } catch (error) {
-        formStatus.textContent = 'Connection issue. Please email contact@oryxen.tech.';
-      }
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme') || getSystemTheme();
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('oryxen-theme', next);
     });
   }
 });
