@@ -395,7 +395,16 @@
       
       /* Espaciado: Altura del header fijo + aire visual */
       padding-top: calc(var(--header-height) + 2rem);
-      padding-bottom: 4rem;
+      padding-bottom: 2.25rem;
+    }
+
+    /* Desktop: avoid huge empty space between sections */
+    @media screen and (min-width: 968px) {
+      .hero {
+        min-height: auto;
+        padding-top: calc(var(--header-height) + 3rem);
+        padding-bottom: 1.5rem;
+      }
     }
 
     .hero__grid {
@@ -812,10 +821,6 @@
             <p data-i18n="create.card2.text">Premium sites that explain complex value simply, ready for multilingual European audiences.</p>
           </div>
           <div class="card">
-            <h3 data-i18n="create.card3.title">MVP &amp; idea validation</h3>
-            <p data-i18n="create.card3.text">Rapid prototypes to test ideas, gather feedback, and de-risk investment before full build.</p>
-          </div>
-          <div class="card">
             <h3 data-i18n="create.card4.title">Technical consulting</h3>
             <p data-i18n="create.card4.text">Architecture, governance, Microsoft 365, Azure, Intune, Windows 10/11, AD, and ServiceNow optimization.</p>
           </div>
@@ -873,19 +878,23 @@
           </div>
 
           <div class="contact__panel">
+            <div class="contact__panel-header">
+              <p class="contact__panel-eyebrow" data-i18n="contact.panel.eyebrow">Start a conversation</p>
+              <p class="contact__panel-subtitle" data-i18n="contact.panel.subtitle">Share the essentials. We’ll reply with next steps.</p>
+            </div>
             <form id="contact-form" action="mailto:contact@oryxen.tech" method="POST" class="contact__form" novalidate autocomplete="on" aria-describedby="contact-meta">
               <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off">
 
               <div class="contact__group">
                 <div class="input-wrapper">
-                  <label class="sr-only" for="name">Name</label>
+                  <label class="contact__label" for="name" data-i18n="contact.form.name">Name</label>
                   <input type="text" id="name" name="name" class="contact__input" placeholder="Name" required autocomplete="name" autocapitalize="words" data-i18n-placeholder="contact.form.name">
                   <span class="input-check-icon" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   </span>
                 </div>
                 <div class="input-wrapper">
-                  <label class="sr-only" for="email">Email</label>
+                  <label class="contact__label" for="email" data-i18n="contact.form.email">Email</label>
                   <input type="email" id="email" name="email" class="contact__input" placeholder="Email" required autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" data-i18n-placeholder="contact.form.email">
                   <span class="input-check-icon" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -894,7 +903,7 @@
               </div>
 
               <div class="input-wrapper contact__span-2">
-                <label class="sr-only" for="company">Company</label>
+                <label class="contact__label" for="company" data-i18n="contact.form.company">Company (optional)</label>
                 <input type="text" id="company" name="company" class="contact__input" placeholder="Company (optional)" autocomplete="organization" data-i18n-placeholder="contact.form.company">
                 <span class="input-check-icon" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -902,7 +911,7 @@
               </div>
 
               <div class="input-wrapper contact__span-2">
-                <label class="sr-only" for="idea">Tell us about your idea</label>
+                <label class="contact__label" for="idea" data-i18n="contact.form.idea">Tell us about your idea</label>
                 <textarea id="idea" name="idea" class="contact__input" placeholder="Tell us about your idea" required data-i18n-placeholder="contact.form.idea" rows="5"></textarea>
                 <span class="input-check-icon" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
