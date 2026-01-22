@@ -97,16 +97,38 @@
     const navLinks = document.querySelectorAll('.nav__link');
     let lastFocused = null;
 
+    const overlay =
+      document.querySelector('.nav-overlay') ||
+      (() => {
+        const el = document.createElement('div');
+        el.className = 'nav-overlay';
+        el.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(el);
+        return el;
+      })();
+
+    const getFocusable = () => {
+      if (!navMenu) return [];
+      return Array.from(
+        navMenu.querySelectorAll(
+          'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex=\"-1\"])'
+        )
+      ).filter((el) => el instanceof HTMLElement && !el.hasAttribute('disabled'));
+    };
+
     const setMenuOpen = (isOpen, { focus = true } = {}) => {
       if (!navMenu || !navToggle) return;
 
       navMenu.classList.toggle('show-menu', isOpen);
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      navMenu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      if ('inert' in navMenu) navMenu.inert = !isOpen;
+      overlay.classList.toggle('visible', isOpen);
 
       if (isOpen) {
         lastFocused = document.activeElement;
         document.body.style.overflow = 'hidden';
-        if (focus) navMenu.querySelector('.nav__link')?.focus();
+        if (focus) (getFocusable()[0] || navMenu).focus?.();
       } else {
         document.body.style.overflow = '';
         if (focus && lastFocused instanceof HTMLElement) lastFocused.focus();
@@ -120,10 +142,31 @@
       navClose.addEventListener('click', () => setMenuOpen(false));
     }
     navLinks.forEach((link) => link.addEventListener('click', () => setMenuOpen(false, { focus: false })));
+    overlay.addEventListener('click', () => setMenuOpen(false));
 
     document.addEventListener('keydown', (event) => {
+      const isOpen = !!navMenu?.classList.contains('show-menu');
+
       if (event.key === 'Escape') setMenuOpen(false);
+
+      if (!isOpen || event.key !== 'Tab') return;
+      const focusables = getFocusable();
+      if (!focusables.length) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+
+      if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
     });
+
+    setMenuOpen(false, { focus: false });
   };
 
   const initHeaderScroll = () => {
@@ -203,7 +246,6 @@
     const formStatus = document.querySelector('.form-status');
     if (!form || !formStatus) return;
 
-<<<<<<< HEAD
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -238,30 +280,41 @@
       } catch {
         formStatus.textContent = 'Connection issue. Please email contact@oryxen.tech.';
       }
-=======
-  // Theme Toggle Logic
-  const themeToggle = document.getElementById('theme-toggle');
-  const html = document.documentElement;
-  
-  const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-  const savedTheme = localStorage.getItem('oryxen-theme');
-  
-  if (savedTheme) {
-    html.setAttribute('data-theme', savedTheme);
-  }
+    });
+  };
 
-  if (themeToggle) {
+  const initTheme = () => {
+    const themeToggle = document.getElementById('theme-toggle');
+    if (!themeToggle) return;
+
+    const getSystemTheme = () =>
+      window.matchMedia?.('(prefers-color-scheme: light)')?.matches ? 'light' : 'dark';
+
+    const html = document.documentElement;
+    try {
+      const savedTheme = localStorage.getItem('oryxen-theme');
+      if (savedTheme === 'light' || savedTheme === 'dark') {
+        html.setAttribute('data-theme', savedTheme);
+      }
+    } catch {
+      /* ignore */
+    }
+
     themeToggle.addEventListener('click', () => {
       const current = html.getAttribute('data-theme') || getSystemTheme();
       const next = current === 'light' ? 'dark' : 'light';
       html.setAttribute('data-theme', next);
-      localStorage.setItem('oryxen-theme', next);
->>>>>>> 93abb8ef5375d2b6cd95934be82c29eb60d1316d
+      try {
+        localStorage.setItem('oryxen-theme', next);
+      } catch {
+        /* ignore */
+      }
     });
   };
 
   onReady(() => {
     initI18n();
+    initTheme();
     initNav();
     initHeaderScroll();
     initActiveLinks();

@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ORYXEN TECH — Quietly Engineering Bold Futures</title>
   <meta name="description" content="ORYXEN TECH: technology with purpose and human guidance. We build applications, websites, and digital solutions with calm precision.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta name="color-scheme" content="dark light">
+  <script>document.documentElement.classList.add('js');</script>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -83,7 +82,7 @@
         <div class="hero__panel" aria-label="ORYXEN TECH logo and promise">
           <div class="hero__brand">
             <div class="hero__logo">
-              <img src="/assets/logo.png" alt="ORYXEN TECH logo" width="946" height="623" decoding="async" fetchpriority="high">
+              <img src="assets/logo.png" alt="ORYXEN TECH logo" width="946" height="623" decoding="async" fetchpriority="high">
             </div>
             <div>
               <p class="hero__brand-name">ORYXEN TECH</p>
@@ -244,8 +243,7 @@
         </div>
         
         <!-- Enhanced Form: Functional, Minimalist, Mobile-First -->
-        <!-- IMPORTANT: Replace 'https://formspree.io/f/YOUR_FORM_ID' with your actual Formspree endpoint -->
-        <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact__form" novalidate>
+        <form id="contact-form" action="mailto:contact@oryxen.tech" method="POST" class="contact__form" novalidate>
           <!-- Honeypot for anti-spam (invisible) -->
           <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off">
           
@@ -267,7 +265,7 @@
           </div>
           <div class="input-wrapper">
             <label class="sr-only" for="idea">Tell us about your idea</label>
-            <textarea id="idea" name="message" class="contact__input" placeholder="Tell us about your idea" required data-i18n-placeholder="contact.form.idea" rows="4"></textarea>
+            <textarea id="idea" name="idea" class="contact__input" placeholder="Tell us about your idea" required data-i18n-placeholder="contact.form.idea" rows="4"></textarea>
             <span class="input-check-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
             </span>
@@ -281,6 +279,7 @@
             </span>
           </button>
         </form>
+        <p class="form-status" role="status" aria-live="polite"></p>
         
         <a href="mailto:contact@oryxen.tech" class="contact__email-link">contact@oryxen.tech</a>
       </div>
@@ -307,6 +306,7 @@
     </div>
   </footer>
 
-  <script src="js/script.js"></script>
+  <script src="js/locales.js" defer></script>
+  <script src="js/script.js" defer></script>
 </body>
 </html>

@@ -15,12 +15,8 @@
   --container: 1180px;
   --shadow: 0 20px 55px rgba(0, 0, 0, 0.38);
   --transition: 0.35s ease;
-<<<<<<< HEAD
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
-=======
-  --font-sans: "Space Grotesk", "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
-  
-  /* Dynamic Theme Variables (Default Dark) */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+
   --bg-gradient-1: rgba(140,198,255,0.08);
   --bg-gradient-2: rgba(118,180,255,0.06);
   --bg-solid-1: #05070c;
@@ -55,12 +51,12 @@
     --accent-strong: #0369a1;
     --glow: rgba(2, 132, 199, 0.15);
     --shadow: 0 20px 55px rgba(0, 0, 0, 0.08);
-    
+
     --bg-gradient-1: rgba(2, 132, 199, 0.05);
     --bg-gradient-2: rgba(2, 132, 199, 0.03);
     --bg-solid-1: #f8fafc;
     --bg-solid-2: #ffffff;
-    
+
     --header-gradient: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.65) 60%, transparent 100%);
     --header-scrolled: rgba(255,255,255,0.92);
     --bg-glass: rgba(0,0,0,0.03);
@@ -76,7 +72,6 @@
     --bg-footer: #f1f5f9;
     --bg-error: #fef2f2;
   }
->>>>>>> 93abb8ef5375d2b6cd95934be82c29eb60d1316d
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -190,7 +185,6 @@ button { -webkit-tap-highlight-color: transparent; }
 }
 .lang__btn:hover { color: var(--accent); }
 
-<<<<<<< HEAD
 .nav__toggle, .nav__close {
   display: none;
   cursor: pointer;
@@ -213,17 +207,6 @@ button { -webkit-tap-highlight-color: transparent; }
   align-items: center;
   justify-content: center;
   padding: 0;
-=======
-.nav__toggle, .nav__close { display: flex; cursor: pointer; color: var(--text); }
-.nav__menu {
-  position: fixed;
-  top: 0; right: -100%;
-  width: 100%; height: 100vh;
-  background: var(--bg-mobile-menu);
-  backdrop-filter: blur(16px);
-  padding: 6rem 2rem 4rem;
-  transition: var(--transition);
->>>>>>> 93abb8ef5375d2b6cd95934be82c29eb60d1316d
 }
 .nav__link {
   font-weight: 600; color: var(--muted); letter-spacing: 0.02em; position: relative; transition: color 0.3s ease;
@@ -257,6 +240,17 @@ button { -webkit-tap-highlight-color: transparent; }
 }
 
 .js .nav__toggle { display: flex; }
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 100;
+}
+.nav-overlay.visible { opacity: 1; visibility: visible; }
+
 .js .nav__menu {
   position: fixed;
   top: 0; right: -100%;
@@ -265,6 +259,7 @@ button { -webkit-tap-highlight-color: transparent; }
   padding: 6rem 2rem 4rem;
   transition: var(--transition);
   box-shadow: -24px 0 60px rgba(0, 0, 0, 0.5);
+  z-index: 101;
 }
 .js .nav__menu.show-menu { right: 0; }
 .js .nav__close { display: flex; }
@@ -485,11 +480,7 @@ button { -webkit-tap-highlight-color: transparent; }
   transition: border-color 0.3s ease, background 0.3s ease;
 }
 .contact__input::placeholder { color: var(--muted); }
-<<<<<<< HEAD
-.contact__input:focus { border-color: rgba(140,198,255,0.65); background: rgba(17,24,36,0.95); }
-=======
-.contact__input:focus { outline: none; border-color: var(--accent); background: var(--bg-input-focus); }
->>>>>>> 93abb8ef5375d2b6cd95934be82c29eb60d1316d
+.contact__input:focus { border-color: var(--accent); background: var(--bg-input-focus); }
 textarea.contact__input { min-height: 160px; resize: vertical; }
 .contact__button { align-self: flex-start; cursor: pointer; }
 .contact__email-link { display: block; text-align: center; margin-top: 0.5rem; color: var(--muted); font-weight: 700; }
