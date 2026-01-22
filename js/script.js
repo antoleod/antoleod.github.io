@@ -72,8 +72,13 @@ const ORYXEN_LOCALES = {
     'contact.subtitle': 'No need for a perfect brief. Share where you are and what you want to achieve. We respond within one business day.',
     'contact.form.name': 'Name',
     'contact.form.email': 'Email',
+    'contact.form.company': 'Company (optional)',
     'contact.form.idea': 'Tell us about your idea',
     'contact.form.submit': 'Send message',
+    'contact.meta.responseTitle': 'Response time:',
+    'contact.meta.responseText': 'within one business day.',
+    'contact.meta.emailTitle': 'Email:',
+    'contact.note': 'By sending, you agree we can contact you back about this request.',
     'footer.line1': 'ORYXEN TECH — Quietly engineering bold futures.',
     'footer.note': 'Technology with purpose. Calm support for bold ideas.',
     'pitch.title': 'Engineering the AI-First Ecosystem',
@@ -164,8 +169,13 @@ const ORYXEN_LOCALES = {
     'contact.subtitle': 'No necesitas un brief perfecto. Cuéntanos dónde estás y qué quieres lograr. Respondemos en un día hábil.',
     'contact.form.name': 'Nombre',
     'contact.form.email': 'Email',
+    'contact.form.company': 'Empresa (opcional)',
     'contact.form.idea': 'Cuéntanos tu idea',
     'contact.form.submit': 'Enviar mensaje',
+    'contact.meta.responseTitle': 'Respuesta:',
+    'contact.meta.responseText': 'en 1 día hábil.',
+    'contact.meta.emailTitle': 'Email:',
+    'contact.note': 'Al enviar, aceptas que podamos contactarte sobre esta solicitud.',
     'footer.line1': 'ORYXEN TECH — Ingeniería silenciosa para futuros audaces.',
     'footer.note': 'Tecnología con propósito. Soporte sereno para ideas ambiciosas.',
     'pitch.title': 'Ingeniería del Ecosistema AI-First',
@@ -253,8 +263,13 @@ const ORYXEN_LOCALES = {
     'contact.subtitle': 'Pas besoin d’un brief parfait. Dites-nous où vous en êtes et ce que vous visez. Réponse sous un jour ouvré.',
     'contact.form.name': 'Nom',
     'contact.form.email': 'Email',
+    'contact.form.company': 'Entreprise (optionnel)',
     'contact.form.idea': 'Parlez-nous de votre idée',
     'contact.form.submit': 'Envoyer',
+    'contact.meta.responseTitle': 'Réponse :',
+    'contact.meta.responseText': 'sous un jour ouvré.',
+    'contact.meta.emailTitle': 'Email :',
+    'contact.note': 'En envoyant, vous acceptez que nous puissions vous recontacter au sujet de cette demande.',
     'footer.line1': 'ORYXEN TECH — Ingénierie discrète pour des futurs audacieux.',
     'footer.note': 'Technologie avec intention. Un support calme pour des idées audacieuses.',
     'pitch.title': 'Ingénierie de l’Écosystème AI-First',
@@ -465,27 +480,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const form = document.querySelector('.contact__form');
   const formStatus = document.querySelector('.form-status');
+  const submitButton = document.getElementById('submit-btn');
   if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const action = form.getAttribute('action') || '';
       const data = new FormData(form);
 
+      if (submitButton) {
+        submitButton.classList.remove('is-success');
+        submitButton.classList.add('is-loading');
+        submitButton.disabled = true;
+      }
+
       if (action.startsWith('mailto:')) {
         const to = action.replace('mailto:', '');
         const name = data.get('name') || 'ORYXEN contact';
         const email = data.get('email') || '';
+        const company = data.get('company') || '';
         const idea = data.get('idea') || '';
         const subject = encodeURIComponent(`Project idea — ${name}`);
         const body = encodeURIComponent(
-          `Name: ${name}\nEmail: ${email}\n\nIdea:\n${idea}`
+          `Name: ${name}\nEmail: ${email}\nCompany: ${company}\n\nIdea:\n${idea}`
         );
-        formStatus.textContent = 'Opening your email client...';
+        if (formStatus) formStatus.textContent = 'Opening your email client...';
+        if (submitButton) {
+          submitButton.classList.remove('is-loading');
+          submitButton.disabled = false;
+        }
         window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
         return;
       }
 
-      formStatus.textContent = 'Sending...';
+      if (formStatus) formStatus.textContent = 'Sending...';
       try {
         const response = await fetch(action, {
           method: form.method,
@@ -493,13 +520,19 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: { 'Accept': 'application/json' }
         });
         if (response.ok) {
-          formStatus.textContent = 'Thank you. We will respond within one business day.';
+          if (formStatus) formStatus.textContent = 'Thank you. We will respond within one business day.';
           form.reset();
+          if (submitButton) submitButton.classList.add('is-success');
         } else {
-          formStatus.textContent = 'We could not send the form. Please email contact@oryxen.tech.';
+          if (formStatus) formStatus.textContent = 'We could not send the form. Please email contact@oryxen.tech.';
         }
       } catch (error) {
-        formStatus.textContent = 'Connection issue. Please email contact@oryxen.tech.';
+        if (formStatus) formStatus.textContent = 'Connection issue. Please email contact@oryxen.tech.';
+      } finally {
+        if (submitButton) {
+          submitButton.classList.remove('is-loading');
+          submitButton.disabled = false;
+        }
       }
     });
   }

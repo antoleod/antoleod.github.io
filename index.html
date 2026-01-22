@@ -858,53 +858,71 @@
     </section>
 
     <section class="section contact" id="contact" data-reveal>
-      <div class="container narrow">
-        <div class="section__header">
-          <p class="section__eyebrow" data-i18n="contact.eyebrow">Contact</p>
-          <h2 class="section__title" data-i18n="contact.title">Tell us your idea. We will listen, advise, and build it with you.</h2>
-          <p class="section__subtitle" data-i18n="contact.subtitle">No need for a perfect brief. Share where you are and what you want to achieve. We respond within one business day.</p>
+      <div class="container">
+        <div class="contact__grid">
+          <div class="contact__copy">
+            <div class="section__header contact__header">
+              <p class="section__eyebrow" data-i18n="contact.eyebrow">Contact</p>
+              <h2 class="section__title" data-i18n="contact.title">Tell us your idea. We will listen, advise, and build it with you.</h2>
+              <p class="section__subtitle" data-i18n="contact.subtitle">No need for a perfect brief. Share where you are and what you want to achieve. We respond within one business day.</p>
+            </div>
+            <div class="contact__meta" id="contact-meta">
+              <p class="contact__meta-line"><strong data-i18n="contact.meta.responseTitle">Response time:</strong> <span data-i18n="contact.meta.responseText">within one business day.</span></p>
+              <p class="contact__meta-line"><strong data-i18n="contact.meta.emailTitle">Email:</strong> <a href="mailto:contact@oryxen.tech" class="contact__email-link">contact@oryxen.tech</a></p>
+            </div>
+          </div>
+
+          <div class="contact__panel">
+            <form id="contact-form" action="mailto:contact@oryxen.tech" method="POST" class="contact__form" novalidate autocomplete="on" aria-describedby="contact-meta">
+              <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off">
+
+              <div class="contact__group">
+                <div class="input-wrapper">
+                  <label class="sr-only" for="name">Name</label>
+                  <input type="text" id="name" name="name" class="contact__input" placeholder="Name" required autocomplete="name" autocapitalize="words" data-i18n-placeholder="contact.form.name">
+                  <span class="input-check-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </span>
+                </div>
+                <div class="input-wrapper">
+                  <label class="sr-only" for="email">Email</label>
+                  <input type="email" id="email" name="email" class="contact__input" placeholder="Email" required autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" data-i18n-placeholder="contact.form.email">
+                  <span class="input-check-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </span>
+                </div>
+              </div>
+
+              <div class="input-wrapper contact__span-2">
+                <label class="sr-only" for="company">Company</label>
+                <input type="text" id="company" name="company" class="contact__input" placeholder="Company (optional)" autocomplete="organization" data-i18n-placeholder="contact.form.company">
+                <span class="input-check-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </span>
+              </div>
+
+              <div class="input-wrapper contact__span-2">
+                <label class="sr-only" for="idea">Tell us about your idea</label>
+                <textarea id="idea" name="idea" class="contact__input" placeholder="Tell us about your idea" required data-i18n-placeholder="contact.form.idea" rows="5"></textarea>
+                <span class="input-check-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </span>
+              </div>
+
+              <div class="contact__actions">
+                <p class="contact__note" data-i18n="contact.note">By sending, you agree we can contact you back about this request.</p>
+                <button type="submit" id="submit-btn" class="contact__button button">
+                  <span class="btn-text" data-i18n="contact.form.submit">Send message</span>
+                  <span class="btn-loader" aria-hidden="true"></span>
+                  <span class="btn-success-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </span>
+                </button>
+              </div>
+            </form>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </div>
         </div>
-        
-        <!-- Enhanced Form: Functional, Minimalist, Mobile-First -->
-        <form id="contact-form" action="mailto:contact@oryxen.tech" method="POST" class="contact__form" novalidate>
-          <!-- Honeypot for anti-spam (invisible) -->
-          <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off">
-          
-          <div class="contact__group">
-            <div class="input-wrapper">
-              <label class="sr-only" for="name">Name</label>
-              <input type="text" id="name" name="name" class="contact__input" placeholder="Name" required autocomplete="name" data-i18n-placeholder="contact.form.name">
-              <span class="input-check-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              </span>
-            </div>
-            <div class="input-wrapper">
-              <label class="sr-only" for="email">Email</label>
-              <input type="email" id="email" name="email" class="contact__input" placeholder="Email" required autocomplete="email" inputmode="email" data-i18n-placeholder="contact.form.email">
-              <span class="input-check-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              </span>
-            </div>
-          </div>
-          <div class="input-wrapper">
-            <label class="sr-only" for="idea">Tell us about your idea</label>
-            <textarea id="idea" name="idea" class="contact__input" placeholder="Tell us about your idea" required data-i18n-placeholder="contact.form.idea" rows="4"></textarea>
-            <span class="input-check-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            </span>
-          </div>
-          
-          <button type="submit" id="submit-btn" class="contact__button button">
-            <span class="btn-text" data-i18n="contact.form.submit">Send message</span>
-            <span class="btn-loader" aria-hidden="true"></span>
-            <span class="btn-success-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            </span>
-          </button>
-        </form>
-        <p class="form-status" role="status" aria-live="polite"></p>
-        
-        <a href="mailto:contact@oryxen.tech" class="contact__email-link">contact@oryxen.tech</a>
       </div>
     </section>
   </main>
