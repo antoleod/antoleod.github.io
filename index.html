@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ORYXEN TECH — Quietly engineering bold futures</title>
-  <meta name="description" content="ORYXEN TECH designs and builds calm, precise digital solutions — with continuity, clarity, and human guidance.">
-  <meta name="color-scheme" content="dark">
-  <script>document.documentElement.classList.add('js');</script>
-  <link rel="stylesheet" href="/css/styles.css">
+  <title>ORYXEN TECH — Quietly Engineering Bold Futures</title>
+  <meta name="description" content="ORYXEN TECH: technology with purpose and human guidance. We build applications, websites, and digital solutions with calm precision.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main-content" data-i18n="a11y.skip">Skip to content</a>
@@ -241,18 +242,46 @@
           <h2 class="section__title" data-i18n="contact.title">Tell us your idea. We will listen, advise, and build it with you.</h2>
           <p class="section__subtitle" data-i18n="contact.subtitle">No need for a perfect brief. Share where you are and what you want to achieve. We respond within one business day.</p>
         </div>
-        <form action="mailto:contact@oryxen.tech" method="POST" class="contact__form" aria-label="Contact form">
+        
+        <!-- Enhanced Form: Functional, Minimalist, Mobile-First -->
+        <!-- IMPORTANT: Replace 'https://formspree.io/f/YOUR_FORM_ID' with your actual Formspree endpoint -->
+        <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact__form" novalidate>
+          <!-- Honeypot for anti-spam (invisible) -->
+          <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off">
+          
           <div class="contact__group">
-            <label class="sr-only" for="name">Name</label>
-            <input type="text" id="name" name="name" class="contact__input" placeholder="Name" required data-i18n-placeholder="contact.form.name">
-            <label class="sr-only" for="email">Email</label>
-            <input type="email" id="email" name="email" class="contact__input" placeholder="Email" required data-i18n-placeholder="contact.form.email">
+            <div class="input-wrapper">
+              <label class="sr-only" for="name">Name</label>
+              <input type="text" id="name" name="name" class="contact__input" placeholder="Name" required autocomplete="name" data-i18n-placeholder="contact.form.name">
+              <span class="input-check-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+            </div>
+            <div class="input-wrapper">
+              <label class="sr-only" for="email">Email</label>
+              <input type="email" id="email" name="email" class="contact__input" placeholder="Email" required autocomplete="email" inputmode="email" data-i18n-placeholder="contact.form.email">
+              <span class="input-check-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+            </div>
           </div>
-          <label class="sr-only" for="idea">Tell us about your idea</label>
-          <textarea id="idea" name="idea" class="contact__input" placeholder="Tell us about your idea" required data-i18n-placeholder="contact.form.idea"></textarea>
-          <button type="submit" class="contact__button button" data-i18n="contact.form.submit">Send message</button>
+          <div class="input-wrapper">
+            <label class="sr-only" for="idea">Tell us about your idea</label>
+            <textarea id="idea" name="message" class="contact__input" placeholder="Tell us about your idea" required data-i18n-placeholder="contact.form.idea" rows="4"></textarea>
+            <span class="input-check-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+          </div>
+          
+          <button type="submit" id="submit-btn" class="contact__button button">
+            <span class="btn-text" data-i18n="contact.form.submit">Send message</span>
+            <span class="btn-loader" aria-hidden="true"></span>
+            <span class="btn-success-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+          </button>
         </form>
-        <p class="form-status" role="status" aria-live="polite"></p>
+        
         <a href="mailto:contact@oryxen.tech" class="contact__email-link">contact@oryxen.tech</a>
       </div>
     </section>
@@ -265,6 +294,11 @@
     </svg>
   </a>
 
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+    <svg class="theme-icon-light" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    <svg class="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+  </button>
+
   <footer class="footer">
     <div class="container footer__grid">
       <p data-i18n="footer.line1">ORYXEN TECH — Quietly engineering bold futures.</p>
@@ -273,7 +307,6 @@
     </div>
   </footer>
 
-  <script src="/js/locales.js" defer></script>
-  <script src="/js/script.js" defer></script>
+  <script src="js/script.js"></script>
 </body>
 </html>

@@ -203,6 +203,7 @@
     const formStatus = document.querySelector('.form-status');
     if (!form || !formStatus) return;
 
+<<<<<<< HEAD
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -237,6 +238,25 @@
       } catch {
         formStatus.textContent = 'Connection issue. Please email contact@oryxen.tech.';
       }
+=======
+  // Theme Toggle Logic
+  const themeToggle = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  
+  const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  const savedTheme = localStorage.getItem('oryxen-theme');
+  
+  if (savedTheme) {
+    html.setAttribute('data-theme', savedTheme);
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme') || getSystemTheme();
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('oryxen-theme', next);
+>>>>>>> 93abb8ef5375d2b6cd95934be82c29eb60d1316d
     });
   };
 
