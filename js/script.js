@@ -302,13 +302,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const closeMenu = () => navMenu && navMenu.classList.remove('show-menu');
+  const closeMenu = () => {
+    if (navMenu) navMenu.classList.remove('show-menu');
+    document.body.classList.remove('no-scroll');
+  };
 
-  if (navToggle) navToggle.addEventListener('click', () => navMenu && navMenu.classList.add('show-menu'));
+  if (navToggle) navToggle.addEventListener('click', () => {
+    if (navMenu) navMenu.classList.add('show-menu');
+    document.body.classList.add('no-scroll');
+  });
+
   if (navClose) navClose.addEventListener('click', closeMenu);
   navLinks.forEach(link => link.addEventListener('click', closeMenu));
 
   window.addEventListener('scroll', () => {
+    if (navMenu && navMenu.classList.contains('show-menu')) closeMenu();
     if (!header) return;
     if (window.scrollY >= 60) {
       header.classList.add('header-scrolled');
