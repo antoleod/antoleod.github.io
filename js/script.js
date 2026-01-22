@@ -386,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const backToTopButton = document.querySelector('.back-to-top');
   if (backToTopButton) {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 320) {
+      if (window.scrollY > 120) {
         backToTopButton.classList.add('visible');
       } else {
         backToTopButton.classList.remove('visible');
