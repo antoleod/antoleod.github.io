@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ORYXEN TECH — Quietly Engineering Bold Futures</title>
-  <meta name="description" content="ORYXEN TECH: technology with purpose and human guidance. We build applications, websites, and digital solutions with calm precision.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <title>ORYXEN TECH — Quietly engineering bold futures</title>
+  <meta name="description" content="ORYXEN TECH designs and builds calm, precise digital solutions — with continuity, clarity, and human guidance.">
+  <meta name="color-scheme" content="dark">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content" data-i18n="a11y.skip">Skip to content</a>
   <header class="header">
     <nav class="nav container">
       <a href="#home" class="nav__logo" aria-label="ORYXEN TECH">
@@ -18,7 +18,7 @@
         <span class="nav__logo-text">TECH</span>
       </a>
       <div class="nav__menu" id="nav-menu">
-        <ul class="nav__list">
+        <ul class="nav__list" aria-label="Primary">
           <li class="nav__item"><a href="#home" class="nav__link" data-i18n="nav.overview">Overview</a></li>
           <li class="nav__item"><a href="#about" class="nav__link" data-i18n="nav.about">About</a></li>
           <li class="nav__item"><a href="#approach" class="nav__link" data-i18n="nav.approach">Our Approach</a></li>
@@ -26,37 +26,37 @@
           <li class="nav__item"><a href="#projects" class="nav__link" data-i18n="nav.projects">Projects</a></li>
           <li class="nav__item"><a href="#contact" class="nav__link" data-i18n="nav.contact">Contact</a></li>
         </ul>
-        <div class="nav__close" id="nav-close" aria-label="Close menu">
+        <button class="nav__close" id="nav-close" type="button" aria-label="Close menu">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
             <path fill="none" d="M0 0h24v24H0z"/>
             <path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="currentColor"/>
           </svg>
-        </div>
+        </button>
       </div>
       <div class="nav__actions">
         <div class="lang-switch" role="group" aria-label="Language">
-          <button class="lang__btn active" data-lang="en">EN</button>
-          <button class="lang__btn" data-lang="fr">FR</button>
-          <button class="lang__btn" data-lang="es">ES</button>
+          <button class="lang__btn active" type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang__btn" type="button" data-lang="fr" aria-pressed="false">FR</button>
+          <button class="lang__btn" type="button" data-lang="es" aria-pressed="false">ES</button>
         </div>
         <a class="nav__cta" href="#contact" data-i18n="nav.cta">Tell us your idea</a>
-        <div class="nav__toggle" id="nav-toggle" aria-label="Open menu">
+        <button class="nav__toggle" id="nav-toggle" type="button" aria-label="Open menu" aria-controls="nav-menu" aria-expanded="false">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
             <path fill="none" d="M0 0h24v24H0z"/>
             <path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="currentColor"/>
           </svg>
-        </div>
+        </button>
       </div>
     </nav>
   </header>
 
-  <main class="main">
+  <main class="main" id="main-content" tabindex="-1">
     <section class="section hero" id="home" data-reveal>
       <div class="container hero__grid">
         <div class="hero__content">
-          <div class="hero__eyebrow" data-i18n="hero.eyebrow">Quietly Engineering Bold Futures.</div>
-          <h1 class="hero__title" data-i18n="hero.title">Technology with purpose, delivered with calm precision.</h1>
-          <p class="hero__subtitle" data-i18n="hero.subtitle">ORYXEN TECH listens, designs, and builds digital solutions for teams that need clarity and continuity. Over 10 years in Belgium and Europe, supporting technical and non-technical leaders with a human touch.</p>
+          <div class="hero__eyebrow" data-i18n="hero.eyebrow">Quietly engineering bold futures.</div>
+          <h1 class="hero__title" data-i18n="hero.title">Calm, precise engineering for teams that need continuity.</h1>
+          <p class="hero__subtitle" data-i18n="hero.subtitle">We listen, design, and build digital products that stay understandable and maintainable — supporting technical and non-technical leaders across Europe.</p>
           <div class="hero__stats">
             <div class="stat">
               <p class="stat__label" data-i18n="hero.stat1.label">Experience</p>
@@ -76,13 +76,13 @@
           </div>
           <div class="hero__actions">
             <a href="#contact" class="button" data-i18n="hero.cta.primary">Tell us your idea</a>
-            <a href="#contact" class="button button--ghost" data-i18n="hero.cta.secondary">Let’s build it together</a>
+            <a href="#approach" class="button button--ghost" data-i18n="hero.cta.secondary">See how we work</a>
           </div>
         </div>
         <div class="hero__panel" aria-label="ORYXEN TECH logo and promise">
           <div class="hero__brand">
             <div class="hero__logo">
-              <img src="assets/logo.png" alt="ORYXEN TECH logo">
+              <img src="/assets/logo.png" alt="ORYXEN TECH logo" width="946" height="623" decoding="async" fetchpriority="high">
             </div>
             <div>
               <p class="hero__brand-name">ORYXEN TECH</p>
@@ -258,7 +258,7 @@
     </section>
   </main>
 
-  <a href="#" class="back-to-top" aria-label="Back to top">
+  <a href="#home" class="back-to-top" aria-label="Back to top">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
       <path fill="none" d="M0 0h24v24H0z"/>
       <path d="M12 10.828l-4.95 4.95-1.414-1.414L12 8l6.364 6.364-1.414 1.414z" fill="currentColor"/>
@@ -267,12 +267,13 @@
 
   <footer class="footer">
     <div class="container footer__grid">
-      <p data-i18n="footer.line1">ORYXEN TECH — Quietly Engineering Bold Futures.</p>
+      <p data-i18n="footer.line1">ORYXEN TECH — Quietly engineering bold futures.</p>
       <a href="mailto:contact@oryxen.tech" class="footer__email">contact@oryxen.tech</a>
       <p class="footer__note" data-i18n="footer.note">Technology with purpose. Calm support for bold ideas.</p>
     </div>
   </footer>
 
-  <script src="js/script.js"></script>
+  <script src="/js/locales.js" defer></script>
+  <script src="/js/script.js" defer></script>
 </body>
 </html>

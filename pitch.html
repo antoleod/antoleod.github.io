@@ -1,79 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <title>ORYXEN — Investor Relations</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-    <!-- Libraries -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORYXEN TECH — Investor pitch</title>
+  <meta name="description" content="A calm, precise pitch for ORYXEN TECH: problem, solution, traction, and next steps.">
+  <meta name="color-scheme" content="dark">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
-
 <body>
+  <a class="skip-link" href="#main-content" data-i18n="a11y.skip">Skip to content</a>
 
-    <header data-aos="fade-down" data-aos-duration="1000">
-        <div class="logo">ORYXEN <span style="font-size:0.5em; opacity:0.6; vertical-align: top;">INVEST</span></div>
-        <nav>
-            <a href="index.html" class="nav-link" data-i18n="nav_home">Home</a>
-        </nav>
-    </header>
+  <header class="header">
+    <nav class="nav container">
+      <a href="/index.html#home" class="nav__logo" aria-label="ORYXEN TECH">
+        <span class="nav__logo-mark">ORYXEN</span>
+        <span class="nav__logo-text">TECH</span>
+      </a>
 
-    <div class="pitch-container">
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__list" aria-label="Primary">
+          <li class="nav__item"><a href="/index.html" class="nav__link" data-i18n="nav.home">Home</a></li>
+          <li class="nav__item"><a href="#pitch" class="nav__link" data-i18n="nav.pitch">Pitch</a></li>
+          <li class="nav__item"><a href="/index.html#contact" class="nav__link" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+        <button class="nav__close" id="nav-close" type="button" aria-label="Close menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="none" d="M0 0h24v24H0z"/>
+            <path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
 
-        <div class="pitch-section" data-aos="fade-up">
-            <h2>The Problem</h2>
-            <p class="description" style="margin:0; text-align: left;">
-                Businesses struggle to scale their digital infrastructure rapidly enough to meet modern demands. Legacy
-                systems are slow, expensive to maintain, and lack the flexibility required for the AI era.
-            </p>
+      <div class="nav__actions">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button class="lang__btn active" type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang__btn" type="button" data-lang="fr" aria-pressed="false">FR</button>
+          <button class="lang__btn" type="button" data-lang="es" aria-pressed="false">ES</button>
         </div>
+        <a class="nav__cta" href="mailto:invest@oryxen.tech" data-i18n="pitch.cta">Request pitch deck</a>
+        <button class="nav__toggle" id="nav-toggle" type="button" aria-label="Open menu" aria-controls="nav-menu" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="none" d="M0 0h24v24H0z"/>
+            <path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
 
-        <div class="pitch-section" data-aos="fade-up" data-aos-delay="100">
-            <h2>The Solution</h2>
-            <p class="description" style="margin:0; text-align: left;">
-                ORYXEN provides a modular, AI-first development ecosystem. We build scalable platforms that grow with
-                the business, reducing technical debt and accelerating time-to-market by 40%.
-            </p>
+  <main class="main" id="main-content" tabindex="-1">
+    <section class="section pitch-hero" id="pitch" data-reveal>
+      <div class="container narrow">
+        <div class="section__header">
+          <p class="section__eyebrow" data-i18n="pitch.eyebrow">Investor note</p>
+          <h1 class="section__title pitch-hero__title" data-i18n="pitch.title">A measured path to scale: modular, AI-ready delivery without operational chaos.</h1>
+          <p class="section__subtitle" data-i18n="pitch.subtitle">ORYXEN TECH builds calm infrastructure and product delivery for teams that need speed without fragility.</p>
         </div>
-
-        <div class="pitch-section" data-aos="fade-up" data-aos-delay="200">
-            <h2>Traction & Projections</h2>
-            <div class="pitch-grid">
-                <div class="stat-card">
-                    <span class="stat-number">40%</span>
-                    <span class="stat-label">Faster Checkout</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">15+</span>
-                    <span class="stat-label">Enterprise Clients</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">$2M</span>
-                    <span class="stat-label">Pipeline Value</span>
-                </div>
-            </div>
+        <div class="pitch-hero__actions">
+          <a class="button" href="mailto:invest@oryxen.tech" data-i18n="pitch.cta">Request pitch deck</a>
+          <a class="button button--ghost" href="/index.html" data-i18n="pitch.back">Back to website</a>
         </div>
+      </div>
+    </section>
 
-        <div class="pitch-section" data-aos="fade-up" data-aos-delay="300" style="text-align: center;">
-            <h2>Join the Future</h2>
-            <p>We are raising a seed round to accelerate our AI core development.</p>
-            <br>
-            <a href="mailto:invest@oryxen.tech" class="btn primary">Request Pitch Deck</a>
+    <section class="section pitch" id="problem" data-reveal>
+      <div class="container narrow">
+        <div class="section__header">
+          <p class="section__eyebrow" data-i18n="pitch.problem.eyebrow">The problem</p>
+          <h2 class="section__title" data-i18n="pitch.problem.title">Digital systems grow faster than the teams that maintain them.</h2>
+          <p class="section__subtitle" data-i18n="pitch.problem.text">Legacy stacks, unclear ownership, and rushed delivery create technical debt that slows AI adoption, increases risk, and burns attention.</p>
         </div>
+      </div>
+    </section>
 
+    <section class="section pitch" id="solution" data-reveal>
+      <div class="container narrow">
+        <div class="section__header">
+          <p class="section__eyebrow" data-i18n="pitch.solution.eyebrow">The solution</p>
+          <h2 class="section__title" data-i18n="pitch.solution.title">A modular delivery system: build, ship, and operate with continuity.</h2>
+          <p class="section__subtitle" data-i18n="pitch.solution.text">We standardize foundations (governance, security, observability) so teams can deliver AI-ready products without reinventing the basics.</p>
+        </div>
+        <div class="cards pitch__cards">
+          <div class="card">
+            <h3 data-i18n="pitch.solution.card1.title">Reusable modules</h3>
+            <p data-i18n="pitch.solution.card1.text">Patterns for identity, data, deployments, and documentation — adapted to each context.</p>
+          </div>
+          <div class="card">
+            <h3 data-i18n="pitch.solution.card2.title">Operational clarity</h3>
+            <p data-i18n="pitch.solution.card2.text">Ownership, runbooks, and health signals designed in from day one.</p>
+          </div>
+          <div class="card">
+            <h3 data-i18n="pitch.solution.card3.title">Human-first adoption</h3>
+            <p data-i18n="pitch.solution.card3.text">Calm communication that keeps executives and teams aligned — technical or not.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pitch" id="traction" data-reveal>
+      <div class="container narrow">
+        <div class="section__header">
+          <p class="section__eyebrow" data-i18n="pitch.traction.eyebrow">Traction</p>
+          <h2 class="section__title" data-i18n="pitch.traction.title">Signals of demand and repeatable delivery.</h2>
+          <p class="section__subtitle" data-i18n="pitch.traction.text">Early projects validate speed, stability, and governance as a single package.</p>
+        </div>
+        <div class="pitch__stats">
+          <div class="stat-card">
+            <p class="stat-card__value" data-i18n="pitch.traction.stat1.value">40%</p>
+            <p class="stat-card__label" data-i18n="pitch.traction.stat1.label">Faster delivery cycles</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-card__value" data-i18n="pitch.traction.stat2.value">15+</p>
+            <p class="stat-card__label" data-i18n="pitch.traction.stat2.label">Enterprise engagements</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-card__value" data-i18n="pitch.traction.stat3.value">$2M</p>
+            <p class="stat-card__label" data-i18n="pitch.traction.stat3.label">Pipeline value</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pitch" id="next" data-reveal>
+      <div class="container narrow">
+        <div class="section__header">
+          <p class="section__eyebrow" data-i18n="pitch.next.eyebrow">Next steps</p>
+          <h2 class="section__title" data-i18n="pitch.next.title">We are raising a seed round to accelerate the AI core.</h2>
+          <p class="section__subtitle" data-i18n="pitch.next.text">If you are aligned with quiet execution and long-term operational strength, we would like to share the full deck.</p>
+        </div>
+        <div class="pitch-cta">
+          <a class="button" href="mailto:invest@oryxen.tech" data-i18n="pitch.cta">Request pitch deck</a>
+          <a class="button button--ghost" href="/index.html#contact" data-i18n="pitch.contact">Contact</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <p data-i18n="footer.line1">ORYXEN TECH — Quietly engineering bold futures.</p>
+      <a href="mailto:invest@oryxen.tech" class="footer__email">invest@oryxen.tech</a>
+      <p class="footer__note" data-i18n="pitch.footer.note">A calm pitch. A precise execution.</p>
     </div>
+  </footer>
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="locales.js"></script>
-    <script src="script.js"></script>
+  <script src="/js/locales.js" defer></script>
+  <script src="/js/script.js" defer></script>
 </body>
-
 </html>
