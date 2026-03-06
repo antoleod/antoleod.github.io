@@ -1,960 +1,583 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ORYXEN TECH — Quietly Engineering Bold Futures</title>
-  <meta name="description" content="ORYXEN TECH: technology with purpose and human guidance. We build applications, websites, and digital solutions with calm precision.">
-  <meta name="color-scheme" content="dark light">
-  <script>document.documentElement.classList.add('js');</script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <title>Oryxen Labs — Building Apps, Tools &amp; Digital Products</title>
+  <meta name="description" content="Oryxen Labs is a developer studio building mobile apps, automation tools, and open-source digital products. Based in Belgium, shipping globally.">
+  <meta name="keywords" content="Oryxen Labs, mobile apps, developer studio, automation tools, software studio, open source">
+  <meta property="og:title" content="Oryxen Labs — Building Apps, Tools &amp; Digital Products">
+  <meta property="og:description" content="Developer studio building mobile apps, automation tools, and open-source projects.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://oryxen.tech">
+  <meta name="theme-color" content="#06060b">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="css/styles.css">
-  <style>
-    /* --- ORYXEN PROFESSIONAL NAV OVERRIDES --- */
-    /* Ensures consistent rendering across Chrome, Edge, Brave */
-    
-    :root {
-      --header-height: 4.5rem;
-      --z-fixed: 1000;
-      --primary-color: #2563eb;
-      --nav-shadow: 0 18px 45px rgba(0,0,0,0.16);
-      --nav-ease: cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: var(--header-height);
-      background-color: rgba(3, 3, 3, 0.78);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      z-index: var(--z-fixed);
-      transition: background-color 0.3s, border-color 0.3s;
-    }
-
-    [data-theme="light"] .header {
-      background-color: rgba(255, 255, 255, 0.86);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-    }
-
-    /* Utility: Bloquear scroll del body cuando el menú está abierto */
-    body.no-scroll { overflow: hidden; }
-
-    /* Focus styles (keyboard) */
-    .nav__link:focus-visible,
-    .nav__toggle:focus-visible,
-    .nav__close:focus-visible,
-    .lang__btn:focus-visible,
-    .nav__cta:focus-visible {
-      outline: 2px solid rgba(37, 99, 235, 0.9);
-      outline-offset: 3px;
-      border-radius: 12px;
-    }
-
-    .nav.container {
-      height: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1440px; /* PC: Usar más ancho de pantalla */
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    .nav__logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      font-size: 1.125rem;
-      color: inherit;
-      text-decoration: none;
-      z-index: 1002;
-    }
-    .nav__logo-mark { color: var(--primary-color); }
-    .nav__link::after { content: none !important; }
-
-    /* Desktop Navigation */
-    @media screen and (min-width: 968px) {
-      .nav__menu {
-        flex: 1;
-        min-width: 0;
-        display: flex;
-        justify-content: center;
-        margin: 0 1.25rem;
-      }
-      .nav__list {
-        display: inline-flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        max-width: min(820px, calc(100vw - 520px));
-        row-gap: 0.35rem;
-        gap: 0.35rem;
-        list-style: none;
-        margin: 0;
-        padding: 0.35rem;
-        border-radius: 999px;
-        background: rgba(255,255,255,0.04);
-        border: 1px solid rgba(255,255,255,0.08);
-        box-shadow: 0 14px 36px rgba(0,0,0,0.45);
-      }
-      [data-theme="light"] .nav__list {
-        background: rgba(0,0,0,0.035);
-        border-color: rgba(0,0,0,0.06);
-        box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-      }
-      .nav__link {
-        color: inherit;
-        text-decoration: none;
-        font-size: 0.9375rem;
-        font-weight: 600;
-        letter-spacing: 0.01em;
-        opacity: 0.9;
-        padding: 0.55rem 0.85rem;
-        border-radius: 999px;
-        position: relative;
-        isolation: isolate;
-        transition: opacity 0.2s, color 0.2s, transform 0.25s var(--nav-ease), background-color 0.25s var(--nav-ease), box-shadow 0.25s var(--nav-ease);
-      }
-      .nav__link::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: inherit;
-        background: linear-gradient(135deg, rgba(96,165,250,0.16), rgba(96,165,250,0.06));
-        opacity: 0;
-        transform: translateY(1px);
-        transition: opacity 0.25s var(--nav-ease), transform 0.25s var(--nav-ease);
-        z-index: -1;
-      }
-      [data-theme="light"] .nav__link::before {
-        background: linear-gradient(135deg, rgba(37,99,235,0.14), rgba(37,99,235,0.06));
-      }
-      .nav__link:hover, .nav__link.active-link {
-        opacity: 1;
-        color: var(--primary-color);
-        transform: translateY(-1px);
-      }
-      .nav__link:hover::before, .nav__link.active-link::before {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .nav__link.active-link {
-        box-shadow: 0 10px 30px rgba(37,99,235,0.18);
-      }
-      [data-theme="light"] .nav__link.active-link {
-        box-shadow: 0 12px 34px rgba(0,0,0,0.12);
-      }
-      .nav__close, .nav__toggle { display: none; }
-      .nav__mobile-actions { display: none; }
-    }
-
-    .nav__overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.22);
-      backdrop-filter: blur(2px);
-      -webkit-backdrop-filter: blur(2px);
-      cursor: pointer;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.28s var(--nav-ease), visibility 0.28s var(--nav-ease);
-      z-index: 1000;
-    }
-    .nav__overlay.is-open {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* Mobile Navigation */
-    @media screen and (max-width: 967px) {
-      .nav__menu {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: min(420px, 92vw);
-        height: 100vh;
-        height: 100svh;
-        background: linear-gradient(180deg, rgba(10,10,10,0.92), rgba(10,10,10,0.78));
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-        padding: calc(4.75rem + env(safe-area-inset-top)) 1.25rem 2.25rem;
-        transition: transform 0.48s var(--nav-ease);
-        box-shadow: var(--nav-shadow);
-        border-left: 1px solid rgba(255,255,255,0.08);
-        display: flex;
-        flex-direction: column;
-        justify-content: center; /* Móvil: Centrado vertical */
-        z-index: 1001;
-        overflow-y: auto; /* Permitir scroll dentro del menú si es muy alto */
-        transform: translateX(110%);
-      }
-      [data-theme="light"] .nav__menu {
-        background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.78));
-        border-left-color: rgba(0,0,0,0.08);
-      }
-      .nav__menu.show-menu { transform: translateX(0); }
-      
-      .nav__list {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.9rem;
-        list-style: none;
-        padding: 0;
-        margin-bottom: 1.25rem;
-        font-size: 1.1rem;
-        font-weight: 650;
-      }
-      .nav__link {
-        color: inherit;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.95rem 1rem;
-        border-radius: 14px;
-        background: rgba(255,255,255,0.04);
-        border: 1px solid rgba(255,255,255,0.08);
-        transition: transform 0.25s var(--nav-ease), background-color 0.25s var(--nav-ease), border-color 0.25s var(--nav-ease), box-shadow 0.25s var(--nav-ease);
-      }
-      [data-theme="light"] .nav__link {
-        background: rgba(0,0,0,0.035);
-        border-color: rgba(0,0,0,0.06);
-      }
-      .nav__link:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 16px 40px rgba(0,0,0,0.12);
-      }
-      .nav__link.active-link {
-        border-color: rgba(37,99,235,0.35);
-        box-shadow: 0 18px 45px rgba(37,99,235,0.14);
-      }
-      
-      .nav__close {
-        position: absolute;
-        top: calc(1rem + env(safe-area-inset-top));
-        right: 1rem;
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        color: inherit;
-        padding: 0.6rem;
-        border-radius: 12px;
-        background: rgba(255,255,255,0.04);
-        border: 1px solid rgba(255,255,255,0.08);
-      }
-      [data-theme="light"] .nav__close {
-        background: rgba(0,0,0,0.04);
-        border-color: rgba(0,0,0,0.06);
-      }
-      
-      /* Mobile Actions: Estilos para elementos dentro del menú */
-      .nav__mobile-actions {
-        margin-top: 1.5rem;
-        padding-top: 2rem;
-        border-top: 1px solid rgba(0,0,0,0.1);
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 1.5rem;
-        width: 100%;
-      }
-      .nav__mobile-actions .lang-switch { align-self: center; }
-      .nav__mobile-actions .nav__cta { width: 100%; justify-content: center; }
-      [data-theme="light"] .nav__mobile-actions { border-color: rgba(0,0,0,0.1); }
-      
-      /* Ocultar controles del header en móvil (ya están en el menú) */
-      .nav__actions .lang-switch, .nav__actions .nav__cta { display: none; }
-    }
-
-    @media (prefers-reduced-motion: no-preference) and (max-width: 967px) {
-      .nav__item { opacity: 0; transform: translateY(10px); transition: opacity 0.35s var(--nav-ease), transform 0.35s var(--nav-ease); }
-      .nav__menu.show-menu .nav__item { opacity: 1; transform: translateY(0); }
-      .nav__menu.show-menu .nav__item:nth-child(1) { transition-delay: 80ms; }
-      .nav__menu.show-menu .nav__item:nth-child(2) { transition-delay: 120ms; }
-      .nav__menu.show-menu .nav__item:nth-child(3) { transition-delay: 160ms; }
-      .nav__menu.show-menu .nav__item:nth-child(4) { transition-delay: 200ms; }
-      .nav__menu.show-menu .nav__item:nth-child(5) { transition-delay: 240ms; }
-      .nav__menu.show-menu .nav__item:nth-child(6) { transition-delay: 280ms; }
-    }
-
-    .nav__actions {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      z-index: 1002;
-    }
-
-    /* Language Switcher */
-    .lang-switch {
-      display: flex;
-      background-color: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.10);
-      padding: 3px;
-      border-radius: 8px;
-    }
-    [data-theme="light"] .lang-switch {
-      background-color: rgba(0,0,0,0.05);
-      border-color: rgba(0,0,0,0.08);
-    }
-    
-    .lang__btn {
-      background: none;
-      border: none;
-      padding: 4px 10px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      border-radius: 6px;
-      cursor: pointer;
-      color: inherit;
-      opacity: 0.6;
-      transition: all 0.2s;
-    }
-    .lang__btn.active {
-      background-color: #fff;
-      color: #000;
-      opacity: 1;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    [data-theme="light"] .lang__btn.active {
-      background-color: #18181b;
-      color: #fff;
-    }
-
-    /* CTA Button */
-    .nav__cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #fff;
-      color: #0b0b0c;
-      padding: 0.6rem 1.25rem;
-      border-radius: 8px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.14);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    [data-theme="light"] .nav__cta {
-      background-color: #18181b;
-      color: #fff;
-      border-color: rgba(0,0,0,0.12);
-    }
-    .nav__cta:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 45px rgba(0,0,0,0.22);
-    }
-
-    .nav__toggle {
-      display: none;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 12px;
-      cursor: pointer;
-      color: inherit;
-      padding: 0.6rem;
-      transition: transform 0.2s var(--nav-ease), background-color 0.2s var(--nav-ease), box-shadow 0.2s var(--nav-ease);
-    }
-    [data-theme="light"] .nav__toggle {
-      background: rgba(0,0,0,0.03);
-      border-color: rgba(0,0,0,0.06);
-    }
-    .nav__toggle:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
-    }
-    @media screen and (max-width: 967px) {
-      .nav__toggle { display: block; }
-    }
-
-    /* --- HERO SECTION PROFESSIONAL OVERRIDES --- */
-    /* 1. Contenedor Principal: Permitir scroll si el contenido desborda */
-    .main { 
-      overflow: visible !important; 
-    }
-
-    .hero {
-      /* Fallback para navegadores antiguos */
-      min-height: 100vh;
-      /* Unidad moderna: ignora barras de navegación móviles (Small Viewport Height) */
-      min-height: 100svh;
-      /* CRÍTICO: Permite que crezca si el contenido es mayor a la pantalla */
-      height: auto;
-      
-      /* Layout */
-      display: flex;
-      align-items: center;
-      position: relative;
-      
-      /* Espaciado: Altura del header fijo + aire visual */
-      padding-top: calc(var(--header-height) + 2rem);
-      padding-bottom: 2.25rem;
-    }
-
-    /* Desktop: avoid huge empty space between sections */
-    @media screen and (min-width: 968px) {
-      .hero {
-        min-height: auto;
-        padding-top: calc(var(--header-height) + 3rem);
-        padding-bottom: 1.5rem;
-      }
-    }
-
-    .hero__grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: clamp(2rem, 5vw, 4rem);
-      align-items: center;
-    }
-
-    .hero__eyebrow {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--primary-color);
-      background: rgba(37, 99, 235, 0.1);
-      padding: 0.5rem 1rem;
-      border-radius: 100px;
-      margin-bottom: 1.5rem;
-      border: 1px solid rgba(37, 99, 235, 0.2);
-    }
-
-    .hero__title {
-      font-size: clamp(2.25rem, 4vw, 3.5rem); /* Tamed scaling */
-      line-height: 1.1;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.25rem;
-    }
-
-    .hero__subtitle {
-      font-size: 1.125rem;
-      line-height: 1.6;
-      opacity: 0.8;
-      margin-bottom: 2rem;
-      max-width: 540px;
-    }
-
-    .hero__actions {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .hero__stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      border-top: 1px solid rgba(128,128,128, 0.2);
-      padding-top: 2rem;
-    }
-
-    .stat {
-      display: flex;
-      flex-direction: column-reverse;
-      background: none;
-      border: none;
-      padding: 0;
-    }
-
-    .stat__value {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.5rem;
-      font-weight: 700;
-      display: block;
-      margin-bottom: 0.25rem;
-      color: inherit;
-    }
-
-    .stat__label {
-      font-size: 0.875rem;
-      opacity: 0.6;
-      font-weight: 500;
-    }
-    
-    .stat__hint { display: none; }
-
-    .hero__panel {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 24px;
-      padding: 2.5rem;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    }
-    
-    @keyframes slideUpFade {
-      from { 
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to { 
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* 3. Pantallas Bajas o Medianas: Apilar en 1 columna */
-    @media screen and (max-width: 968px), screen and (max-height: 800px) {
-      .hero {
-        min-height: auto;
-        padding-top: calc(var(--header-height) + 2rem);
-        padding-bottom: 4rem;
-        align-items: center;
-      }
-      
-      .hero__grid { 
-        grid-template-columns: 1fr; /* Stack 1 columna */
-        gap: 2.5rem; 
-        text-align: center; 
-      }
-      
-      /* Orden: Texto (1), Card (2) */
-      .hero__content { order: 1; }
-      .hero__panel { 
-        order: 2; 
-        display: block; /* Mostrar panel */
-        width: 100%;
-        max-width: 500px;
-        margin: 0 auto;
-        /* Animación de entrada en móvil */
-        opacity: 0;
-        animation: slideUpFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-        animation-delay: 0.3s;
-      }
-
-      .hero__title { font-size: clamp(2rem, 5vw, 2.5rem); }
-      .hero__subtitle { margin-left: auto; margin-right: auto; max-width: 100%; }
-      .hero__actions { justify-content: center; }
-      .hero__stats { 
-        grid-template-columns: 1fr; 
-        gap: 1.5rem;
-        text-align: center;
-      }
-      .stat { align-items: center; }
-    }
-
-    [data-theme="light"] .hero__panel {
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(0,0,0,0.06);
-      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
-    }
-
-
-    /* --- SECTIONS PROFESSIONAL OVERRIDES --- */
-    
-    /* Split Layout (About & Approach) */
-    @media screen and (min-width: 968px) {
-      .split-layout {
-        display: grid;
-        grid-template-columns: 0.8fr 1.2fr;
-        gap: 5rem;
-        align-items: start;
-      }
-      .split-layout .section__header {
-        text-align: left;
-        position: sticky;
-        top: 8rem;
-        margin-bottom: 0;
-      }
-      .split-layout .section__subtitle {
-        margin-left: 0;
-        max-width: 100%;
-      }
-      .split-layout .approach__steps { margin: 0; max-width: 100%; }
-    }
-
-    /* Glass Cards for About/Approach */
-    .about__card, .step {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 2rem;
-      transition: transform 0.3s, background-color 0.3s;
-    }
-    [data-theme="light"] .about__card, 
-    [data-theme="light"] .step {
-      background: rgba(255, 255, 255, 0.6);
-      border: 1px solid rgba(0,0,0,0.06);
-    }
-    .about__card:hover, .step:hover {
-      transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.06);
-    }
-    [data-theme="light"] .about__card:hover,
-    [data-theme="light"] .step:hover {
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    /* Projects Reveal Effect */
-    .project-card {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      min-height: 360px;
-      padding: 2rem;
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
-    [data-theme="light"] .project-card {
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(0,0,0,0.08);
-    }
-    .project-card__icon { font-size: 3.5rem; margin-bottom: 1rem; transition: transform 0.4s; }
-    .project-card__title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; transition: transform 0.4s; }
-    .project-card__description { opacity: 0; transform: translateY(20px); transition: all 0.4s; max-width: 300px; }
-    .project-card__link { margin-top: 1.5rem; opacity: 0; transform: translateY(20px); transition: all 0.4s 0.1s; font-weight: 600; color: var(--primary-color); }
-    
-    .project-card:hover .project-card__icon { transform: translateY(-10px) scale(0.9); }
-    .project-card:hover .project-card__title { transform: translateY(-5px); }
-    .project-card:hover .project-card__description { opacity: 0.8; transform: translateY(0); }
-    .project-card:hover .project-card__link { opacity: 1; transform: translateY(0); }
-  </style>
 </head>
 <body>
-  <a class="skip-link" href="#main-content" data-i18n="a11y.skip">Skip to content</a>
-  <header class="header">
-    <nav class="nav container">
-      <a href="#home" class="nav__logo" aria-label="ORYXEN TECH">
-        <span class="nav__logo-mark">ORYXEN</span> 
-        <span class="nav__logo-text">TECH</span>
-      </a>
-      <div class="nav__menu" id="nav-menu">
-        <ul class="nav__list" aria-label="Primary">
-          <li class="nav__item"><a href="#home" class="nav__link" data-i18n="nav.overview">Overview</a></li>
-          <li class="nav__item"><a href="#about" class="nav__link" data-i18n="nav.about">About</a></li>
-          <li class="nav__item"><a href="#approach" class="nav__link" data-i18n="nav.approach">Approach</a></li>
-          <li class="nav__item"><a href="#create" class="nav__link" data-i18n="nav.create">Services</a></li>
-          <li class="nav__item"><a href="#projects" class="nav__link" data-i18n="nav.projects">Projects</a></li>
-          <li class="nav__item"><a href="#contact" class="nav__link" data-i18n="nav.contact">Contact</a></li>
-        </ul>
-        
-        <!-- Mobile Actions: Se muestran solo en móvil dentro del menú -->
-        <div class="nav__mobile-actions">
-          <div class="lang-switch" role="group" aria-label="Language">
-            <button class="lang__btn active" type="button" data-lang="en" aria-pressed="true">EN</button>
-            <button class="lang__btn" type="button" data-lang="fr" aria-pressed="false">FR</button>
-            <button class="lang__btn" type="button" data-lang="es" aria-pressed="false">ES</button>
-          </div>
-          <a class="nav__cta" href="#contact" data-i18n="nav.cta">Let's Talk</a>
-        </div>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-        <button class="nav__close" id="nav-close" type="button" aria-label="Close menu">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-            <path fill="none" d="M0 0h24v24H0z"/>
-            <path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="currentColor"/>
-          </svg>
-        </button>
-      </div>
-      <div class="nav__overlay" id="nav-overlay" aria-hidden="true" hidden></div>
+  <!-- ======================================================
+       HEADER
+  ====================================================== -->
+  <header class="header" id="header">
+    <nav class="nav container">
+
+      <a href="#hero" class="nav__logo" aria-label="Oryxen Labs — home">
+        <span class="nav__logo-mark">ORYXEN</span><span class="nav__logo-sep">/</span><span>Labs</span>
+      </a>
+
+      <!-- Desktop nav list -->
+      <ul class="nav__list" role="list">
+        <li><a href="#about"      class="nav__link" data-nav>About</a></li>
+        <li><a href="#products"   class="nav__link" data-nav>Products</a></li>
+        <li><a href="#opensource" class="nav__link" data-nav>Open Source</a></li>
+        <li><a href="#stack"      class="nav__link" data-nav>Stack</a></li>
+        <li><a href="#contact"    class="nav__link" data-nav>Contact</a></li>
+      </ul>
+
       <div class="nav__actions">
-        <div class="lang-switch" role="group" aria-label="Language">
-          <button class="lang__btn active" type="button" data-lang="en" aria-pressed="true">EN</button>
-          <button class="lang__btn" type="button" data-lang="fr" aria-pressed="false">FR</button>
-          <button class="lang__btn" type="button" data-lang="es" aria-pressed="false">ES</button>
-        </div>
-        <a class="nav__cta" href="#contact" data-i18n="nav.cta">Let's Talk</a>
-        <button class="nav__toggle" id="nav-toggle" type="button" aria-label="Open menu" aria-controls="nav-menu" aria-expanded="false">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-            <path fill="none" d="M0 0h24v24H0z"/>
-            <path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="currentColor"/>
-          </svg>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour theme" title="Toggle theme">
+          <!-- sun -->
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <!-- moon -->
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+
+        <a href="https://github.com/oryxen" target="_blank" rel="noopener noreferrer" class="nav__github-btn" id="nav-github-desktop">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="#contact" class="nav__cta" id="nav-cta-desktop">Let's Build</a>
+
+        <button class="nav__toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
       </div>
+
+      <!-- Mobile drawer overlay -->
+      <div class="nav__overlay" id="nav-overlay" aria-hidden="true"></div>
+
+      <!-- Mobile drawer -->
+      <div class="nav__menu" id="nav-menu" aria-label="Mobile navigation">
+        <button class="nav__close" id="nav-close" aria-label="Close navigation menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <ul class="nav__list" role="list">
+          <li><a href="#about"      class="nav__link" data-nav>About</a></li>
+          <li><a href="#products"   class="nav__link" data-nav>Products</a></li>
+          <li><a href="#opensource" class="nav__link" data-nav>Open Source</a></li>
+          <li><a href="#stack"      class="nav__link" data-nav>Stack</a></li>
+          <li><a href="#contact"    class="nav__link" data-nav>Contact</a></li>
+        </ul>
+        <a href="https://github.com/oryxen" target="_blank" rel="noopener noreferrer" class="nav__github-btn btn btn--ghost" style="margin-top:1rem">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="#contact" class="nav__cta btn btn--primary" style="margin-top:.5rem;justify-content:center">Let's Build</a>
+      </div>
+
     </nav>
   </header>
 
-  <main class="main" id="main-content" tabindex="-1">
-    <section class="section hero" id="home" data-reveal>
-      <div class="container hero__grid">
-        <div class="hero__content">
-          <div class="hero__eyebrow" data-i18n="hero.eyebrow">Quietly engineering bold futures.</div>
-          <h1 class="hero__title" data-i18n="hero.title">Calm, precise engineering for teams that need continuity.</h1>
-          <p class="hero__subtitle" data-i18n="hero.subtitle">We listen, design, and build digital products that stay understandable and maintainable — supporting technical and non-technical leaders across Europe.</p>
+  <!-- ======================================================
+       MAIN
+  ====================================================== -->
+  <main id="main" tabindex="-1">
+
+    <!-- ── HERO ── -->
+    <section class="hero section" id="hero">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__orb hero__orb--1"></div>
+        <div class="hero__orb hero__orb--2"></div>
+        <div class="hero__grid-bg"></div>
+      </div>
+
+      <div class="container hero__layout">
+        <!-- Content -->
+        <div class="hero__content" data-reveal>
+          <div class="hero__eyebrow">
+            <span class="dot"></span>
+            Developer Studio · Est. 2024
+          </div>
+
+          <h1 class="hero__title">
+            Building apps,<br>
+            tools &amp; digital<br>
+            <span class="gradient-text">products</span>.
+          </h1>
+
+          <p class="hero__subtitle">
+            Oryxen Labs ships mobile apps, automation tools, and open-source software — crafted with precision, designed to last.
+          </p>
+
+          <div class="hero__ctas">
+            <a href="#products" class="btn btn--primary" id="hero-view-work">
+              View Our Work
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="https://github.com/oryxen" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" id="hero-github">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub →
+            </a>
+          </div>
+
           <div class="hero__stats">
-            <div class="stat">
-              <p class="stat__label" data-i18n="hero.stat1.label">Experience</p>
-              <p class="stat__value" data-i18n="hero.stat1.value">10+ years</p>
-              <p class="stat__hint" data-i18n="hero.stat1.hint">IT specialist in EU corporate environments.</p>
+            <div>
+              <span class="hero__stat-val">3+</span>
+              <span class="hero__stat-lbl">Live Products</span>
             </div>
-            <div class="stat">
-              <p class="stat__label" data-i18n="hero.stat2.label">Stack</p>
-              <p class="stat__value" data-i18n="hero.stat2.value">M365 · Azure · Intune</p>
-              <p class="stat__hint" data-i18n="hero.stat2.hint">Windows 10/11, AD, ServiceNow, process optimization.</p>
+            <div class="hero__stat-sep" aria-hidden="true"></div>
+            <div>
+              <span class="hero__stat-val">10+</span>
+              <span class="hero__stat-lbl">Years Experience</span>
             </div>
-            <div class="stat">
-              <p class="stat__label" data-i18n="hero.stat3.label">Approach</p>
-              <p class="stat__value" data-i18n="hero.stat3.value">Human, calm</p>
-              <p class="stat__hint" data-i18n="hero.stat3.hint">We listen first, then build together.</p>
+            <div class="hero__stat-sep" aria-hidden="true"></div>
+            <div>
+              <span class="hero__stat-val">100%</span>
+              <span class="hero__stat-lbl">Open Source</span>
             </div>
-          </div>
-          <div class="hero__actions">
-            <a href="#contact" class="button" data-i18n="hero.cta.primary">Tell us your idea</a>
-            <a href="#approach" class="button button--ghost" data-i18n="hero.cta.secondary">See how we work</a>
           </div>
         </div>
-        <div class="hero__panel" aria-label="ORYXEN TECH logo and promise">
-          <div class="hero__brand">
-            <div class="hero__logo">
-              <img src="assets/logo.png" alt="ORYXEN TECH logo" width="946" height="623" decoding="async" fetchpriority="high">
-            </div>
-            <div>
-              <p class="hero__brand-name">ORYXEN TECH</p>
-              <p class="hero__brand-tag" data-i18n="hero.brand">Calm, precise, human.</p>
-            </div>
+
+        <!-- Terminal panel -->
+        <div class="hero__terminal" aria-label="Oryxen Labs — build preview terminal" data-reveal data-delay="2">
+          <div class="terminal__bar">
+            <span class="terminal__dot terminal__dot--r" aria-hidden="true"></span>
+            <span class="terminal__dot terminal__dot--y" aria-hidden="true"></span>
+            <span class="terminal__dot terminal__dot--g" aria-hidden="true"></span>
+            <span class="terminal__caption">oryxen-labs ~ build pipeline</span>
           </div>
-          <div class="panel__copy">
-            <p class="panel__line" data-i18n="hero.panel.line1">“Share your idea. We translate it into a roadmap, then build with care.”</p>
-            <p class="panel__line" data-i18n="hero.panel.line2">No noise. No rush. Just engineering that respects people and time.</p>
-          </div>
-          <div class="panel__footer">
-            <span class="status-dot" aria-hidden="true"></span>
-            <p class="panel__status" data-i18n="hero.panel.status">Available for EU-based collaborations.</p>
+          <div class="terminal__body" aria-label="Terminal output showing build process">
+            <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">oryxen init --studio</span></div>
+            <div class="t-line"><span class="t-out">✓ Workspace ready</span></div>
+            <div class="t-line" style="margin-top:.25rem"><span class="t-prompt">$</span><span class="t-cmd">oryxen build --target production</span></div>
+            <div class="t-line"><span class="t-out t-info">⟳ Compiling mobile apps…</span></div>
+            <div class="t-line"><span class="t-out t-info">⟳ Bundling automation tools…</span></div>
+            <div class="t-line"><span class="t-out t-info">⟳ Generating open-source packages…</span></div>
+            <div class="t-line"><span class="t-out t-success">✓ PINBRIDGE · Secure Vault — deployed</span></div>
+            <div class="t-line"><span class="t-out t-success">✓ AppLeo   · Baby Tracker  — deployed</span></div>
+            <div class="t-line"><span class="t-out t-success">✓ Lena     · Kids Game     — deployed</span></div>
+            <div class="t-line" style="margin-top:.25rem"><span class="t-prompt">$</span><span class="t-cmd">oryxen ship --all <span class="t-cursor" aria-hidden="true"></span></span></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section about" id="about" data-reveal>
-      <div class="container split-layout">
-        <div class="section__header">
-          <p class="section__eyebrow" data-i18n="about.eyebrow">About / Who We Are</p>
-          <h2 class="section__title" data-i18n="about.title">Engineering with purpose, grounded in real-world operations.</h2>
-          <p class="section__subtitle" data-i18n="about.subtitle">We operate at the intersection of technology and people. Every engagement starts with listening, translating needs into a calm plan, and staying close until the solution is stable and understood by everyone involved.</p>
+    <!-- ── ABOUT ── -->
+    <section class="section about" id="about">
+      <div class="container">
+        <div class="section__header" data-reveal>
+          <p class="section__eyebrow">About Oryxen Labs</p>
+          <h2 class="section__title">A small studio.<br>A <span class="gradient-text">big impact</span>.</h2>
+          <p class="section__subtitle">We design and build mobile apps, automation tools, and digital products — quietly and precisely, with a focus on long-term quality.</p>
         </div>
+
         <div class="about__grid">
-          <div class="about__card">
-            <h3 data-i18n="about.card1.title">Human and consultative</h3>
-            <p data-i18n="about.card1.text">We keep the language clear, guide decisions, and make space for leaders to think. Technical or not, you always know what is happening and why.</p>
+          <div class="about__card" data-reveal data-delay="1">
+            <div class="about__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <h3>Mobile Apps</h3>
+            <p>Native-quality mobile apps built for real users — intuitive, reliable, and designed to stand out in crowded app stores.</p>
           </div>
-          <div class="about__card">
-            <h3 data-i18n="about.card2.title">European experience</h3>
-            <p data-i18n="about.card2.text">Based in Belgium, experienced across EU corporate and institutional environments with governance, privacy, and continuity at the center.</p>
+          <div class="about__card" data-reveal data-delay="2">
+            <div class="about__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3>Automation Tools</h3>
+            <p>Smart scripts and tools that eliminate repetitive work — from IT automation to workflow integrations and API connectors.</p>
           </div>
-          <div class="about__card">
-            <h3 data-i18n="about.card3.title">10+ years in the field</h3>
-            <p data-i18n="about.card3.text">Applications, web platforms, ServiceNow optimization, Microsoft 365, Azure, Intune, Windows 10/11, and Active Directory.</p>
+          <div class="about__card" data-reveal data-delay="3">
+            <div class="about__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </div>
+            <h3>Open Source</h3>
+            <p>We believe in giving back. Every major project we build feeds back into the open-source community with clean, documented code.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section approach" id="approach" data-reveal>
-      <div class="container split-layout">
-        <div class="section__header">
-          <p class="section__eyebrow" data-i18n="approach.eyebrow">Our Approach</p>
-          <h2 class="section__title" data-i18n="approach.title">A calm, transparent path from idea to long-term support.</h2>
-          <p class="section__subtitle" data-i18n="approach.subtitle">No need to arrive with the perfect brief. We shape it together, then build and support it with steady hands.</p>
-        </div>
-        <div class="approach__steps">
-          <div class="step">
-            <span class="step__badge">01</span>
-            <div>
-              <p class="step__title" data-i18n="approach.step1.title">You share your idea</p>
-              <p class="step__text" data-i18n="approach.step1.text">We listen, capture context, and surface constraints early.</p>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step__badge">02</span>
-            <div>
-              <p class="step__title" data-i18n="approach.step2.title">We listen &amp; advise</p>
-              <p class="step__text" data-i18n="approach.step2.text">Clear guidance on feasibility, options, and risks.</p>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step__badge">03</span>
-            <div>
-              <p class="step__title" data-i18n="approach.step3.title">We design together</p>
-              <p class="step__text" data-i18n="approach.step3.text">Co-create the blueprint so every stakeholder is aligned.</p>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step__badge">04</span>
-            <div>
-              <p class="step__title" data-i18n="approach.step4.title">We build with care</p>
-              <p class="step__text" data-i18n="approach.step4.text">Iterative delivery with documentation and calm communication.</p>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step__badge">05</span>
-            <div>
-              <p class="step__title" data-i18n="approach.step5.title">We support long-term</p>
-              <p class="step__text" data-i18n="approach.step5.text">Runbooks, training, and responsive support to keep it steady.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section create" id="create" data-reveal>
+    <!-- ── PRODUCTS ── -->
+    <section class="section" id="products">
       <div class="container">
-        <div class="section__header">
-          <p class="section__eyebrow" data-i18n="create.eyebrow">What We Create</p>
-          <h2 class="section__title" data-i18n="create.title">Digital products and platforms that stay reliable.</h2>
-          <p class="section__subtitle" data-i18n="create.subtitle">From first sketch to live operations, we build quietly and keep you informed.</p>
+        <div class="section__header" data-reveal>
+          <p class="section__eyebrow">Our Products</p>
+          <h2 class="section__title">Things we've <span class="gradient-text">shipped</span>.</h2>
+          <p class="section__subtitle">Real products, live in the wild — each solving a concrete problem for real people.</p>
         </div>
-        <div class="cards">
-          <div class="card">
-            <h3 data-i18n="create.card1.title">Application development</h3>
-            <p data-i18n="create.card1.text">Web and mobile applications built with governance, security, and user clarity from day one.</p>
+
+        <div class="products__grid">
+
+          <!-- PINBRIDGE -->
+          <div class="product-card" data-reveal data-delay="1">
+            <span class="product-card__status status--live">Live</span>
+            <span class="product-card__icon" aria-hidden="true">🔐</span>
+            <h3 class="product-card__title">PINBRIDGE</h3>
+            <p class="product-card__desc">A secure offline-first vault app. Store, encrypt, and sync your sensitive data with zero cloud dependency. Your data stays yours.</p>
+            <div class="product-card__tags">
+              <span class="tag">Encryption</span>
+              <span class="tag">Offline-first</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">PWA</span>
+            </div>
+            <a href="https://oryxen.tech/PINBRIDGE/" target="_blank" rel="noopener noreferrer" class="product-card__link" id="link-pinbridge">
+              Visit Project
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
           </div>
-          <div class="card">
-            <h3 data-i18n="create.card2.title">Website creation</h3>
-            <p data-i18n="create.card2.text">Premium sites that explain complex value simply, ready for multilingual European audiences.</p>
+
+          <!-- AppLeo -->
+          <div class="product-card" data-reveal data-delay="2">
+            <span class="product-card__status status--live">Live</span>
+            <span class="product-card__icon" aria-hidden="true">🍼</span>
+            <h3 class="product-card__title">AppLeo</h3>
+            <p class="product-card__desc">A beautifully crafted baby tracking app. Monitor feeding schedules, sleep patterns, diaper changes, and milestones — all in one place.</p>
+            <div class="product-card__tags">
+              <span class="tag">PWA</span>
+              <span class="tag">Mobile-first</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">IndexedDB</span>
+            </div>
+            <a href="https://oryxen.tech/AppLeo/" target="_blank" rel="noopener noreferrer" class="product-card__link" id="link-appleo">
+              Visit Project
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
           </div>
-          <div class="card">
-            <h3 data-i18n="create.card4.title">Technical consulting</h3>
-            <p data-i18n="create.card4.text">Architecture, governance, Microsoft 365, Azure, Intune, Windows 10/11, AD, and ServiceNow optimization.</p>
+
+          <!-- Lena -->
+          <div class="product-card" data-reveal data-delay="3">
+            <span class="product-card__status status--live">Live</span>
+            <span class="product-card__icon" aria-hidden="true">🦄</span>
+            <h3 class="product-card__title">Lena</h3>
+            <p class="product-card__desc">A magical adventure game designed for young children. Choose your avatar, explore colourful worlds, and embark on a journey full of wonder.</p>
+            <div class="product-card__tags">
+              <span class="tag">Kids &amp; Games</span>
+              <span class="tag">HTML5 Canvas</span>
+              <span class="tag">JavaScript</span>
+            </div>
+            <a href="https://oryxen.tech/Lena/html/login.html" target="_blank" rel="noopener noreferrer" class="product-card__link" id="link-lena">
+              Visit Project
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
           </div>
-          <div class="card">
-            <h3 data-i18n="create.card5.title">Long-term support</h3>
-            <p data-i18n="create.card5.text">Calm operations, documentation, and direct access to engineers who speak plainly.</p>
+
+          <!-- Coming Soon -->
+          <div class="product-card" data-reveal data-delay="4" style="opacity:.7">
+            <span class="product-card__status status--coming">Coming Soon</span>
+            <span class="product-card__icon" aria-hidden="true">📱</span>
+            <h3 class="product-card__title">Play Store Launch</h3>
+            <p class="product-card__desc">Our mobile apps are being packaged and submitted to the Google Play Store. Stay tuned for native Android releases of Oryxen Labs products.</p>
+            <div class="product-card__tags">
+              <span class="tag">Android</span>
+              <span class="tag">Play Store</span>
+              <span class="tag">2025</span>
+            </div>
+            <span class="product-card__link" style="color:var(--text-3);cursor:default">In preparation…</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── OPEN SOURCE ── -->
+    <section class="section opensource" id="opensource">
+      <div class="container">
+        <div class="section__header" data-reveal>
+          <p class="section__eyebrow">Open Source</p>
+          <h2 class="section__title">Built in the <span class="gradient-text">open</span>.</h2>
+          <p class="section__subtitle">All our major projects are open source. Explore the code, contribute, or fork and build your own.</p>
+        </div>
+
+        <a href="https://github.com/oryxen" target="_blank" rel="noopener noreferrer" class="github-banner" data-reveal id="github-profile-link">
+          <div class="github-banner__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </div>
+          <div class="github-banner__text">
+            <h3>github.com/oryxen</h3>
+            <p>Explore all repositories, contribute to ongoing projects, and follow our development journey.</p>
+          </div>
+          <span class="btn btn--ghost btn--sm github-banner__cta">View Profile →</span>
+        </a>
+
+        <div class="repo-grid">
+
+          <a href="https://github.com/oryxen/oryxen.github.io" target="_blank" rel="noopener noreferrer" class="repo-card" data-reveal data-delay="1" id="repo-website">
+            <div class="repo-card__header">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 3h18v18H3z"/></svg>
+              <span class="repo-card__name">oryxen.github.io</span>
+            </div>
+            <p class="repo-card__desc">The source code behind this very website. Open, clean, and fully static.</p>
+            <div class="repo-card__meta">
+              <span class="repo-lang"><span class="lang-dot lang-html"></span>HTML</span>
+              <span class="repo-stars">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Public
+              </span>
+            </div>
+          </a>
+
+          <a href="https://github.com/oryxen" target="_blank" rel="noopener noreferrer" class="repo-card" data-reveal data-delay="2" id="repo-pinbridge">
+            <div class="repo-card__header">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span class="repo-card__name">PINBRIDGE</span>
+            </div>
+            <p class="repo-card__desc">Offline-first encrypted vault. Store credentials and sensitive data without any server.</p>
+            <div class="repo-card__meta">
+              <span class="repo-lang"><span class="lang-dot lang-js"></span>JavaScript</span>
+              <span class="repo-stars">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Public
+              </span>
+            </div>
+          </a>
+
+          <a href="https://github.com/oryxen" target="_blank" rel="noopener noreferrer" class="repo-card" data-reveal data-delay="3" id="repo-appleo">
+            <div class="repo-card__header">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <span class="repo-card__name">AppLeo</span>
+            </div>
+            <p class="repo-card__desc">Baby tracking PWA with offline support, charts, and multi-profile management.</p>
+            <div class="repo-card__meta">
+              <span class="repo-lang"><span class="lang-dot lang-js"></span>JavaScript</span>
+              <span class="repo-stars">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Public
+              </span>
+            </div>
+          </a>
+
+          <a href="https://github.com/oryxen" target="_blank" rel="noopener noreferrer" class="repo-card" data-reveal data-delay="4" id="repo-lena">
+            <div class="repo-card__header">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span class="repo-card__name">Lena</span>
+            </div>
+            <p class="repo-card__desc">An HTML5 adventure game for kids with avatar selection, story progression and animations.</p>
+            <div class="repo-card__meta">
+              <span class="repo-lang"><span class="lang-dot lang-html"></span>HTML / JS</span>
+              <span class="repo-stars">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Public
+              </span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TECH STACK ── -->
+    <section class="section" id="stack">
+      <div class="container">
+        <div class="section__header" data-reveal>
+          <p class="section__eyebrow">Technology Stack</p>
+          <h2 class="section__title">Tools we <span class="gradient-text">trust</span>.</h2>
+          <p class="section__subtitle">A curated set of battle-tested technologies we use to build reliable, maintainable software.</p>
+        </div>
+
+        <div class="stack__grid">
+          <div class="stack-cat" data-reveal data-delay="1">
+            <span class="stack-cat__label">Frontend</span>
+            <div class="stack-items">
+              <div class="stack-item"><span class="stack-item-emoji">⚛️</span> React / Next.js</div>
+              <div class="stack-item"><span class="stack-item-emoji">🌐</span> HTML5 &amp; CSS3</div>
+              <div class="stack-item"><span class="stack-item-emoji">🟨</span> JavaScript (ES2023)</div>
+              <div class="stack-item"><span class="stack-item-emoji">🔷</span> TypeScript</div>
+            </div>
+          </div>
+          <div class="stack-cat" data-reveal data-delay="2">
+            <span class="stack-cat__label">Mobile</span>
+            <div class="stack-items">
+              <div class="stack-item"><span class="stack-item-emoji">🤖</span> Android (Kotlin)</div>
+              <div class="stack-item"><span class="stack-item-emoji">📱</span> Progressive Web Apps</div>
+              <div class="stack-item"><span class="stack-item-emoji">🩵</span> Flutter</div>
+              <div class="stack-item"><span class="stack-item-emoji">🍎</span> iOS (Swift, future)</div>
+            </div>
+          </div>
+          <div class="stack-cat" data-reveal data-delay="3">
+            <span class="stack-cat__label">Backend &amp; Data</span>
+            <div class="stack-items">
+              <div class="stack-item"><span class="stack-item-emoji">🟢</span> Node.js</div>
+              <div class="stack-item"><span class="stack-item-emoji">🐍</span> Python</div>
+              <div class="stack-item"><span class="stack-item-emoji">🔥</span> Firebase</div>
+              <div class="stack-item"><span class="stack-item-emoji">🐘</span> PostgreSQL</div>
+            </div>
+          </div>
+          <div class="stack-cat" data-reveal data-delay="4">
+            <span class="stack-cat__label">DevOps &amp; Cloud</span>
+            <div class="stack-items">
+              <div class="stack-item"><span class="stack-item-emoji">☁️</span> Microsoft Azure</div>
+              <div class="stack-item"><span class="stack-item-emoji">▲</span> Vercel</div>
+              <div class="stack-item"><span class="stack-item-emoji">🐙</span> GitHub Actions</div>
+              <div class="stack-item"><span class="stack-item-emoji">🐋</span> Docker</div>
+            </div>
+          </div>
+          <div class="stack-cat" data-reveal data-delay="5">
+            <span class="stack-cat__label">Tooling</span>
+            <div class="stack-items">
+              <div class="stack-item"><span class="stack-item-emoji">💻</span> VS Code</div>
+              <div class="stack-item"><span class="stack-item-emoji">🎨</span> Figma</div>
+              <div class="stack-item"><span class="stack-item-emoji">🔑</span> M365 &amp; Intune</div>
+              <div class="stack-item"><span class="stack-item-emoji">🗂️</span> ServiceNow</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section projects" id="projects" data-reveal>
+    <!-- ── CONTACT ── -->
+    <section class="section contact" id="contact">
       <div class="container">
-        <div class="section__header">
-          <p class="section__eyebrow" data-i18n="projects.eyebrow">Our Projects</p>
-          <h2 class="section__title" data-i18n="projects.title">Featured Projects</h2>
-          <p class="section__subtitle" data-i18n="projects.subtitle">Explore some of our recent work and digital solutions.</p>
+        <div class="section__header" data-reveal>
+          <p class="section__eyebrow">Contact &amp; Collaboration</p>
+          <h2 class="section__title">Let's build something <span class="gradient-text">together</span>.</h2>
+          <p class="section__subtitle">Have an idea? A project? A question? We respond within one business day.</p>
         </div>
-        <div class="projects__grid">
-          <a href="https://oryxen.tech/PINBRIDGE/" target="_blank" rel="noopener noreferrer" class="project-card">
-            <div class="project-card__icon">🔐</div>
-            <h3 class="project-card__title">PINBRIDGE</h3>
-            <p class="project-card__description">Secure Vault - Your data, secured offline and in-sync.</p>
-            <span class="project-card__link">Visit project →</span>
-          </a>
-          <a href="https://oryxen.tech/Lena/html/login.html" target="_blank" rel="noopener noreferrer" class="project-card">
-            <div class="project-card__icon">🦄</div>
-            <h3 class="project-card__title">Lena</h3>
-            <p class="project-card__description">A magical adventure game for kids - Choose your avatar and start your journey.</p>
-            <span class="project-card__link">Visit project →</span>
-          </a>
-          <a href="https://oryxen.tech/AppLeo/" target="_blank" rel="noopener noreferrer" class="project-card">
-            <div class="project-card__icon">🍼</div>
-            <h3 class="project-card__title">AppLeo</h3>
-            <p class="project-card__description">Baby tracking app - Monitor feeding, sleep, diapers, and more.</p>
-            <span class="project-card__link">Visit project →</span>
-          </a>
-        </div>
-      </div>
-    </section>
 
-    <section class="section contact" id="contact" data-reveal>
-      <div class="container">
-        <div class="contact__grid">
-          <div class="contact__copy">
-            <div class="section__header contact__header">
-              <p class="section__eyebrow" data-i18n="contact.eyebrow">Contact</p>
-              <h2 class="section__title" data-i18n="contact.title">Tell us your idea. We will listen, advise, and build it with you.</h2>
-              <p class="section__subtitle" data-i18n="contact.subtitle">No need for a perfect brief. Share where you are and what you want to achieve. We respond within one business day.</p>
+        <div class="contact__layout">
+          <!-- Info cards -->
+          <div class="contact__info" data-reveal>
+            <a href="mailto:contact@oryxen.tech" class="contact__info-card" id="contact-email-card">
+              <div class="contact__info-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <span class="contact__info-lbl">Email</span>
+                <span class="contact__info-val">contact@oryxen.tech</span>
+              </div>
+            </a>
+
+            <a href="https://github.com/oryxen" target="_blank" rel="noopener noreferrer" class="contact__info-card" id="contact-github-card">
+              <div class="contact__info-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </div>
+              <div>
+                <span class="contact__info-lbl">GitHub</span>
+                <span class="contact__info-val">github.com/oryxen</span>
+              </div>
+            </a>
+
+            <div class="contact__info-card" style="cursor:default">
+              <div class="contact__info-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <span class="contact__info-lbl">Response time</span>
+                <span class="contact__info-val">Within 1 business day</span>
+              </div>
             </div>
-            <div class="contact__meta" id="contact-meta">
-              <p class="contact__meta-line"><strong data-i18n="contact.meta.responseTitle">Response time:</strong> <span data-i18n="contact.meta.responseText">within one business day.</span></p>
-              <p class="contact__meta-line"><strong data-i18n="contact.meta.emailTitle">Email:</strong> <a href="mailto:contact@oryxen.tech" class="contact__email-link">contact@oryxen.tech</a></p>
+
+            <div class="contact__info-card" style="cursor:default">
+              <div class="contact__info-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <span class="contact__info-lbl">Based in</span>
+                <span class="contact__info-val">Belgium 🇧🇪 — EU</span>
+              </div>
             </div>
           </div>
 
-          <div class="contact__panel">
-            <div class="contact__panel-header">
-              <p class="contact__panel-eyebrow" data-i18n="contact.panel.eyebrow">Start a conversation</p>
-              <p class="contact__panel-subtitle" data-i18n="contact.panel.subtitle">Share the essentials. We’ll reply with next steps.</p>
-            </div>
-            <form id="contact-form" action="mailto:contact@oryxen.tech" method="POST" class="contact__form" novalidate autocomplete="on" aria-describedby="contact-meta">
-              <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off">
+          <!-- Form -->
+          <div class="contact__form-panel" data-reveal data-delay="2">
+            <p class="form-title">Start a conversation</p>
+            <form id="contact-form" novalidate autocomplete="on">
+              <!-- Honeypot -->
+              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none!important" aria-hidden="true">
 
-              <div class="contact__group">
-                <div class="input-wrapper">
-                  <label class="contact__label" for="name" data-i18n="contact.form.name">Name</label>
-                  <input type="text" id="name" name="name" class="contact__input" placeholder="Name" required autocomplete="name" autocapitalize="words" data-i18n-placeholder="contact.form.name">
-                  <span class="input-check-icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  </span>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="cf-name">Name *</label>
+                  <input class="form-input" type="text" id="cf-name" name="name" placeholder="Your name" required autocomplete="name">
                 </div>
-                <div class="input-wrapper">
-                  <label class="contact__label" for="email" data-i18n="contact.form.email">Email</label>
-                  <input type="email" id="email" name="email" class="contact__input" placeholder="Email" required autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" data-i18n-placeholder="contact.form.email">
-                  <span class="input-check-icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  </span>
+                <div class="form-group">
+                  <label class="form-label" for="cf-email">Email *</label>
+                  <input class="form-input" type="email" id="cf-email" name="email" placeholder="you@example.com" required autocomplete="email" inputmode="email">
                 </div>
               </div>
 
-              <div class="input-wrapper contact__span-2">
-                <label class="contact__label" for="company" data-i18n="contact.form.company">Company (optional)</label>
-                <input type="text" id="company" name="company" class="contact__input" placeholder="Company (optional)" autocomplete="organization" data-i18n-placeholder="contact.form.company">
-                <span class="input-check-icon" aria-hidden="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </span>
+              <div class="form-group">
+                <label class="form-label" for="cf-subject">Subject</label>
+                <input class="form-input" type="text" id="cf-subject" name="subject" placeholder="What's this about?" autocomplete="off">
               </div>
 
-              <div class="input-wrapper contact__span-2">
-                <label class="contact__label" for="idea" data-i18n="contact.form.idea">Tell us about your idea</label>
-                <textarea id="idea" name="idea" class="contact__input" placeholder="Tell us about your idea" required data-i18n-placeholder="contact.form.idea" rows="5"></textarea>
-                <span class="input-check-icon" aria-hidden="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </span>
+              <div class="form-group">
+                <label class="form-label" for="cf-message">Message *</label>
+                <textarea class="form-textarea" id="cf-message" name="message" placeholder="Tell us about your idea, project, or question…" required rows="5"></textarea>
               </div>
 
-              <div class="contact__actions">
-                <p class="contact__note" data-i18n="contact.note">By sending, you agree we can contact you back about this request.</p>
-                <button type="submit" id="submit-btn" class="contact__button button">
-                  <span class="btn-text" data-i18n="contact.form.submit">Send message</span>
-                  <span class="btn-loader" aria-hidden="true"></span>
-                  <span class="btn-success-icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  </span>
-                </button>
-              </div>
+              <button type="submit" class="btn btn--primary form-submit" id="contact-submit">
+                <span class="btn-text">Send Message</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+              <p class="form-note">By sending this form, you agree we may reply to your request via email.</p>
+              <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
             </form>
-            <p class="form-status" role="status" aria-live="polite"></p>
           </div>
         </div>
       </div>
     </section>
+
   </main>
 
-  <a href="#home" class="back-to-top" aria-label="Back to top">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-      <path fill="none" d="M0 0h24v24H0z"/>
-      <path d="M12 10.828l-4.95 4.95-1.414-1.414L12 8l6.364 6.364-1.414 1.414z" fill="currentColor"/>
-    </svg>
-  </a>
-
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-    <svg class="theme-icon-light" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-    <svg class="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-  </button>
-
+  <!-- ======================================================
+       FOOTER
+  ====================================================== -->
   <footer class="footer">
-    <div class="container footer__grid">
-      <p data-i18n="footer.line1">ORYXEN TECH — Quietly engineering bold futures.</p>
-      <a href="mailto:contact@oryxen.tech" class="footer__email">contact@oryxen.tech</a>
-      <p class="footer__note" data-i18n="footer.note">Technology with purpose. Calm support for bold ideas.</p>
+    <div class="container">
+      <div class="footer__grid">
+        <!-- Brand -->
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <span class="footer__logo-mark">ORYXEN</span> Labs
+          </div>
+          <p class="footer__tagline">Building mobile apps, automation tools, and open-source digital products — quietly and precisely.</p>
+          <div class="footer__socials">
+            <a href="https://github.com/oryxen" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="Oryxen Labs on GitHub" id="footer-github">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <a href="mailto:contact@oryxen.tech" class="footer__social" aria-label="Email Oryxen Labs" id="footer-email">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Products -->
+        <div>
+          <span class="footer__col-title">Products</span>
+          <ul class="footer__links">
+            <li><a href="https://oryxen.tech/PINBRIDGE/" target="_blank" rel="noopener noreferrer" class="footer__link" id="footer-pinbridge">PINBRIDGE</a></li>
+            <li><a href="https://oryxen.tech/AppLeo/" target="_blank" rel="noopener noreferrer" class="footer__link" id="footer-appleo">AppLeo</a></li>
+            <li><a href="https://oryxen.tech/Lena/html/login.html" target="_blank" rel="noopener noreferrer" class="footer__link" id="footer-lena">Lena</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div>
+          <span class="footer__col-title">Company</span>
+          <ul class="footer__links">
+            <li><a href="#about"      class="footer__link">About</a></li>
+            <li><a href="#opensource" class="footer__link">Open Source</a></li>
+            <li><a href="#stack"      class="footer__link">Tech Stack</a></li>
+            <li><a href="#contact"    class="footer__link">Contact</a></li>
+            <li><a href="mailto:contact@oryxen.tech" class="footer__link">contact@oryxen.tech</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2024–2026 Oryxen Labs · Belgium 🇧🇪</p>
+        <p class="footer__copy" style="color:var(--text-3)">Built with purpose. Shipped with precision.</p>
+      </div>
     </div>
   </footer>
+
+  <!-- Back to top -->
+  <a href="#hero" class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+  </a>
 
   <script src="js/script.js" defer></script>
 </body>
