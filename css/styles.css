@@ -234,6 +234,7 @@ button {
   border-bottom: 1px solid rgba(255, 255, 255, .06);
   z-index: 1000;
   transition: background .3s, border-color .3s;
+  transition: background var(--t), border-color var(--t);
 }
 
 [data-theme="light"] .header {
@@ -1571,6 +1572,19 @@ button {
     justify-content: center;
   }
 
+  .hero__orb--1 {
+    width: 450px;
+    height: 450px;
+    top: -150px;
+    right: -150px;
+  }
+
+  .hero__orb--2 {
+    width: 350px;
+    height: 350px;
+    left: -150px;
+  }
+
   .about__grid {
     grid-template-columns: 1fr;
   }
@@ -1595,6 +1609,14 @@ button {
 
   .github-banner__cta {
     margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hero__orb--1,
+  .hero__orb--2 {
+    animation: none;
   }
 }
 
