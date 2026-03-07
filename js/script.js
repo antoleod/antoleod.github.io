@@ -135,12 +135,9 @@
   const header = $('#header');
 
   if (header) {
-    const onScroll = () => {
-      header.style.boxShadow = window.scrollY > 20
-        ? '0 4px 24px rgba(0,0,0,0.35)'
-        : 'none';
-    };
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 20);
     window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
   /* ============================================================

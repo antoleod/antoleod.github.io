@@ -234,7 +234,11 @@ button {
   border-bottom: 1px solid rgba(255, 255, 255, .06);
   z-index: 1000;
   transition: background .3s, border-color .3s;
-  transition: background var(--t), border-color var(--t);
+  transition: background var(--t), border-color var(--t), box-shadow var(--t);
+}
+
+.header.scrolled {
+  box-shadow: var(--shadow-sm);
 }
 
 [data-theme="light"] .header {
