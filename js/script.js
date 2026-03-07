@@ -17,14 +17,22 @@
   const root      = document.documentElement;
   const themeBtn  = $('#theme-toggle');
 
+  function normalizeTheme (theme) {
+    if (theme === 'white') return 'light';
+    if (theme === 'light' || theme === 'dark') return theme;
+    return null;
+  }
+
   function getStoredTheme () {
-    return localStorage.getItem(THEME_KEY)
-      || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    const stored = normalizeTheme(localStorage.getItem(THEME_KEY));
+    if (stored) return stored;
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   }
 
   function applyTheme (theme) {
-    root.setAttribute('data-theme', theme);
-    localStorage.setItem(THEME_KEY, theme);
+    const resolved = normalizeTheme(theme) || 'dark';
+    root.setAttribute('data-theme', resolved);
+    localStorage.setItem(THEME_KEY, resolved);
   }
 
   applyTheme(getStoredTheme());
@@ -188,7 +196,7 @@
       }
 
       if (sent) {
-        showStatus('success', '✓ Message sent! We'll reply within one business day.');
+        showStatus('success', '✓ Message sent! We will reply within one business day.');
         form.reset();
       } else {
         // Graceful mailto fallback
@@ -219,7 +227,66 @@
   }
 
   /* ============================================================
-     8. SMOOTH SCROLL for anchor links
+     8. HERO TERMINAL ANIMATION
+  ============================================================ */
+  function initTerminalAnimation() {
+    const terminalBody = $('.terminal__body');
+    if (!terminalBody) return;
+
+    const lines = $$('.t-line', terminalBody);
+    if (!lines.length) return;
+
+    const lineDelay = 200;
+    const restartDelay = 5000;
+    const typeSpeed = 90;
+
+    const lastLine = lines[lines.length - 1];
+    const lastLineCmd = lastLine.querySelector('.t-cmd');
+    const originalCmdText = lastLineCmd ? (lastLineCmd.textContent || '') : '';
+    const cursor = lastLine.querySelector('.t-cursor');
+
+    function runAnimation() {
+      // 1. Reset state
+      lines.forEach(line => line.style.opacity = '0');
+      if (lastLineCmd) lastLineCmd.textContent = '';
+      if (cursor) cursor.style.display = 'none';
+
+      // 2. Animate lines
+      let cumulativeDelay = 500; // Initial delay
+      lines.forEach((line, index) => {
+        setTimeout(() => {
+          line.style.transition = 'opacity 0.4s ease';
+          line.style.opacity = '1';
+
+          // 3. Type last line
+          if (index === lines.length - 1 && lastLineCmd && originalCmdText) {
+            if (cursor) cursor.style.display = 'inline-block';
+            let charIndex = 0;
+            const type = () => {
+              if (charIndex < originalCmdText.length) {
+                lastLineCmd.textContent += originalCmdText[charIndex];
+                charIndex++;
+                setTimeout(type, typeSpeed);
+              }
+            };
+            setTimeout(type, 300); // Pause before typing
+          }
+        }, cumulativeDelay += lineDelay);
+      });
+
+      // 4. Schedule restart
+      setTimeout(runAnimation, cumulativeDelay + restartDelay);
+    }
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      lines.forEach(line => line.style.opacity = '0'); // Initial hide
+      runAnimation();
+    }
+  }
+  initTerminalAnimation();
+
+  /* ============================================================
+     9. SMOOTH SCROLL for anchor links
   ============================================================ */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
