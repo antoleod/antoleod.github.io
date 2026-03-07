@@ -1464,12 +1464,15 @@ button {
    SCROLL REVEAL
    ============================================================ */
 [data-reveal] {
-  opacity: 0;
-  transform: translateY(28px);
   transition: opacity .65s var(--ease), transform .65s var(--ease);
 }
 
-[data-reveal].revealed {
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+html.js [data-reveal].revealed {
   opacity: 1;
   transform: translateY(0);
 }
