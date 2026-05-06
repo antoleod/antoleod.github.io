@@ -202,7 +202,7 @@
         // Graceful mailto fallback
         const subject = encodeURIComponent(`[Oryxen Labs] Message from ${name}`);
         const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-        window.location.href = `mailto:contact@oryxen.tech?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:jdioses@outlook.be?subject=${subject}&body=${body}`;
         showStatus('success', '✓ Opening your email client…');
       }
 

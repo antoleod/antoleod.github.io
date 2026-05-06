@@ -1,0 +1,22 @@
+{
+  "name": "Oryxen Labs",
+  "short_name": "Oryxen",
+  "description": "Belgium-based developer studio building mobile apps, automation tools & open-source software.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#06060b",
+  "theme_color": "#8b5cf6",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

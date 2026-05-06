@@ -1,0 +1,83 @@
+{
+  "products": [
+    {
+      "id": "pinbridge",
+      "status": "Live",
+      "icon": "🔐",
+      "title": "PINBRIDGE",
+      "description": "A secure offline-first vault app. Store, encrypt, and sync your sensitive data with zero cloud dependency. Your data stays yours.",
+      "tags": ["Encryption", "Offline-first", "JavaScript", "PWA"],
+      "url": "https://oryxen.tech/PINBRIDGE/",
+      "ariaLabel": "Visit PINBRIDGE — Secure Vault App"
+    },
+    {
+      "id": "appleo",
+      "status": "Live",
+      "icon": "🍼",
+      "title": "AppLeo",
+      "description": "A beautifully crafted baby tracking app. Monitor feeding schedules, sleep patterns, diaper changes, and milestones — all in one place.",
+      "tags": ["PWA", "Mobile-first", "JavaScript", "IndexedDB"],
+      "url": "https://oryxen.tech/AppLeo/",
+      "ariaLabel": "Visit AppLeo — Baby Tracker App"
+    },
+    {
+      "id": "lena",
+      "status": "Live",
+      "icon": "🦄",
+      "title": "Lena",
+      "description": "A magical adventure game designed for young children. Choose your avatar, explore colourful worlds, and embark on a journey full of wonder.",
+      "tags": ["Kids & Games", "HTML5 Canvas", "JavaScript"],
+      "url": "https://oryxen.tech/Lena/html/login.html",
+      "ariaLabel": "Visit Lena — Kids Adventure Game"
+    },
+    {
+      "id": "playstore",
+      "status": "Coming Soon",
+      "icon": "📱",
+      "title": "Play Store Launch",
+      "description": "Our mobile apps are being packaged and submitted to the Google Play Store. Stay tuned for native Android releases of Oryxen Labs products.",
+      "tags": ["Android", "Play Store", "2026"],
+      "url": null,
+      "ariaLabel": "Coming soon: Play Store Launch",
+      "disabled": true
+    }
+  ],
+  "repositories": [
+    {
+      "id": "website",
+      "icon": "file",
+      "name": "oryxen.github.io",
+      "description": "The source code behind this very website. Open, clean, and fully static.",
+      "language": "HTML",
+      "languageClass": "lang-html",
+      "url": "https://github.com/oryxen/oryxen.github.io"
+    },
+    {
+      "id": "pinbridge-repo",
+      "icon": "lock",
+      "name": "PINBRIDGE",
+      "description": "Offline-first encrypted vault. Store credentials and sensitive data without any server.",
+      "language": "JavaScript",
+      "languageClass": "lang-js",
+      "url": "https://github.com/oryxen"
+    },
+    {
+      "id": "appleo-repo",
+      "icon": "heart",
+      "name": "AppLeo",
+      "description": "Baby tracking PWA with offline support, charts, and multi-profile management.",
+      "language": "JavaScript",
+      "languageClass": "lang-js",
+      "url": "https://github.com/oryxen"
+    },
+    {
+      "id": "lena-repo",
+      "icon": "play",
+      "name": "Lena",
+      "description": "An HTML5 adventure game for kids with avatar selection, story progression and animations.",
+      "language": "HTML / JS",
+      "languageClass": "lang-html",
+      "url": "https://github.com/oryxen"
+    }
+  ]
+}

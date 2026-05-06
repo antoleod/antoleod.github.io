@@ -1,0 +1,37 @@
+{
+  "site": {
+    "title": "Oryxen Labs",
+    "tagline": "Building mobile apps, automation tools, and open-source digital products — quietly and precisely.",
+    "description": "Oryxen Labs builds mobile apps, automation tools & open-source software. Belgium-based dev studio shipping quality digital products globally.",
+    "email": "jdioses@outlook.be",
+    "github": "https://github.com/oryxen",
+    "location": "Belgium 🇧🇪 — EU"
+  },
+  "hero": {
+    "subtitle": "Oryxen Labs ships mobile apps, automation tools, and open-source software — crafted with precision, designed to last.",
+    "stats": [
+      { "value": "3+", "label": "Live Products" },
+      { "value": "10+", "label": "Years Experience" },
+      { "value": "100%", "label": "Open Source" }
+    ]
+  },
+  "about": {
+    "title": "A small studio.",
+    "titleHighlight": "big impact",
+    "subtitle": "We design and build mobile apps, automation tools, and digital products — quietly and precisely, with a focus on long-term quality.",
+    "cards": [
+      {
+        "title": "Mobile Apps",
+        "description": "Native-quality mobile apps built for real users — intuitive, reliable, and designed to stand out in crowded app stores."
+      },
+      {
+        "title": "Automation Tools",
+        "description": "Smart scripts and tools that eliminate repetitive work — from IT automation to workflow integrations and API connectors."
+      },
+      {
+        "title": "Open Source",
+        "description": "We believe in giving back. Every major project we build feeds back into the open-source community with clean, documented code."
+      }
+    ]
+  }
+}

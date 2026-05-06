@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    ORYXEN LABS — Design System v2.0
    ============================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
@@ -435,51 +435,227 @@ button {
     top: 0;
     right: 0;
     bottom: 0;
-    width: min(340px, 90vw);
-    background: var(--surface);
+    width: min(360px, 92vw);
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg-2) 100%);
     border-left: 1px solid var(--card-border);
-    padding: 5.5rem 1.5rem 2rem;
+    padding: 1.25rem 1.5rem 1.5rem;
     transform: translateX(105%);
     transition: transform var(--t-slow);
     z-index: 1001;
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: 0;
     overflow-y: auto;
+    box-shadow: -24px 0 64px rgba(0, 0, 0, .35);
   }
 
   .nav__menu.open {
     transform: translateX(0);
   }
 
+  /* ── Drawer Header ── */
+  .nav__menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .nav__menu-logo {
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    font-family: var(--font-mono);
+    font-size: .875rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -.01em;
+  }
+
+  .nav__menu-logo .nav__logo-mark {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .nav__menu-logo .nav__logo-sep {
+    color: var(--text-3);
+    margin: 0 .15rem;
+  }
+
+  /* ── Eyebrow ── */
+  .nav__menu-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-family: var(--font-mono);
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--text-3);
+    margin-bottom: .75rem;
+  }
+
+  .nav__menu-eyebrow .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 8px var(--primary);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* ── Nav List ── */
   .nav__menu .nav__list {
     display: flex;
     flex-direction: column;
     gap: .25rem;
+    margin-bottom: 1.25rem;
   }
 
   .nav__menu .nav__link {
-    display: block;
-    font-size: 1.0625rem;
+    display: flex;
+    align-items: center;
+    gap: .875rem;
+    font-size: 1rem;
+    font-weight: 500;
     padding: .875rem 1rem;
     border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    color: var(--text-2);
+    transition: all var(--t);
+    position: relative;
   }
 
-  .nav__menu .nav__github-btn {
+  .nav__menu .nav__link:hover {
+    background: var(--card-hover);
+    border-color: var(--card-border);
+    color: var(--text);
+    transform: translateX(2px);
+  }
+
+  .nav__menu .nav__link.active {
+    background: linear-gradient(135deg, rgba(139, 92, 246, .12), rgba(59, 130, 246, .08));
+    border-color: var(--card-border-hover);
+    color: var(--text);
+  }
+
+  .nav__menu .nav__link.active::before {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 60%;
+    background: linear-gradient(180deg, var(--primary), var(--accent));
+    border-radius: 0 4px 4px 0;
+  }
+
+  .nav__link-icon {
     display: flex;
-    margin-top: .5rem;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-xs);
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    color: var(--text-2);
+    flex-shrink: 0;
+    transition: all var(--t);
   }
 
+  .nav__menu .nav__link:hover .nav__link-icon,
+  .nav__menu .nav__link.active .nav__link-icon {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-color: transparent;
+    color: white;
+  }
+
+  .nav__link-text {
+    flex: 1;
+  }
+
+  .nav__link-arrow {
+    color: var(--text-3);
+    font-size: 1rem;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all var(--t);
+  }
+
+  .nav__menu .nav__link:hover .nav__link-arrow,
+  .nav__menu .nav__link.active .nav__link-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--primary);
+  }
+
+  /* ── CTA ── */
   .nav__menu .nav__cta {
     display: flex;
-    margin-top: .5rem;
+    align-items: center;
     justify-content: center;
+    gap: .5rem;
+    margin-bottom: 1.5rem;
   }
 
+  /* Hide GitHub button (now in footer) */
+  .nav__menu .nav__github-btn {
+    display: none;
+  }
+
+  /* ── Drawer Footer ── */
+  .nav__menu-footer {
+    margin-top: auto;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--card-border);
+  }
+
+  .nav__menu-socials {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+    margin-bottom: 1rem;
+  }
+
+  .nav__menu-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    padding: .75rem .5rem;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-sm);
+    color: var(--text-2);
+    font-size: .85rem;
+    font-weight: 500;
+    transition: all var(--t);
+  }
+
+  .nav__menu-social:hover {
+    background: var(--card-hover);
+    border-color: var(--card-border-hover);
+    color: var(--text);
+    transform: translateY(-1px);
+  }
+
+  .nav__menu-copy {
+    font-size: .7rem;
+    color: var(--text-3);
+    text-align: center;
+    font-family: var(--font-mono);
+    letter-spacing: .02em;
+  }
+
+  /* ── Close Button ── */
   .nav__close {
-    position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
+    position: relative;
     width: 38px;
     height: 38px;
     border-radius: var(--radius-sm);
@@ -490,11 +666,56 @@ button {
     align-items: center;
     justify-content: center;
     transition: all var(--t);
+    flex-shrink: 0;
   }
 
   .nav__close:hover {
     background: var(--card-hover);
+    border-color: var(--card-border-hover);
+    transform: rotate(90deg);
   }
+
+  /* ── Staggered animation when open ── */
+  .nav__menu .nav__list li {
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity .4s var(--ease), transform .4s var(--ease);
+  }
+
+  .nav__menu.open .nav__list li {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .nav__menu.open .nav__list li:nth-child(1) { transition-delay: .08s; }
+  .nav__menu.open .nav__list li:nth-child(2) { transition-delay: .14s; }
+  .nav__menu.open .nav__list li:nth-child(3) { transition-delay: .20s; }
+  .nav__menu.open .nav__list li:nth-child(4) { transition-delay: .26s; }
+  .nav__menu.open .nav__list li:nth-child(5) { transition-delay: .32s; }
+
+  .nav__menu .nav__cta,
+  .nav__menu .nav__menu-footer {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .4s var(--ease), transform .4s var(--ease);
+  }
+
+  .nav__menu.open .nav__cta {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: .38s;
+  }
+
+  .nav__menu.open .nav__menu-footer {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: .44s;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .6; transform: scale(.85); }
 }
 
 /* ============================================================
@@ -1552,6 +1773,8 @@ html.js [data-reveal].revealed {
 /* ============================================================
    RESPONSIVE
    ============================================================ */
+
+/* â”€â”€ Tablet / medium screens (â‰¤ 900px) â”€â”€ */
 @media (max-width:900px) {
   .section {
     padding: 5rem 0;
@@ -1619,36 +1842,141 @@ html.js [data-reveal].revealed {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .hero__orb--1,
   .hero__orb--2 {
     animation: none;
   }
 }
 
+/* â”€â”€ Mobile (â‰¤ 600px) â”€â”€ */
 @media (max-width:600px) {
   .section {
     padding: 4rem 0;
   }
 
+  .container {
+    padding: 0 1.125rem;
+  }
+
+  /* Typography */
   .hero__title {
-    font-size: clamp(2.25rem, 8vw, 3rem);
+    font-size: clamp(2.2rem, 8vw, 3rem);
   }
 
   .section__title {
     font-size: clamp(1.75rem, 6vw, 2.25rem);
   }
 
+  /* Hero */
+  .hero {
+    padding-top: calc(var(--header-h) + 1.5rem);
+    padding-bottom: 3.5rem;
+  }
+
+  .hero__eyebrow {
+    font-size: .72rem;
+    padding: .35rem .85rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Full-width CTAs on mobile */
+  .hero__ctas {
+    flex-direction: column;
+    align-items: center;
+    gap: .75rem;
+  }
+
+  .hero__ctas .btn {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
+
+  .hero__stats {
+    gap: 1.25rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: .25rem;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .hero__stat-val {
+    font-size: 1.25rem;
+  }
+
+  /* Terminal â€” compact + scrollable instead of hidden */
+  .hero__terminal {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .terminal__body {
+    font-size: .8rem;
+    padding: 1rem;
+    line-height: 1.85;
+    min-width: 280px;
+  }
+
+  /* About */
+  .about__card {
+    padding: 1.5rem;
+  }
+
+  /* Products */
   .products__grid {
     grid-template-columns: 1fr;
+  }
+
+  .product-card {
+    padding: 1.5rem;
+  }
+
+  /* Open Source */
+  .github-banner {
+    padding: 1.5rem;
+    gap: 1.25rem;
+  }
+
+  /* Stack â€” 2 cols on mobile */
+  .stack__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: .875rem;
+  }
+
+  .stack-cat {
+    padding: 1.125rem;
+  }
+
+  /* Contact */
+  .contact__info-val {
+    font-size: .85rem;
+    word-break: break-all;
+    overflow-wrap: break-word;
+  }
+
+  .contact__form-panel {
+    padding: 1.5rem;
   }
 
   .form-row {
     grid-template-columns: 1fr;
   }
 
+  /* Footer */
   .footer__grid {
     grid-template-columns: 1fr;
+  }
+
+  .footer__tagline {
+    max-width: 100%;
   }
 
   .footer__bottom {
@@ -1656,7 +1984,60 @@ html.js [data-reveal].revealed {
     text-align: center;
   }
 
-  .hero__terminal {
-    display: none;
+  /* Back-to-top â€” bigger tap target */
+  .back-to-top {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    width: 48px;
+    height: 48px;
+  }
+
+  /* Tone down orb animations on mobile */
+  .hero__orb--1,
+  .hero__orb--2 {
+    animation-duration: 14s;
+    opacity: .07;
+  }
+}
+
+/* â”€â”€ Very small screens (â‰¤ 375px) â”€â”€ */
+@media (max-width:375px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .hero__title {
+    font-size: 2rem;
+    letter-spacing: -.03em;
+  }
+
+  .section__title {
+    font-size: 1.65rem;
+  }
+
+  .hero__ctas .btn {
+    max-width: 100%;
+    font-size: .875rem;
+    padding: .75rem 1.25rem;
+  }
+
+  .stack__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav__logo {
+    font-size: 1rem;
+  }
+
+  .product-card {
+    padding: 1.25rem;
+  }
+
+  .about__card {
+    padding: 1.25rem;
+  }
+
+  .contact__form-panel {
+    padding: 1.25rem;
   }
 }
