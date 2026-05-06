@@ -323,6 +323,7 @@
         <button class="tab active" onclick="switchTab('products')">Products</button>
         <button class="tab" onclick="switchTab('repos')">Repositories</button>
         <button class="tab" onclick="switchTab('tools')">Tools</button>
+        <button class="tab" onclick="switchTab('settings')">⚙️ Settings</button>
       </div>
 
       <div id="products" class="tab-content active">
@@ -391,6 +392,12 @@
 
       <div id="tools" class="tab-content">
         <div class="card">
+          <h3>🚀 Sync to GitHub</h3>
+          <p style="margin-bottom: 1rem; color: rgba(242,242,248,0.65);">Commit and push your changes directly to the repository. Configure GitHub token in Settings first.</p>
+          <button onclick="syncToGithub()" id="sync-btn">Push to GitHub</button>
+          <p style="font-size: 0.85rem; margin-top: 0.75rem; color: rgba(242,242,248,0.5);" id="sync-status"></p>
+        </div>
+        <div class="card">
           <h3>📥 Import Data</h3>
           <p style="margin-bottom: 1rem; color: rgba(242,242,248,0.65);">Upload JSON to import data.</p>
           <input type="file" id="import-file" accept=".json">
@@ -402,9 +409,65 @@
           <button onclick="exportData()">Export All Data</button>
         </div>
         <div class="card">
-          <h3>🔄 Sync</h3>
-          <p style="margin-bottom: 1rem; color: rgba(242,242,248,0.65);">Reload data from server.</p>
+          <h3>🔄 Reload</h3>
+          <p style="margin-bottom: 1rem; color: rgba(242,242,248,0.65);">Reload data from server (discards local changes).</p>
           <button onclick="reloadData()">Reload Data</button>
+        </div>
+      </div>
+
+      <div id="settings" class="tab-content">
+        <div class="card">
+          <h3>🔑 Change Password</h3>
+          <p style="margin-bottom: 1rem; color: rgba(242,242,248,0.65);">Update your admin password. Stored locally in your browser.</p>
+          <div class="form-group">
+            <label for="current-password">Current Password</label>
+            <input type="password" id="current-password" placeholder="Enter current password">
+          </div>
+          <div class="form-group">
+            <label for="new-password">New Password</label>
+            <input type="password" id="new-password" placeholder="Enter new password (min 6 chars)">
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirm New Password</label>
+            <input type="password" id="confirm-password" placeholder="Re-enter new password">
+          </div>
+          <button onclick="changePassword()">Update Password</button>
+        </div>
+
+        <div class="card">
+          <h3>🐙 GitHub Sync Configuration</h3>
+          <p style="margin-bottom: 1rem; color: rgba(242,242,248,0.65);">
+            Configure GitHub to enable direct sync. Requires a Personal Access Token with <code style="background:rgba(139,92,246,.15);padding:.15rem .4rem;border-radius:4px;">Contents: Read/Write</code> permission.
+            <br><a href="https://github.com/settings/tokens?type=beta" target="_blank" style="color:#8b5cf6;text-decoration:underline;">→ Create Token (fine-grained)</a>
+          </p>
+          <div class="form-group">
+            <label for="gh-owner">Repository Owner</label>
+            <input type="text" id="gh-owner" placeholder="e.g., oryxen">
+          </div>
+          <div class="form-group">
+            <label for="gh-repo">Repository Name</label>
+            <input type="text" id="gh-repo" placeholder="e.g., oryxen.github.io">
+          </div>
+          <div class="form-group">
+            <label for="gh-branch">Branch</label>
+            <input type="text" id="gh-branch" placeholder="main" value="main">
+          </div>
+          <div class="form-group">
+            <label for="gh-token">Personal Access Token</label>
+            <input type="password" id="gh-token" placeholder="github_pat_...">
+            <p style="font-size: 0.75rem; margin-top: 0.5rem; color: rgba(242,242,248,0.5);">⚠️ Stored in localStorage. Don't use shared computers.</p>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button onclick="saveGithubConfig()">Save Configuration</button>
+            <button class="secondary" onclick="testGithubConnection()">Test Connection</button>
+          </div>
+          <p style="font-size: 0.85rem; margin-top: 0.75rem;" id="gh-test-status"></p>
+        </div>
+
+        <div class="card">
+          <h3>🗑️ Danger Zone</h3>
+          <p style="margin-bottom: 1rem; color: rgba(242,242,248,0.65);">Reset all local data. Cannot be undone.</p>
+          <button class="danger" onclick="resetAllData()">Clear All Local Data</button>
         </div>
       </div>
     </div>
