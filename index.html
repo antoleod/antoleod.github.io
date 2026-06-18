@@ -12,7 +12,6 @@
   <meta name="author" content="Oryxen Labs">
   <meta name="copyright" content="© 2024–2026 Oryxen Labs">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <meta name="revisit-after" content="7 days">
   <meta name="rating" content="general">
   <meta name="category" content="Technology, Software Development">
   <meta name="language" content="English">
@@ -492,7 +491,7 @@
           </h1>
 
           <p class="hero__subtitle">
-            We turn ideas into polished, production-ready software — mobile apps, automation tools, and open-source products built to last.
+            We ship mobile apps and automation tools in weeks, not months — open source, documented, and built for real users.
           </p>
 
           <div class="hero__ctas">
@@ -504,13 +503,8 @@
                 <polyline points="12 5 19 12 12 19" />
               </svg>
             </a>
-            <a href="https://github.com/antoleod" target="_blank" rel="noopener noreferrer" class="btn btn--ghost"
-              id="hero-github">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path
-                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-              </svg>
-              GitHub →
+            <a href="pitch.html" class="btn btn--ghost" id="hero-work-with-us">
+              Work With Us →
             </a>
           </div>
 
@@ -526,8 +520,8 @@
             </div>
             <div class="hero__stat-sep" aria-hidden="true"></div>
             <div>
-              <span class="hero__stat-val">100%</span>
-              <span class="hero__stat-lbl">Open Source</span>
+              <span class="hero__stat-val">Open</span>
+              <span class="hero__stat-lbl">Source Code</span>
             </div>
             <div class="hero__stat-sep" aria-hidden="true"></div>
             <div>
@@ -604,8 +598,8 @@
                   d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
               </svg>
             </div>
-            <h3>Open Source</h3>
-            <p>Every major product we build is open source. Forkable, auditable, and community-ready — because great software grows in the open.</p>
+            <h3>Built to Last</h3>
+            <p>We're building towards fully open source. Our products are documented, auditable, and designed for community contribution — no vendor lock-in, ever.</p>
           </div>
         </div>
       </div>
@@ -630,7 +624,7 @@
           <div class="process__step">
             <div class="process__num" aria-hidden="true">02</div>
             <h3 class="process__title">Build</h3>
-            <p class="process__desc">Short cycles with real progress visible at every step. We ship working software iteratively — no black boxes, no radio silence.</p>
+            <p class="process__desc">Short cycles with real progress visible at every step. We ship working software iteratively — no black boxes, no radio silence. Typical projects in 4–8 weeks.</p>
           </div>
           <div class="process__connector" aria-hidden="true"></div>
           <div class="process__step">
@@ -651,8 +645,21 @@
           <p class="section__subtitle">Real products, live in the wild — each solving a concrete problem for real people. Not demos. Not side projects. Production software.</p>
         </div>
 
-        <div class="products__grid">
-          <!-- Renderizado dinámicamente por render.js desde data/projects.json -->
+        <div class="carousel" id="products-carousel">
+          <div class="carousel__controls">
+            <button class="carousel__btn carousel__btn--prev" aria-label="Previous products" disabled>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="carousel__btn carousel__btn--next" aria-label="Next products">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+          <div class="carousel__viewport">
+            <div class="products__grid">
+              <!-- Renderizado dinámicamente por render.js desde data/projects.json -->
+            </div>
+          </div>
+          <div class="carousel__dots" id="carousel-dots" role="tablist" aria-label="Product carousel"></div>
         </div>
       </div>
     </section>
@@ -677,7 +684,7 @@
           </div>
           <div class="github-banner__text">
             <h3>github.com/antoleod</h3>
-            <p>All our products are open source — forkable, auditable, and ready for contributions. No paywalls, no vendor lock-in.</p>
+            <p>Our products are built to be open source — repos publishing progressively. Forkable, auditable, no paywalls, no vendor lock-in.</p>
           </div>
           <span class="btn btn--ghost btn--sm github-banner__cta">View Profile →</span>
         </a>
@@ -883,8 +890,8 @@
             <li><a href="#opensource" class="footer__link">Open Source</a></li>
             <li><a href="#stack" class="footer__link">Tech Stack</a></li>
             <li><a href="#contact" class="footer__link">Contact</a></li>
+            <li><a href="pitch.html" class="footer__link">Work With Us</a></li>
             <li><a href="slug.html" class="footer__link">Link Directory</a></li>
-            <li><a href="privacy.html" class="footer__link">Privacy Policy</a></li>
           </ul>
         </div>
       </div>

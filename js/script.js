@@ -241,14 +241,18 @@
     const originalCmdText = lastLineCmd ? (lastLineCmd.textContent || '') : '';
     const cursor = lastLine.querySelector('.t-cursor');
 
+    let pendingRestartId = null;
+
     function runAnimation() {
+      pendingRestartId = null;
+
       // 1. Reset state
       lines.forEach(line => line.style.opacity = '0');
       if (lastLineCmd) lastLineCmd.textContent = '';
       if (cursor) cursor.style.display = 'none';
 
       // 2. Animate lines
-      let cumulativeDelay = 500; // Initial delay
+      let cumulativeDelay = 500;
       lines.forEach((line, index) => {
         setTimeout(() => {
           line.style.transition = 'opacity 0.4s ease';
@@ -265,17 +269,32 @@
                 setTimeout(type, typeSpeed);
               }
             };
-            setTimeout(type, 300); // Pause before typing
+            setTimeout(type, 300);
           }
         }, cumulativeDelay += lineDelay);
       });
 
-      // 4. Schedule restart
-      setTimeout(runAnimation, cumulativeDelay + restartDelay);
+      // 4. Schedule restart — cancelled if terminal leaves viewport
+      pendingRestartId = setTimeout(runAnimation, cumulativeDelay + restartDelay);
     }
 
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      lines.forEach(line => line.style.opacity = '0'); // Initial hide
+      lines.forEach(line => line.style.opacity = '0');
+
+      const terminalEl = terminalBody.closest('.hero__terminal') || terminalBody;
+      if ('IntersectionObserver' in window) {
+        const termIO = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+              clearTimeout(pendingRestartId);
+              pendingRestartId = null;
+            } else if (pendingRestartId === null) {
+              runAnimation();
+            }
+          });
+        }, { threshold: 0.1 });
+        termIO.observe(terminalEl);
+      }
       runAnimation();
     }
   }

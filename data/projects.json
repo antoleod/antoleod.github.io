@@ -31,6 +31,76 @@
       "ariaLabel": "Visit Lena — Kids Adventure Game"
     },
     {
+      "id": "lenaland",
+      "status": "Live",
+      "icon": "🌈",
+      "title": "LenaLand",
+      "description": "An enchanted world where kids explore, discover and play. A full creative universe built around Lena's adventures.",
+      "tags": ["Kids", "Interactive", "JavaScript", "PWA"],
+      "url": "https://oryxen.tech/lenaland",
+      "ariaLabel": "Visit LenaLand — Kids Interactive World"
+    },
+    {
+      "id": "mykit",
+      "status": "Live",
+      "icon": "🧰",
+      "title": "MyKit",
+      "description": "Your personal developer toolkit. Snippets, shortcuts, and utilities — always at hand, always offline-ready.",
+      "tags": ["Developer Tools", "PWA", "Offline-first", "JavaScript"],
+      "url": "https://oryxen.tech/mykit/",
+      "ariaLabel": "Visit MyKit — Developer Toolkit"
+    },
+    {
+      "id": "wash",
+      "status": "Live",
+      "icon": "🫧",
+      "title": "Wash",
+      "description": "Smart laundry planner and cycle tracker. Schedule washes, track loads, and never forget what's in the machine again.",
+      "tags": ["Lifestyle", "PWA", "Mobile-first", "JavaScript"],
+      "url": "https://oryxen.tech/wash/",
+      "ariaLabel": "Visit Wash — Smart Laundry Planner"
+    },
+    {
+      "id": "pilot",
+      "status": "Live",
+      "icon": "🧭",
+      "title": "Pilot",
+      "description": "A lightweight goal-navigation tool. Define your destination, break it into waypoints, and fly through your objectives step by step.",
+      "tags": ["Productivity", "PWA", "JavaScript"],
+      "url": "https://oryxen.tech/pilot/",
+      "ariaLabel": "Visit Pilot — Goal Navigation Tool"
+    },
+    {
+      "id": "flowlyne",
+      "status": "Live",
+      "icon": "🔄",
+      "title": "Flowlyne",
+      "description": "Visual workflow and pipeline builder. Drag, connect, and automate your processes without writing a single line of configuration.",
+      "tags": ["Automation", "No-code", "JavaScript", "PWA"],
+      "url": "https://oryxen.tech/Flowlyne/",
+      "ariaLabel": "Visit Flowlyne — Visual Workflow Builder"
+    },
+    {
+      "id": "pulse",
+      "status": "Live",
+      "icon": "💓",
+      "title": "Pulse",
+      "description": "Real-time metrics and personal analytics dashboard. Track what matters, spot trends, and keep your finger on the pulse.",
+      "tags": ["Analytics", "Dashboard", "JavaScript", "PWA"],
+      "url": "https://oryxen.tech/pulse",
+      "ariaLabel": "Visit Pulse — Analytics Dashboard"
+    },
+    {
+      "id": "bot",
+      "status": "Live",
+      "icon": "🤖",
+      "title": "Bot",
+      "description": "AI-powered bot builder and manager. Create, configure, and deploy intelligent bots for automation and conversational flows.",
+      "tags": ["AI", "Automation", "JavaScript", "PWA"],
+      "url": "https://oryxen.tech/bot/",
+      "ariaLabel": "Visit Bot — AI Bot Builder"
+    },
+    {
       "id": "playstore",
       "status": "Coming Soon",
       "icon": "📱",
@@ -46,7 +116,7 @@
     {
       "id": "website",
       "icon": "file",
-      "name": "oryxen.github.io",
+      "name": "antoleod.github.io",
       "description": "The source code behind this very website. Open, clean, and fully static — HTML, CSS, JS, zero dependencies.",
       "language": "HTML",
       "languageClass": "lang-html",

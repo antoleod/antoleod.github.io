@@ -15,7 +15,7 @@
         { "emoji": "🤖", "text": "Android (Kotlin)" },
         { "emoji": "📱", "text": "Progressive Web Apps" },
         { "emoji": "🩵", "text": "Flutter" },
-        { "emoji": "🍎", "text": "iOS (Swift, future)" }
+        { "emoji": "🎨", "text": "Responsive UI / CSS" }
       ]
     },
     {
@@ -40,9 +40,9 @@
       "label": "Tooling",
       "items": [
         { "emoji": "💻", "text": "VS Code" },
-        { "emoji": "🎨", "text": "Figma" },
-        { "emoji": "🔑", "text": "M365 & Intune" },
-        { "emoji": "🗂️", "text": "ServiceNow" }
+        { "emoji": "🖌️", "text": "Figma" },
+        { "emoji": "🧪", "text": "Playwright / Vitest" },
+        { "emoji": "✅", "text": "ESLint / Prettier" }
       ]
     }
   ]

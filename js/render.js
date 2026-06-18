@@ -84,15 +84,92 @@
         `}
       </article>
     `).join('');
+
     observeNewReveals(container);
+    initCarousel();
+  }
+
+  function initCarousel() {
+    const viewport  = document.querySelector('.carousel__viewport');
+    const prevBtn   = document.querySelector('.carousel__btn--prev');
+    const nextBtn   = document.querySelector('.carousel__btn--next');
+    const dotsWrap  = document.getElementById('carousel-dots');
+    const cards     = document.querySelectorAll('.product-card');
+
+    if (!viewport || !prevBtn || !nextBtn || !dotsWrap || !cards.length) return;
+
+    // Build dot indicators
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'carousel__dot' + (i === 0 ? ' carousel__dot--active' : '');
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', `Product ${i + 1}`);
+      dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+
+    const dots = () => dotsWrap.querySelectorAll('.carousel__dot');
+
+    function cardWidth() {
+      const card = cards[0];
+      if (!card) return 0;
+      const style = getComputedStyle(document.querySelector('.products__grid'));
+      const gap = parseFloat(style.gap) || 24;
+      return card.offsetWidth + gap;
+    }
+
+    function currentIndex() {
+      return Math.round(viewport.scrollLeft / (cardWidth() || 1));
+    }
+
+    function updateState(idx) {
+      const total = cards.length;
+      prevBtn.disabled = idx <= 0;
+      nextBtn.disabled = idx >= total - 1;
+      dots().forEach((d, i) => {
+        const active = i === idx;
+        d.classList.toggle('carousel__dot--active', active);
+        d.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+    }
+
+    function goTo(idx) {
+      const clamped = Math.max(0, Math.min(idx, cards.length - 1));
+      viewport.scrollTo({ left: clamped * cardWidth(), behavior: 'smooth' });
+      updateState(clamped);
+    }
+
+    prevBtn.addEventListener('click', () => goTo(currentIndex() - 1));
+    nextBtn.addEventListener('click', () => goTo(currentIndex() + 1));
+
+    let scrollTimer;
+    viewport.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => updateState(currentIndex()), 80);
+    }, { passive: true });
+
+    // Touch/drag swipe support
+    let dragStartX = 0;
+    let dragging = false;
+    viewport.addEventListener('pointerdown', e => { dragStartX = e.clientX; dragging = true; });
+    viewport.addEventListener('pointerup', e => {
+      if (!dragging) return;
+      dragging = false;
+      const delta = dragStartX - e.clientX;
+      if (Math.abs(delta) > 40) goTo(currentIndex() + (delta > 0 ? 1 : -1));
+    });
+
+    updateState(0);
   }
 
   function renderRepositories() {
     const container = document.querySelector('.repo-grid');
     if (!container) return;
 
-    container.innerHTML = data.projects.repositories.map((repo, idx) => `
-      <a href="${escapeHtml(safeUrl(repo.url))}" target="_blank" rel="noopener noreferrer" class="repo-card${repo.comingSoon ? ' repo-card--soon' : ''}" data-reveal data-delay="${idx + 1}" id="repo-${escapeHtml(repo.id)}">
+    container.innerHTML = data.projects.repositories.map((repo, idx) => {
+      const soon = !!repo.comingSoon;
+      const inner = `
         <div class="repo-card__header">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
             ${getRepoIcon(repo.icon)}
@@ -106,11 +183,14 @@
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
             </svg>
-            ${repo.comingSoon ? 'Soon' : 'Public'}
+            ${soon ? 'Soon' : 'Public'}
           </span>
-        </div>
-      </a>
-    `).join('');
+        </div>`;
+      if (soon) {
+        return `<div role="article" aria-label="${escapeHtml(repo.name)} — coming soon" class="repo-card repo-card--soon" data-reveal data-delay="${idx + 1}" id="repo-${escapeHtml(repo.id)}">${inner}</div>`;
+      }
+      return `<a href="${escapeHtml(safeUrl(repo.url))}" target="_blank" rel="noopener noreferrer" class="repo-card" data-reveal data-delay="${idx + 1}" id="repo-${escapeHtml(repo.id)}">${inner}</a>`;
+    }).join('');
     observeNewReveals(container);
   }
 
