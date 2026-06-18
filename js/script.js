@@ -170,15 +170,25 @@
       const subject = $('#cf-subject')?.value.trim();
       const message = $('#cf-message')?.value.trim();
 
-      // Basic validation
-      if (!name || !email || !message) {
+      // Field-level validation
+      let hasError = false;
+      [['cf-name', name], ['cf-email', email], ['cf-message', message]].forEach(([id, val]) => {
+        const group = document.getElementById(id)?.closest('.form-group');
+        if (group) group.classList.toggle('field-error', !val);
+        if (!val) hasError = true;
+      });
+      if (hasError) {
         showStatus('error', '⚠ Please fill in all required fields.');
         return;
       }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        const emailGroup = document.getElementById('cf-email')?.closest('.form-group');
+        emailGroup?.classList.add('field-error');
         showStatus('error', '⚠ Please enter a valid email address.');
         return;
       }
+      // Clear errors on successful validation
+      form.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
 
       // UX: disable button while opening mailto
       if (submitBtn) {
@@ -190,7 +200,7 @@
       const mailSubject = encodeURIComponent(subject || `[Oryxen Labs] Message from ${name}`);
       const body        = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
       window.location.href = `mailto:jdioses@outlook.be?subject=${mailSubject}&body=${body}`;
-      showStatus('info', 'Opening your email client to send the message…');
+      showStatus('info', 'Opening your email client… If nothing happens, email us directly: jdioses@outlook.be');
 
       // Re-enable button
       if (submitBtn) {

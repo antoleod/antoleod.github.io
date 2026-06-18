@@ -27,21 +27,24 @@
 
   async function loadData() {
     try {
-      const [projects, stack, config] = await Promise.all([
+      const [projects, stack] = await Promise.all([
         fetch('data/projects.json').then(r => r.json()),
-        fetch('data/stack.json').then(r => r.json()),
-        fetch('data/config.json').then(r => r.json())
+        fetch('data/stack.json').then(r => r.json())
       ]);
-      return { projects, stack, config };
+      return { projects, stack };
     } catch (err) {
-      console.error('Error cargando datos:', err);
+      console.error('Error loading data:', err);
       return null;
     }
   }
 
+  const FALLBACK_MSG = '<p style="color:var(--text-3);text-align:center;padding:2rem 1rem;font-size:.9rem">Unable to load content — please refresh the page.</p>';
+
   const data = await loadData();
   if (!data) {
-    console.error('No se pudieron cargar los datos.');
+    document.querySelectorAll('.products__grid, .repo-grid, .stack__grid').forEach(el => {
+      el.innerHTML = FALLBACK_MSG;
+    });
     return;
   }
 
@@ -89,7 +92,7 @@
     if (!container) return;
 
     container.innerHTML = data.projects.repositories.map((repo, idx) => `
-      <a href="${escapeHtml(safeUrl(repo.url))}" target="_blank" rel="noopener noreferrer" class="repo-card" data-reveal data-delay="${idx + 1}" id="repo-${escapeHtml(repo.id)}">
+      <a href="${escapeHtml(safeUrl(repo.url))}" target="_blank" rel="noopener noreferrer" class="repo-card${repo.comingSoon ? ' repo-card--soon' : ''}" data-reveal data-delay="${idx + 1}" id="repo-${escapeHtml(repo.id)}">
         <div class="repo-card__header">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
             ${getRepoIcon(repo.icon)}
@@ -103,7 +106,7 @@
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
             </svg>
-            Public
+            ${repo.comingSoon ? 'Soon' : 'Public'}
           </span>
         </div>
       </a>

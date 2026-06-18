@@ -47,7 +47,7 @@
       "id": "website",
       "icon": "file",
       "name": "oryxen.github.io",
-      "description": "The source code behind this very website. Open, clean, and fully static.",
+      "description": "The source code behind this very website. Open, clean, and fully static — HTML, CSS, JS, zero dependencies.",
       "language": "HTML",
       "languageClass": "lang-html",
       "url": "https://github.com/antoleod/antoleod.github.io"
@@ -56,28 +56,31 @@
       "id": "pinbridge-repo",
       "icon": "lock",
       "name": "PINBRIDGE",
-      "description": "Offline-first encrypted vault. Store credentials and sensitive data without any server.",
+      "description": "Offline-first encrypted vault. Source code will be published as open source — follow @antoleod for updates.",
       "language": "JavaScript",
       "languageClass": "lang-js",
-      "url": "https://github.com/antoleod"
+      "url": "https://github.com/antoleod",
+      "comingSoon": true
     },
     {
       "id": "appleo-repo",
       "icon": "heart",
       "name": "AppLeo",
-      "description": "Baby tracking PWA with offline support, charts, and multi-profile management.",
+      "description": "Baby tracking PWA with offline support, charts, and multi-profile management. Repo coming soon.",
       "language": "JavaScript",
       "languageClass": "lang-js",
-      "url": "https://github.com/antoleod"
+      "url": "https://github.com/antoleod",
+      "comingSoon": true
     },
     {
       "id": "lena-repo",
       "icon": "play",
       "name": "Lena",
-      "description": "An HTML5 adventure game for kids with avatar selection, story progression and animations.",
+      "description": "HTML5 kids adventure game with avatar selection, story progression and animations. Repo coming soon.",
       "language": "HTML / JS",
       "languageClass": "lang-html",
-      "url": "https://github.com/antoleod"
+      "url": "https://github.com/antoleod",
+      "comingSoon": true
     }
   ]
 }

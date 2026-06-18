@@ -53,8 +53,8 @@
   --card-border-hover: rgba(139, 92, 246, .3);
 
   --text: #0c0c13;
-  --text-2: rgba(12, 12, 19, .62);
-  --text-3: rgba(12, 12, 19, .65);
+  --text-2: rgba(12, 12, 19, .68);
+  --text-3: rgba(12, 12, 19, .45);
 
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, .06);
   --shadow: 0 8px 32px rgba(0, 0, 0, .08);
@@ -1119,6 +1119,15 @@ button {
   border: 1px solid rgba(245, 158, 11, .22);
 }
 
+.product-card[style*="opacity"] {
+  border-style: dashed;
+}
+
+.product-card[style*="opacity"]:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 .status--live::before {
   content: '';
   width: 6px;
@@ -1356,6 +1365,17 @@ button {
   border-color: rgba(139, 92, 246, .25);
   transform: translateY(-3px);
   box-shadow: var(--shadow);
+}
+
+.repo-card--soon {
+  opacity: .7;
+  border-style: dashed;
+}
+
+.repo-card--soon:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--card-border);
 }
 
 .repo-card__header {
@@ -1632,6 +1652,16 @@ button {
   font-size: .8rem;
   color: var(--text-3);
   margin-top: .75rem;
+}
+
+.form-group.field-error .form-input,
+.form-group.field-error .form-textarea {
+  border-color: #f87171;
+  box-shadow: 0 0 0 3px rgba(248,113,113,.15);
+}
+
+.form-group.field-error .form-label {
+  color: #f87171;
 }
 
 .form-trust {
@@ -1999,14 +2029,14 @@ html.js [data-reveal].revealed {
   }
 
   .hero__stats {
-    gap: 1.25rem;
-    overflow-x: auto;
-    padding-bottom: .25rem;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+    gap: .75rem 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
-    -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
-    mask-image: linear-gradient(to right, black 80%, transparent 100%);
+  }
+
+  .hero__stat-sep {
+    display: none;
   }
 
   .hero__stat-val {
