@@ -4,3 +4,4 @@ Allow: /
 Sitemap: https://oryxen.tech/sitemap.xml
 
 Disallow: /pitch.html
+Disallow: /admin/

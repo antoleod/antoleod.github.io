@@ -84,9 +84,7 @@ localStorage → download .json → commit a Git
 http://localhost:8000/admin/
 ```
 
-**Contraseña**: `oryxen2024`
-
-(Cámbiala en `admin/admin.js` línea 3)
+**Contraseña**: Se configura en el primer acceso al panel (mín. 12 caracteres).
 
 ### Flujo Típico
 
@@ -167,7 +165,7 @@ http://localhost:8000/admin/
 
 ### ⚠️ IMPORTANTE
 
-- Contraseña por defecto: `oryxen2024`
+- Contraseña configurada en primer acceso (mín. 12 caracteres, guardada en localStorage)
 - Data en `localStorage` (solo en navegador)
 - ✅ OK para desarrollo/personal
 - ❌ NO SUFICIENTE para producción pública
@@ -202,7 +200,7 @@ http://localhost:8000/admin/
 2. **Abre admin**
    ```
    http://localhost:8000/admin/
-   Password: oryxen2024
+   Password: (la que configuraste en el primer acceso)
    ```
    ✅ Deberías poder agregar/editar/eliminar
 

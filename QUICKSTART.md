@@ -2,11 +2,11 @@
 
 ## 3 Pasos para Empezar
 
-### 1️⃣ Cambiar Contraseña
-```bash
-Abre: admin/admin.js
-Línea 3: const ADMIN_PASSWORD = 'oryxen2024';
-Cámbialo a tu contraseña segura
+### 1️⃣ Configurar Contraseña
+```
+Abre: /admin/
+Primera vez: ingresa la contraseña que quieras usar (mín. 12 caracteres)
+El sistema la guarda en localStorage de tu navegador
 ```
 
 ### 2️⃣ Acceder al Admin

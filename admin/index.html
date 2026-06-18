@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Oryxen Labs — Admin Panel</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; connect-src https://api.github.com; style-src 'unsafe-inline'; img-src 'self' data:;">
+  <meta name="robots" content="noindex, nofollow">
   <style>
     * {
       margin: 0;
@@ -299,11 +301,12 @@
 <body>
   <div id="login-screen">
     <div class="login-box">
-      <h1>🔐 Admin Panel</h1>
+      <h1><span aria-hidden="true">🔐</span> Admin Panel</h1>
+      <p id="login-hint" style="font-size:0.85rem;color:rgba(242,242,248,0.55);margin-bottom:1.25rem;"></p>
       <form id="login-form">
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Enter admin password" required>
+          <input type="password" id="password" placeholder="Enter admin password" required autocomplete="current-password">
         </div>
         <button type="submit">Login</button>
       </form>
@@ -313,17 +316,17 @@
   <div id="admin-panel">
     <div class="container">
       <header>
-        <h1>🚀 Oryxen Labs Admin</h1>
+        <h1><span aria-hidden="true">🚀</span> Oryxen Labs Admin</h1>
         <button onclick="logoutAdmin()">Logout</button>
       </header>
 
       <div class="status-msg" id="status-msg"></div>
 
       <div class="tabs">
-        <button class="tab active" onclick="switchTab('products')">Products</button>
-        <button class="tab" onclick="switchTab('repos')">Repositories</button>
-        <button class="tab" onclick="switchTab('tools')">Tools</button>
-        <button class="tab" onclick="switchTab('settings')">⚙️ Settings</button>
+        <button class="tab active" onclick="switchTab('products', event)">Products</button>
+        <button class="tab" onclick="switchTab('repos', event)">Repositories</button>
+        <button class="tab" onclick="switchTab('tools', event)">Tools</button>
+        <button class="tab" onclick="switchTab('settings', event)"><span aria-hidden="true">⚙️</span> Settings</button>
       </div>
 
       <div id="products" class="tab-content active">
@@ -392,7 +395,7 @@
 
       <div id="tools" class="tab-content">
         <div class="card">
-          <h3>🚀 Sync to GitHub</h3>
+          <h3><span aria-hidden="true">🚀</span> Sync to GitHub</h3>
           <p style="margin-bottom: 1rem; color: rgba(242,242,248,0.65);">Commit and push your changes directly to the repository. Configure GitHub token in Settings first.</p>
           <button onclick="syncToGithub()" id="sync-btn">Push to GitHub</button>
           <p style="font-size: 0.85rem; margin-top: 0.75rem; color: rgba(242,242,248,0.5);" id="sync-status"></p>

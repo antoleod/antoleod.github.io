@@ -29,7 +29,7 @@ admin/
 https://oryxen.tech/admin/
 ```
 
-**Contraseña**: `oryxen2024` (cámbiala en `admin/admin.js` línea 10)
+**Contraseña**: La primera vez que accedas, ingresa una contraseña nueva (mínimo 12 caracteres) para configurar el panel.
 
 ### 2. Agregar un Nuevo Proyecto
 
@@ -135,10 +135,10 @@ Para que sea permanente en producción, necesitas:
 
 ## 📝 Cambiar Contraseña
 
-1. Abre `admin/admin.js`
-2. Línea 10: `const ADMIN_PASSWORD = 'oryxen2024';`
-3. Reemplaza con tu contraseña segura
-4. Guarda y haz deploy
+1. Abre el panel en `/admin/`
+2. Ve a la pestaña **Settings** → **Change Password**
+3. Ingresa la contraseña actual y la nueva (mín. 12 caracteres)
+4. La nueva contraseña se guarda en localStorage de tu navegador
 
 ---
 

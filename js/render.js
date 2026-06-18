@@ -6,6 +6,25 @@
 (async function () {
   'use strict';
 
+  function escapeHtml(str) {
+    if (str == null) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function safeUrl(url) {
+    if (!url) return '';
+    try {
+      const parsed = new URL(url);
+      if (parsed.protocol === 'http:' || parsed.protocol === 'https:') return url;
+    } catch (_) {}
+    return '#';
+  }
+
   async function loadData() {
     try {
       const [projects, stack, config] = await Promise.all([
@@ -31,16 +50,16 @@
     if (!container) return;
 
     container.innerHTML = data.projects.products.map((product, idx) => `
-      <article class="product-card" data-reveal data-delay="${idx + 1}" ${product.disabled ? 'style="opacity:.7"' : ''} ${product.disabled ? 'aria-label="' + product.ariaLabel + '"' : ''}>
-        <span class="product-card__status status--${product.status === 'Live' ? 'live' : 'coming'}">${product.status}</span>
-        <span class="product-card__icon" aria-hidden="true">${product.icon}</span>
-        <h3 class="product-card__title">${product.title}</h3>
-        <p class="product-card__desc">${product.description}</p>
+      <article class="product-card" data-reveal data-delay="${idx + 1}" ${product.disabled ? 'style="opacity:.7"' : ''} ${product.disabled ? `aria-label="${escapeHtml(product.ariaLabel)}"` : ''}>
+        <span class="product-card__status status--${product.status === 'Live' ? 'live' : 'coming'}">${escapeHtml(product.status)}</span>
+        <span class="product-card__icon" aria-hidden="true">${escapeHtml(product.icon)}</span>
+        <h3 class="product-card__title">${escapeHtml(product.title)}</h3>
+        <p class="product-card__desc">${escapeHtml(product.description)}</p>
         <div class="product-card__tags">
-          ${product.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+          ${(product.tags || []).map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
         </div>
         ${product.url ? `
-          <a href="${product.url}" target="_blank" rel="noopener noreferrer" class="product-card__link" id="link-${product.id}" aria-label="${product.ariaLabel}">
+          <a href="${escapeHtml(safeUrl(product.url))}" target="_blank" rel="noopener noreferrer" class="product-card__link" id="link-${escapeHtml(product.id)}" aria-label="${escapeHtml(product.ariaLabel)}">
             Visit Project
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
               <line x1="5" y1="12" x2="19" y2="12" />
@@ -59,16 +78,16 @@
     if (!container) return;
 
     container.innerHTML = data.projects.repositories.map((repo, idx) => `
-      <a href="${repo.url}" target="_blank" rel="noopener noreferrer" class="repo-card" data-reveal data-delay="${idx + 1}" id="repo-${repo.id}">
+      <a href="${escapeHtml(safeUrl(repo.url))}" target="_blank" rel="noopener noreferrer" class="repo-card" data-reveal data-delay="${idx + 1}" id="repo-${escapeHtml(repo.id)}">
         <div class="repo-card__header">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
             ${getRepoIcon(repo.icon)}
           </svg>
-          <span class="repo-card__name">${repo.name}</span>
+          <span class="repo-card__name">${escapeHtml(repo.name)}</span>
         </div>
-        <p class="repo-card__desc">${repo.description}</p>
+        <p class="repo-card__desc">${escapeHtml(repo.description)}</p>
         <div class="repo-card__meta">
-          <span class="repo-lang"><span class="lang-dot ${repo.languageClass}"></span>${repo.language}</span>
+          <span class="repo-lang"><span class="lang-dot ${escapeHtml(repo.languageClass)}"></span>${escapeHtml(repo.language)}</span>
           <span class="repo-stars">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
@@ -96,9 +115,9 @@
 
     container.innerHTML = data.stack.categories.map((cat, idx) => `
       <div class="stack-cat" data-reveal data-delay="${idx + 1}">
-        <span class="stack-cat__label">${cat.label}</span>
+        <span class="stack-cat__label">${escapeHtml(cat.label)}</span>
         <div class="stack-items">
-          ${cat.items.map(item => `<div class="stack-item"><span class="stack-item-emoji">${item.emoji}</span> ${item.text}</div>`).join('')}
+          ${cat.items.map(item => `<div class="stack-item"><span class="stack-item-emoji">${escapeHtml(item.emoji)}</span> ${escapeHtml(item.text)}</div>`).join('')}
         </div>
       </div>
     `).join('');
@@ -107,6 +126,4 @@
   renderProducts();
   renderRepositories();
   renderStack();
-
-  window.__ORYXEN_DATA = data;
 })();

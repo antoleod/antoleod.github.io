@@ -2,16 +2,39 @@
    ORYXEN LABS — Admin Panel
    ============================================================ */
 
-const DEFAULT_PASSWORD = 'oryxen2024';
 const DATA_URL = '../data/projects.json';
 
 let currentData = { products: [], repositories: [] };
 let tempTags = [];
 let isLoggedIn = false;
 
+/* ── Helpers ── */
+function escapeHtml(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function safeUrl(url) {
+  if (!url) return '';
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol === 'http:' || parsed.protocol === 'https:') return url;
+  } catch (_) {}
+  return '#';
+}
+
 /* ── Storage Helpers ── */
+function hasPassword() {
+  return !!localStorage.getItem('oryxen_admin_password');
+}
+
 function getPassword() {
-  return localStorage.getItem('oryxen_admin_password') || DEFAULT_PASSWORD;
+  return localStorage.getItem('oryxen_admin_password') || '';
 }
 
 function getGithubConfig() {
@@ -23,8 +46,37 @@ function saveGithubConfigData(config) {
 }
 
 /* ── AUTH ── */
+function updateLoginHint() {
+  const hint = document.getElementById('login-hint');
+  if (!hint) return;
+  hint.textContent = hasPassword()
+    ? 'Enter your admin password to continue.'
+    : 'First time? Enter a new password (min 12 chars) to set up the admin panel.';
+}
+
 function loginAdmin() {
   const password = document.getElementById('password').value;
+
+  if (!password) {
+    showStatus('Please enter a password', 'error');
+    return;
+  }
+
+  if (!hasPassword()) {
+    if (password.length < 12) {
+      showStatus('New password must be at least 12 characters', 'error');
+      return;
+    }
+    localStorage.setItem('oryxen_admin_password', password);
+    isLoggedIn = true;
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'block';
+    loadData();
+    loadGithubConfig();
+    showStatus('Admin password created — you are now logged in!', 'success');
+    return;
+  }
+
   if (password === getPassword()) {
     isLoggedIn = true;
     document.getElementById('login-screen').style.display = 'none';
@@ -42,8 +94,26 @@ function logoutAdmin() {
     document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('admin-panel').style.display = 'none';
     document.getElementById('password').value = '';
+    updateLoginHint();
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateLoginHint();
+
+  // Enter key for tag inputs
+  ['prod-tag-input', 'repo-tag-input'].forEach(id => {
+    const input = document.getElementById(id);
+    if (!input) return;
+    const type = id.startsWith('prod') ? 'product' : 'repo';
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addTag(type);
+      }
+    });
+  });
+});
 
 document.getElementById('login-form')?.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -60,8 +130,8 @@ function changePassword() {
     showStatus('Current password is incorrect', 'error');
     return;
   }
-  if (newPwd.length < 6) {
-    showStatus('New password must be at least 6 characters', 'error');
+  if (newPwd.length < 12) {
+    showStatus('New password must be at least 12 characters', 'error');
     return;
   }
   if (newPwd !== confirm) {
@@ -170,7 +240,6 @@ async function syncToGithub() {
   };
 
   try {
-    // 1. Get current file SHA (required for update)
     let sha = null;
     const getRes = await fetch(`${apiUrl}?ref=${config.branch}`, { headers });
     if (getRes.ok) {
@@ -180,13 +249,11 @@ async function syncToGithub() {
       throw new Error(`GET failed: ${getRes.status} ${getRes.statusText}`);
     }
 
-    // 2. Encode content to base64 (UTF-8 safe)
     const jsonContent = JSON.stringify(currentData, null, 2);
     const base64Content = btoa(unescape(encodeURIComponent(jsonContent)));
 
     statusEl.textContent = '⏳ Pushing to GitHub...';
 
-    // 3. PUT file
     const timestamp = new Date().toISOString().split('T')[0];
     const putRes = await fetch(apiUrl, {
       method: 'PUT',
@@ -201,7 +268,14 @@ async function syncToGithub() {
 
     if (putRes.ok) {
       const result = await putRes.json();
-      statusEl.innerHTML = `✅ Synced! <a href="${result.commit.html_url}" target="_blank" style="color:#8b5cf6;text-decoration:underline;">View commit</a>`;
+      statusEl.textContent = '✅ Synced! ';
+      const link = document.createElement('a');
+      link.href = safeUrl(result.commit.html_url);
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = 'View commit';
+      link.style.cssText = 'color:#8b5cf6;text-decoration:underline;';
+      statusEl.appendChild(link);
       statusEl.style.color = '#34d399';
       showStatus('Successfully pushed to GitHub!', 'success');
     } else {
@@ -221,7 +295,6 @@ async function syncToGithub() {
 /* ── DATA LOAD ── */
 async function loadData() {
   try {
-    // Try localStorage first (recent local edits)
     const local = localStorage.getItem('oryxen_projects_data');
     if (local) {
       currentData = JSON.parse(local);
@@ -264,16 +337,24 @@ function resetAllData() {
 }
 
 /* ── UI ── */
-function switchTab(tabName) {
+function switchTab(tabName, e) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
   document.getElementById(tabName).classList.add('active');
-  event.target.classList.add('active');
+  if (e && e.currentTarget) {
+    e.currentTarget.classList.add('active');
+  }
 }
 
 function toggleForm(formId) {
   const form = document.getElementById(formId + '-form');
-  if (form) form.style.display = form.style.display === 'none' ? 'block' : 'none';
+  if (!form) return;
+  const isOpening = form.style.display === 'none' || form.style.display === '';
+  form.style.display = isOpening ? 'block' : 'none';
+  if (isOpening && (formId === 'add-product' || formId === 'add-repo')) {
+    tempTags = [];
+    renderTags(formId === 'add-product' ? 'product' : 'repo');
+  }
 }
 
 function showStatus(msg, type) {
@@ -291,23 +372,44 @@ function addTag(type) {
     tempTags.push(tag);
     renderTags(type);
     input.value = '';
+    input.focus();
   }
 }
 
-function removeTag(index) {
+function removeTag(index, type = 'product') {
   tempTags.splice(index, 1);
-  renderTags('product');
+  renderTags(type);
 }
 
 function renderTags(type = 'product') {
   const container = document.getElementById(`${type}-tags-list`);
   if (!container) return;
   container.innerHTML = tempTags.map((tag, idx) => `
-    <div class="tag">${tag}<button type="button" onclick="removeTag(${idx})">×</button></div>
+    <div class="tag">${escapeHtml(tag)}<button type="button" onclick="removeTag(${idx}, '${type}')">×</button></div>
   `).join('');
 }
 
 /* ── PRODUCTS ── */
+function editProduct(id) {
+  const p = currentData.products.find(p => p.id === id);
+  if (!p) return;
+
+  document.getElementById('prod-title').value = p.title || '';
+  document.getElementById('prod-id').value = p.id || '';
+  document.getElementById('prod-status').value = p.status || 'Live';
+  document.getElementById('prod-icon').value = p.icon || '';
+  document.getElementById('prod-desc').value = p.description || '';
+  document.getElementById('prod-url').value = p.url || '';
+  document.getElementById('prod-label').value = p.ariaLabel || '';
+
+  tempTags = [...(p.tags || [])];
+  renderTags('product');
+
+  const form = document.getElementById('add-product-form');
+  form.style.display = 'block';
+  form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 function saveProduct() {
   const title = document.getElementById('prod-title').value.trim();
   const id = document.getElementById('prod-id').value.trim();
@@ -324,7 +426,7 @@ function saveProduct() {
   const product = {
     id, status, icon, title,
     description: desc,
-    tags: tempTags,
+    tags: [...tempTags],
     url: url || null,
     ariaLabel: document.getElementById('prod-label').value.trim() || `Visit ${title}`,
     disabled: status === 'Coming Soon'
@@ -360,17 +462,34 @@ function renderProductsList() {
   }
   container.innerHTML = currentData.products.map(p => `
     <div class="card">
-      <h3>${p.icon} ${p.title}</h3>
-      <p style="color:rgba(242,242,248,0.65);margin-bottom:0.5rem">${p.description}</p>
-      <p style="font-size:0.85rem;color:rgba(242,242,248,0.5)">Status: ${p.status} | Tags: ${(p.tags||[]).join(', ') || 'None'}</p>
+      <h3>${escapeHtml(p.icon)} ${escapeHtml(p.title)}</h3>
+      <p style="color:rgba(242,242,248,0.65);margin-bottom:0.5rem">${escapeHtml(p.description)}</p>
+      <p style="font-size:0.85rem;color:rgba(242,242,248,0.5)">Status: ${escapeHtml(p.status)} | Tags: ${escapeHtml((p.tags || []).join(', ') || 'None')}</p>
       <div class="card-actions">
-        <button class="danger" onclick="deleteProduct('${p.id}')">Delete</button>
+        <button onclick="editProduct('${escapeHtml(p.id)}')">Edit</button>
+        <button class="danger" onclick="deleteProduct('${escapeHtml(p.id)}')">Delete</button>
       </div>
     </div>
   `).join('');
 }
 
 /* ── REPOS ── */
+function editRepository(id) {
+  const r = currentData.repositories.find(r => r.id === id);
+  if (!r) return;
+
+  document.getElementById('repo-name').value = r.name || '';
+  document.getElementById('repo-id').value = r.id || '';
+  document.getElementById('repo-desc').value = r.description || '';
+  document.getElementById('repo-language').value = r.language || '';
+  document.getElementById('repo-icon').value = r.icon || 'file';
+  document.getElementById('repo-url').value = r.url || '';
+
+  const form = document.getElementById('add-repo-form');
+  form.style.display = 'block';
+  form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 function saveRepository() {
   const name = document.getElementById('repo-name').value.trim();
   const id = document.getElementById('repo-id').value.trim();
@@ -413,11 +532,12 @@ function renderRepositoriesList() {
   }
   container.innerHTML = currentData.repositories.map(r => `
     <div class="card">
-      <h3>${r.name}</h3>
-      <p style="color:rgba(242,242,248,0.65);margin-bottom:0.5rem">${r.description}</p>
-      <p style="font-size:0.85rem">Language: ${r.language}</p>
+      <h3>${escapeHtml(r.name)}</h3>
+      <p style="color:rgba(242,242,248,0.65);margin-bottom:0.5rem">${escapeHtml(r.description)}</p>
+      <p style="font-size:0.85rem">Language: ${escapeHtml(r.language)}</p>
       <div class="card-actions">
-        <button class="danger" onclick="deleteRepository('${r.id}')">Delete</button>
+        <button onclick="editRepository('${escapeHtml(r.id)}')">Edit</button>
+        <button class="danger" onclick="deleteRepository('${escapeHtml(r.id)}')">Delete</button>
       </div>
     </div>
   `).join('');
@@ -440,7 +560,12 @@ function importData() {
   const reader = new FileReader();
   reader.onload = (e) => {
     try {
-      currentData = JSON.parse(e.target.result);
+      const parsed = JSON.parse(e.target.result);
+      if (!parsed || typeof parsed !== 'object' || !Array.isArray(parsed.products) || !Array.isArray(parsed.repositories)) {
+        showStatus('Invalid JSON: expected { products: [], repositories: [] }', 'error');
+        return;
+      }
+      currentData = parsed;
       saveData();
       renderProductsList();
       renderRepositoriesList();
