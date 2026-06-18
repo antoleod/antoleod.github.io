@@ -121,6 +121,7 @@
     }, { threshold: 0.12 });
 
     revealEls.forEach(el => revealIO.observe(el));
+    window.__revealIO = revealIO;
   } else {
     // Fallback: show all
     revealEls.forEach(el => el.classList.add('revealed'));
@@ -161,8 +162,12 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
+      // Honeypot check
+      if ($('[name="_gotcha"]')?.value) return;
+
       const name    = $('#cf-name')?.value.trim();
       const email   = $('#cf-email')?.value.trim();
+      const subject = $('#cf-subject')?.value.trim();
       const message = $('#cf-message')?.value.trim();
 
       // Basic validation
@@ -182,9 +187,9 @@
       }
 
       // Open mailto directly — no server-side form handler is configured
-      const subject = encodeURIComponent(`[Oryxen Labs] Message from ${name}`);
-      const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-      window.location.href = `mailto:jdioses@outlook.be?subject=${subject}&body=${body}`;
+      const mailSubject = encodeURIComponent(subject || `[Oryxen Labs] Message from ${name}`);
+      const body        = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+      window.location.href = `mailto:jdioses@outlook.be?subject=${mailSubject}&body=${body}`;
       showStatus('info', 'Opening your email client to send the message…');
 
       // Re-enable button
@@ -280,6 +285,10 @@
       );
       const top = target.getBoundingClientRect().top + window.scrollY - headerH;
       window.scrollTo({ top, behavior: 'smooth' });
+      // Move focus for skip-link and other programmatic targets
+      if (target.hasAttribute('tabindex')) {
+        setTimeout(() => target.focus({ preventScroll: true }), 450);
+      }
     });
   });
 

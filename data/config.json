@@ -12,7 +12,8 @@
     "stats": [
       { "value": "3+", "label": "Live Products" },
       { "value": "10+", "label": "Years Experience" },
-      { "value": "100%", "label": "Open Source" }
+      { "value": "100%", "label": "Open Source" },
+      { "value": "<24h", "label": "Reply Time" }
     ]
   },
   "about": {

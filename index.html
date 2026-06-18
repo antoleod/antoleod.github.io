@@ -262,9 +262,9 @@
       <!-- Desktop nav list -->
       <ul class="nav__list" role="list">
         <li><a href="#about" class="nav__link" data-nav>About</a></li>
+        <li><a href="#process" class="nav__link" data-nav>Process</a></li>
         <li><a href="#products" class="nav__link" data-nav>Products</a></li>
         <li><a href="#opensource" class="nav__link" data-nav>Open&nbsp;Source</a></li>
-        <li><a href="#stack" class="nav__link" data-nav>Stack</a></li>
         <li><a href="#contact" class="nav__link" data-nav>Contact</a></li>
       </ul>
 
@@ -350,6 +350,19 @@
               </svg>
             </span>
             <span class="nav__link-text">About</span>
+            <span class="nav__link-arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="#process" class="nav__link" data-nav>
+            <span class="nav__link-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </span>
+            <span class="nav__link-text">Process</span>
             <span class="nav__link-arrow" aria-hidden="true">→</span>
           </a>
         </li>
@@ -468,7 +481,7 @@
         <div class="hero__content" data-reveal>
           <div class="hero__eyebrow">
             <span class="dot"></span>
-            Developer Studio · Est. 2024
+            Developer Studio · Belgium 🇧🇪
           </div>
 
           <h1 class="hero__title">
@@ -478,8 +491,7 @@
           </h1>
 
           <p class="hero__subtitle">
-            Oryxen Labs ships mobile apps, automation tools, and open-source software — crafted with precision, designed
-            to last.
+            We turn ideas into polished, production-ready software — mobile apps, automation tools, and open-source products built to last.
           </p>
 
           <div class="hero__ctas">
@@ -516,6 +528,11 @@
               <span class="hero__stat-val">100%</span>
               <span class="hero__stat-lbl">Open Source</span>
             </div>
+            <div class="hero__stat-sep" aria-hidden="true"></div>
+            <div>
+              <span class="hero__stat-val">&lt;24h</span>
+              <span class="hero__stat-lbl">Reply Time</span>
+            </div>
           </div>
         </div>
 
@@ -551,8 +568,7 @@
         <div class="section__header" data-reveal>
           <p class="section__eyebrow">About Oryxen Labs</p>
           <h2 class="section__title">A small studio.<br>A <span class="gradient-text">big impact</span>.</h2>
-          <p class="section__subtitle">We design and build mobile apps, automation tools, and digital products — quietly
-            and precisely, with a focus on long-term quality.</p>
+          <p class="section__subtitle">We build software that earns trust — documented, maintained, and engineered to keep working long after launch. No overcomplicated stacks, no ghost developers.</p>
         </div>
 
         <div class="about__grid">
@@ -565,8 +581,7 @@
               </svg>
             </div>
             <h3>Mobile Apps</h3>
-            <p>Native-quality mobile apps built for real users — intuitive, reliable, and designed to stand out in
-              crowded app stores.</p>
+            <p>PWAs and Android apps engineered for real users — fast, offline-capable, and designed to outperform on every device.</p>
           </div>
           <div class="about__card" data-reveal data-delay="2">
             <div class="about__icon" aria-hidden="true">
@@ -589,8 +604,38 @@
               </svg>
             </div>
             <h3>Open Source</h3>
-            <p>We believe in giving back. Every major project we build feeds back into the open-source community with
-              clean, documented code.</p>
+            <p>Every major product we build is open source. Forkable, auditable, and community-ready — because great software grows in the open.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HOW WE WORK ── -->
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section__header" data-reveal>
+          <p class="section__eyebrow">How We Work</p>
+          <h2 class="section__title">From idea to <span class="gradient-text">shipped</span>.</h2>
+          <p class="section__subtitle">No bloated specs, no endless meetings. Fast cycles, honest communication, and production-ready results every time.</p>
+        </div>
+
+        <div class="process__steps" data-reveal>
+          <div class="process__step">
+            <div class="process__num" aria-hidden="true">01</div>
+            <h3 class="process__title">Discover</h3>
+            <p class="process__desc">We understand your problem before writing a single line. One call, a clear proposal, no hand-wavy estimates or surprise scope creep.</p>
+          </div>
+          <div class="process__connector" aria-hidden="true"></div>
+          <div class="process__step">
+            <div class="process__num" aria-hidden="true">02</div>
+            <h3 class="process__title">Build</h3>
+            <p class="process__desc">Short cycles with real progress visible at every step. We ship working software iteratively — no black boxes, no radio silence.</p>
+          </div>
+          <div class="process__connector" aria-hidden="true"></div>
+          <div class="process__step">
+            <div class="process__num" aria-hidden="true">03</div>
+            <h3 class="process__title">Launch</h3>
+            <p class="process__desc">Production-ready code, deployed and documented. We don't disappear after handoff — ongoing support and fast iteration included.</p>
           </div>
         </div>
       </div>
@@ -602,8 +647,7 @@
         <div class="section__header" data-reveal>
           <p class="section__eyebrow">Our Products</p>
           <h2 class="section__title">Things we've <span class="gradient-text">shipped</span>.</h2>
-          <p class="section__subtitle">Real products, live in the wild — each solving a concrete problem for real
-            people.</p>
+          <p class="section__subtitle">Real products, live in the wild — each solving a concrete problem for real people. Not demos. Not side projects. Production software.</p>
         </div>
 
         <div class="products__grid">
@@ -632,7 +676,7 @@
           </div>
           <div class="github-banner__text">
             <h3>github.com/antoleod</h3>
-            <p>Explore all repositories, contribute to ongoing projects, and follow our development journey.</p>
+            <p>All our products are open source — forkable, auditable, and ready for contributions. No paywalls, no vendor lock-in.</p>
           </div>
           <span class="btn btn--ghost btn--sm github-banner__cta">View Profile →</span>
         </a>
@@ -665,7 +709,7 @@
         <div class="section__header" data-reveal>
           <p class="section__eyebrow">Contact &amp; Collaboration</p>
           <h2 class="section__title">Let's build something <span class="gradient-text">together</span>.</h2>
-          <p class="section__subtitle">Have an idea? A project? A question? We respond within one business day.</p>
+          <p class="section__subtitle">Have an idea, a project, or just a question? Drop us a message — no sales funnel, no middlemen, just a real conversation.</p>
         </div>
 
         <div class="contact__layout">
@@ -709,7 +753,7 @@
               </div>
               <div>
                 <span class="contact__info-lbl">Response time</span>
-                <span class="contact__info-val">Within 1 business day</span>
+                <span class="contact__info-val">Within 24 hours</span>
               </div>
             </div>
 
@@ -730,7 +774,12 @@
 
           <!-- Form -->
           <div class="contact__form-panel" data-reveal data-delay="2">
-            <p class="form-title">Start a conversation</p>
+            <p class="form-title">Get in touch — we reply fast</p>
+            <div class="form-trust" role="list">
+              <span class="form-trust__badge" role="listitem">Direct contact, no agencies</span>
+              <span class="form-trust__badge" role="listitem">Reply within 24 hours</span>
+              <span class="form-trust__badge" role="listitem">EU based — GDPR compliant</span>
+            </div>
             <form id="contact-form" novalidate autocomplete="on">
               <!-- Honeypot -->
               <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none!important"
@@ -829,12 +878,13 @@
           <span class="footer__col-title">Company</span>
           <ul class="footer__links">
             <li><a href="#about" class="footer__link">About</a></li>
+            <li><a href="#process" class="footer__link">How We Work</a></li>
             <li><a href="#opensource" class="footer__link">Open Source</a></li>
             <li><a href="#stack" class="footer__link">Tech Stack</a></li>
             <li><a href="#contact" class="footer__link">Contact</a></li>
-            <li><a href="pitch.html" class="footer__link">Investor Relations</a></li>
+            <li><a href="slug" class="footer__link">Slug / Links</a></li>
+            <li><a href="slug" class="footer__link">All Links</a></li>
             <li><a href="privacy.html" class="footer__link">Privacy Policy</a></li>
-            <li><a href="mailto:jdioses@outlook.be" class="footer__link">jdioses@outlook.be</a></li>
           </ul>
         </div>
       </div>

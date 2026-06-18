@@ -45,6 +45,16 @@
     return;
   }
 
+  function observeNewReveals(container) {
+    container.querySelectorAll('[data-reveal]').forEach(el => {
+      if (window.__revealIO) {
+        window.__revealIO.observe(el);
+      } else {
+        el.classList.add('revealed');
+      }
+    });
+  }
+
   function renderProducts() {
     const container = document.querySelector('.products__grid');
     if (!container) return;
@@ -71,6 +81,7 @@
         `}
       </article>
     `).join('');
+    observeNewReveals(container);
   }
 
   function renderRepositories() {
@@ -97,6 +108,7 @@
         </div>
       </a>
     `).join('');
+    observeNewReveals(container);
   }
 
   function getRepoIcon(type) {
@@ -121,6 +133,7 @@
         </div>
       </div>
     `).join('');
+    observeNewReveals(container);
   }
 
   renderProducts();
