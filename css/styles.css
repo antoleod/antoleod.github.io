@@ -1119,10 +1119,11 @@ button {
 
 @media (max-width: 640px) {
   .carousel {
-    grid-template-columns: 2.25rem 1fr 2.25rem;
+    grid-template-columns: 2.75rem 1fr 2.75rem;
     column-gap: .5rem;
   }
-  .carousel__btn { width: 2.25rem; height: 2.25rem; }
+  /* Keep buttons at 44px minimum touch target */
+  .carousel__btn { width: 2.75rem; height: 2.75rem; }
 }
 
 .product-card {
@@ -1140,7 +1141,8 @@ button {
 }
 
 @media (max-width: 480px) {
-  .product-card { flex: 0 0 min(272px, calc(100vw - 5rem)); }
+  /* Account for carousel side buttons (2×2.75rem) + grid gaps + container padding */
+  .product-card { flex: 0 0 min(272px, calc(100vw - 7.5rem)); }
 }
 
 .product-card::before {
@@ -2161,7 +2163,7 @@ html.js [data-reveal].revealed {
   }
 
   .terminal__body {
-    font-size: .8rem;
+    font-size: .875rem;
     padding: 1rem;
     line-height: 1.85;
     min-width: 280px;
@@ -2239,7 +2241,23 @@ html.js [data-reveal].revealed {
   .hero__orb--2 {
     animation-duration: 14s;
     opacity: .07;
+    max-width: 100vw;
   }
+
+  /* Eyebrow label — minimum 13px for monospace caps */
+  .section__eyebrow { font-size: .8125rem; }
+
+  /* Footer link tap targets — add vertical padding */
+  .footer__link { display: inline-block; padding: .55rem 0; }
+
+  /* Form note legibility */
+  .form-note { font-size: .875rem; }
+
+  /* Active state for footer social icons */
+  .footer__social:active { background: rgba(139, 92, 246, .15); }
+
+  /* Safe area bottom padding for back-to-top + landscape keyboards */
+  body { padding-bottom: env(safe-area-inset-bottom, 0); }
 }
 
 /* â”€â”€ Very small screens (â‰¤ 375px) â”€â”€ */
@@ -2282,4 +2300,7 @@ html.js [data-reveal].revealed {
   .contact__form-panel {
     padding: 1.25rem;
   }
+
+  .hero__stats { column-gap: 1.25rem; row-gap: 1rem; }
+  .hero__stat-val { font-size: 1.1rem; }
 }

@@ -162,7 +162,11 @@
     // Touch/drag swipe support
     let dragStartX = 0;
     let dragging = false;
-    viewport.addEventListener('pointerdown', e => { dragStartX = e.clientX; dragging = true; });
+    viewport.addEventListener('pointerdown', e => {
+      dragStartX = e.clientX;
+      dragging = true;
+      viewport.setPointerCapture(e.pointerId);
+    });
     viewport.addEventListener('pointerup', e => {
       if (!dragging) return;
       dragging = false;
