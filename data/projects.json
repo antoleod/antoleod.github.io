@@ -50,7 +50,7 @@
       "description": "The source code behind this very website. Open, clean, and fully static.",
       "language": "HTML",
       "languageClass": "lang-html",
-      "url": "https://github.com/oryxen/oryxen.github.io"
+      "url": "https://github.com/antoleod/antoleod.github.io"
     },
     {
       "id": "pinbridge-repo",
@@ -59,7 +59,7 @@
       "description": "Offline-first encrypted vault. Store credentials and sensitive data without any server.",
       "language": "JavaScript",
       "languageClass": "lang-js",
-      "url": "https://github.com/oryxen"
+      "url": "https://github.com/antoleod"
     },
     {
       "id": "appleo-repo",
@@ -68,7 +68,7 @@
       "description": "Baby tracking PWA with offline support, charts, and multi-profile management.",
       "language": "JavaScript",
       "languageClass": "lang-js",
-      "url": "https://github.com/oryxen"
+      "url": "https://github.com/antoleod"
     },
     {
       "id": "lena-repo",
@@ -77,7 +77,7 @@
       "description": "An HTML5 adventure game for kids with avatar selection, story progression and animations.",
       "language": "HTML / JS",
       "languageClass": "lang-html",
-      "url": "https://github.com/oryxen"
+      "url": "https://github.com/antoleod"
     }
   ]
 }

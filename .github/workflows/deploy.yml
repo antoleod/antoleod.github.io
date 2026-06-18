@@ -1,0 +1,41 @@
+name: Deploy to Public Repo
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout private repo
+        uses: actions/checkout@v4
+
+      - name: Build dist (copy public files)
+        run: |
+          mkdir -p dist
+          rsync -av \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='dist/' \
+            --exclude='ADMIN_GUIDE.md' \
+            --exclude='IMPLEMENTATION_SUMMARY.md' \
+            --exclude='MASTER_APP_BLUEPRINT.md' \
+            --exclude='QUICKSTART.md' \
+            --exclude='*.md' \
+            . dist/
+
+      - name: Deploy to gh-pages on public repo
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.PAGES_DEPLOY_TOKEN }}
+          external_repository: antoleod/oryxen.tech
+          publish_branch: gh-pages
+          publish_dir: ./dist
+          cname: oryxen.tech
+          commit_message: "deploy: ${{ github.sha }}"
+          force_orphan: true

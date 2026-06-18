@@ -156,7 +156,7 @@
   const submitBtn  = $('#contact-submit');
 
   if (form) {
-    form.addEventListener('submit', async function (e) {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
 
       const name    = $('#cf-name')?.value.trim();
@@ -173,38 +173,17 @@
         return;
       }
 
-      // UX: disable button
+      // UX: disable button while opening mailto
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span class="btn-text">Sending…</span>';
+        submitBtn.innerHTML = '<span class="btn-text">Opening email client…</span>';
       }
 
-      // Attempt fetch (Formspree or similar) — falls back to mailto
-      const endpoint = 'https://formspree.io/f/placeholder'; // Replace with real endpoint
-      let sent = false;
-
-      try {
-        const res = await fetch(endpoint, {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ name, email, message,
-            subject: $('#cf-subject')?.value.trim() || '(no subject)' }),
-        });
-        if (res.ok) sent = true;
-      } catch (_) {
-        /* network error — fall through to mailto */
-      }
-
-      if (sent) {
-        showStatus('success', '✓ Message sent! We will reply within one business day.');
-        form.reset();
-      } else {
-        // Graceful mailto fallback
-        const subject = encodeURIComponent(`[Oryxen Labs] Message from ${name}`);
-        const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-        window.location.href = `mailto:jdioses@outlook.be?subject=${subject}&body=${body}`;
-        showStatus('info', '✓ Opening your email client to complete the message…');
-      }
+      // Open mailto directly — no server-side form handler is configured
+      const subject = encodeURIComponent(`[Oryxen Labs] Message from ${name}`);
+      const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+      window.location.href = `mailto:jdioses@outlook.be?subject=${subject}&body=${body}`;
+      showStatus('info', 'Opening your email client to send the message…');
 
       // Re-enable button
       if (submitBtn) {
