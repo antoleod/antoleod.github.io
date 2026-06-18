@@ -21,7 +21,7 @@
 
   --text: #f2f2f8;
   --text-2: rgba(242, 242, 248, .65);
-  --text-3: rgba(242, 242, 248, .38);
+  --text-3: rgba(242, 242, 248, .50);
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -54,7 +54,7 @@
 
   --text: #0c0c13;
   --text-2: rgba(12, 12, 19, .62);
-  --text-3: rgba(12, 12, 19, .38);
+  --text-3: rgba(12, 12, 19, .50);
 
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, .06);
   --shadow: 0 8px 32px rgba(0, 0, 0, .08);
@@ -345,8 +345,8 @@ button {
 }
 
 .theme-toggle {
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--card-border);
   background: var(--card);
@@ -376,8 +376,8 @@ button {
 
 .nav__toggle {
   display: none;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--card-border);
   background: var(--card);
@@ -389,6 +389,7 @@ button {
 /* Mobile drawer — hidden at desktop */
 .nav__menu {
   display: none;
+  visibility: hidden;
 }
 
 .nav__close {
@@ -439,7 +440,8 @@ button {
     border-left: 1px solid var(--card-border);
     padding: 1.25rem 1.5rem 1.5rem;
     transform: translateX(105%);
-    transition: transform var(--t-slow);
+    transition: transform var(--t-slow), visibility var(--t-slow);
+    visibility: hidden;
     z-index: 1001;
     display: flex;
     flex-direction: column;
@@ -450,6 +452,7 @@ button {
 
   .nav__menu.open {
     transform: translateX(0);
+    visibility: visible;
   }
 
   /* ── Drawer Header ── */
@@ -655,8 +658,8 @@ button {
   /* ── Close Button ── */
   .nav__close {
     position: relative;
-    width: 38px;
-    height: 38px;
+    width: 44px;
+    height: 44px;
     border-radius: var(--radius-sm);
     border: 1px solid var(--card-border);
     background: var(--card);
@@ -1189,6 +1192,8 @@ button {
   color: var(--primary-light);
   transition: gap var(--t), color var(--t);
   width: fit-content;
+  padding: .5rem 0;
+  min-height: 44px;
 }
 
 .product-card__link:hover {
@@ -1516,7 +1521,7 @@ button {
   border-radius: var(--radius-sm);
   color: var(--text);
   font-family: var(--font-sans);
-  font-size: .9375rem;
+  font-size: 1rem;
   transition: border-color var(--t), box-shadow var(--t);
   appearance: none;
   -webkit-appearance: none;
@@ -1615,8 +1620,8 @@ button {
 }
 
 .footer__social {
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--card-border);
   background: var(--card);
@@ -1833,9 +1838,14 @@ html.js [data-reveal].revealed {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__orb--1,
-  .hero__orb--2 {
-    animation: none;
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -1895,6 +1905,8 @@ html.js [data-reveal].revealed {
     flex-wrap: nowrap;
     justify-content: flex-start;
     width: 100%;
+    -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+    mask-image: linear-gradient(to right, black 80%, transparent 100%);
   }
 
   .hero__stat-val {

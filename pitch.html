@@ -18,7 +18,175 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css" />
-    <script>document.documentElement.classList.add('js');</script>
+    <!-- Theme bootstrap (no FOUC) -->
+    <script>(function(){var t=localStorage.getItem('oryxen-theme');var r=document.documentElement;r.classList.add('js');r.setAttribute('data-theme',t==='light'?'light':'dark');})();</script>
+    <style>
+      /* ── Pitch page layout ── */
+      .pitch-page {
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .pitch-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem 2rem;
+        border-bottom: 1px solid var(--card-border);
+        position: sticky;
+        top: 0;
+        background: var(--bg);
+        backdrop-filter: blur(12px);
+        z-index: 100;
+      }
+
+      .pitch-logo {
+        font-family: var(--font-mono);
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: .06em;
+        color: var(--text);
+      }
+
+      .pitch-nav-link {
+        font-size: .875rem;
+        font-weight: 500;
+        color: var(--text-2);
+        transition: color .2s;
+        text-decoration: none;
+        padding: .5rem .75rem;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+      }
+      .pitch-nav-link:hover { color: var(--text); }
+
+      .pitch-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 4rem 2rem 6rem;
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+      }
+
+      /* ── Hero ── */
+      .pitch-hero { text-align: center; }
+
+      .pitch-hero h1 {
+        font-size: clamp(2.25rem, 6vw, 3.75rem);
+        font-weight: 800;
+        line-height: 1.12;
+        letter-spacing: -.03em;
+        margin-bottom: 1.25rem;
+        background: linear-gradient(135deg, var(--text) 0%, var(--primary-light) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .pitch-hero-text {
+        font-size: 1.125rem;
+        color: var(--text-2);
+        max-width: 560px;
+        margin: 0 auto;
+        line-height: 1.7;
+      }
+
+      /* ── Cards grid ── */
+      .pitch-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+
+      @media (max-width: 640px) {
+        .pitch-grid { grid-template-columns: 1fr; }
+      }
+
+      .pitch-card {
+        background: var(--card);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        padding: 2rem;
+        transition: border-color .25s, box-shadow .25s;
+      }
+      .pitch-card:hover {
+        border-color: var(--card-border-hover);
+        box-shadow: 0 8px 32px rgba(0,0,0,.25);
+      }
+
+      .pitch-card h2 {
+        font-size: 1rem;
+        font-family: var(--font-mono);
+        font-weight: 700;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+        color: var(--primary-light);
+        margin-bottom: .875rem;
+      }
+
+      .pitch-card p {
+        color: var(--text-2);
+        line-height: 1.7;
+        font-size: .9375rem;
+      }
+
+      /* ── Stats row ── */
+      .stats-row {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .stat-card {
+        background: var(--card);
+        border: 1px solid var(--card-border);
+        border-radius: 14px;
+        padding: 1.75rem 2.5rem;
+        text-align: center;
+        flex: 1;
+        min-width: 160px;
+        transition: border-color .25s;
+      }
+      .stat-card:hover { border-color: var(--card-border-hover); }
+
+      .stat-number {
+        display: block;
+        font-family: var(--font-mono);
+        font-size: 2.25rem;
+        font-weight: 800;
+        color: var(--primary-light);
+        line-height: 1;
+        margin-bottom: .4rem;
+      }
+
+      .stat-label {
+        display: block;
+        font-size: .8125rem;
+        color: var(--text-2);
+        font-weight: 500;
+      }
+
+      /* ── CTA ── */
+      .cta-section {
+        text-align: center;
+        background: var(--card);
+        border: 1px solid var(--card-border);
+        border-radius: 20px;
+        padding: 3.5rem 2rem;
+      }
+
+      /* ── Mobile ── */
+      @media (max-width: 600px) {
+        .pitch-header { padding: 1rem 1.25rem; }
+        .pitch-container { padding: 2.5rem 1.25rem 4rem; gap: 2.5rem; }
+        .stat-card { padding: 1.25rem 1.5rem; }
+        .cta-section { padding: 2.5rem 1.25rem; }
+      }
+    </style>
 </head>
 
 <body class="pitch-page">
@@ -26,57 +194,57 @@
     <header class="pitch-header">
         <div class="pitch-logo">ORYXEN <span style="opacity:0.6; font-weight: 400;">INVEST</span></div>
         <nav>
-            <a href="index.html" class="pitch-nav-link" data-i18n="nav.home">Home</a>
+            <a href="index.html" class="pitch-nav-link">Home</a>
         </nav>
     </header>
 
     <div class="pitch-container">
 
         <div class="pitch-hero" data-reveal>
-            <h1 data-i18n="pitch.title">Engineering the<br>AI-First Ecosystem</h1>
-            <p class="pitch-hero-text" data-i18n="pitch.subtitle">
+            <h1>Engineering the<br>AI-First Ecosystem</h1>
+            <p class="pitch-hero-text">
                 We build scalable platforms that grow with the business, reducing technical debt and accelerating time-to-market.
             </p>
         </div>
 
         <div class="pitch-grid">
             <div class="pitch-card" data-reveal>
-                <h2 data-i18n="pitch.problem.eyebrow">The Problem</h2>
-                <p data-i18n="pitch.problem.text">
+                <h2>The Problem</h2>
+                <p>
                     Businesses struggle to scale their digital infrastructure rapidly enough to meet modern demands. Legacy systems are slow, expensive to maintain, and lack the flexibility required for the AI era.
                 </p>
             </div>
 
             <div class="pitch-card" data-reveal>
-                <h2 data-i18n="pitch.solution.eyebrow">The Solution</h2>
-                <p data-i18n="pitch.solution.text">
+                <h2>The Solution</h2>
+                <p>
                     ORYXEN provides a modular, AI-first development ecosystem. We build scalable platforms that grow with the business, reducing technical debt and accelerating time-to-market by 40%.
                 </p>
             </div>
         </div>
 
         <div data-reveal>
-            <h2 style="text-align: center; margin-bottom: 2rem;" data-i18n="pitch.traction.title">Traction & Projections</h2>
+            <h2 style="text-align: center; margin-bottom: 2rem;">Traction &amp; Projections</h2>
             <div class="stats-row">
                 <div class="stat-card">
-                    <span class="stat-number" data-i18n="pitch.traction.stat1.value">40%</span>
-                    <span class="stat-label" data-i18n="pitch.traction.stat1.label">Faster Checkout</span>
+                    <span class="stat-number">40%</span>
+                    <span class="stat-label">Faster Checkout</span>
                 </div>
                 <div class="stat-card">
-                    <span class="stat-number" data-i18n="pitch.traction.stat2.value">15+</span>
-                    <span class="stat-label" data-i18n="pitch.traction.stat2.label">Enterprise Clients</span>
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Enterprise Clients</span>
                 </div>
                 <div class="stat-card">
-                    <span class="stat-number" data-i18n="pitch.traction.stat3.value">$2M</span>
-                    <span class="stat-label" data-i18n="pitch.traction.stat3.label">Pipeline Value</span>
+                    <span class="stat-number">$2M</span>
+                    <span class="stat-label">Pipeline Value</span>
                 </div>
             </div>
         </div>
 
         <div class="cta-section" data-reveal>
-            <h2 style="font-size: 2rem; margin-bottom: 1rem;" data-i18n="pitch.next.title">Join the Future</h2>
-            <p style="color: var(--text-2); margin-bottom: 2rem;" data-i18n="pitch.next.text">We are raising a seed round to accelerate our AI core development.</p>
-            <a href="mailto:invest@oryxen.tech" class="btn btn--primary" data-i18n="pitch.cta">Request Pitch Deck</a>
+            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Join the Future</h2>
+            <p style="color: var(--text-2); margin-bottom: 2rem;">We are raising a seed round to accelerate our AI core development.</p>
+            <a href="mailto:invest@oryxen.tech" class="btn btn--primary">Request Pitch Deck</a>
         </div>
 
     </div>

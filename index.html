@@ -97,7 +97,7 @@
   <link rel="stylesheet" href="css/perf.css">
 
   <!-- ── JS theme bootstrap (no FOUC) ── -->
-  <script>document.documentElement.classList.add('js');</script>
+  <script>(function(){var t=localStorage.getItem('oryxen-theme');var r=document.documentElement;r.classList.add('js');r.setAttribute('data-theme',t==='light'?'light':'dark');})();</script>
 
   <!-- ── JSON-LD: Organization ── -->
   <script type="application/ld+json">

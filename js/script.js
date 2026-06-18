@@ -56,6 +56,7 @@
     navMenu?.classList.add('open');
     navOverlay?.classList.add('open');
     navToggle?.setAttribute('aria-expanded', 'true');
+    navMenu?.removeAttribute('aria-hidden');
     document.body.style.overflow = 'hidden';
   }
 
@@ -63,6 +64,7 @@
     navMenu?.classList.remove('open');
     navOverlay?.classList.remove('open');
     navToggle?.setAttribute('aria-expanded', 'false');
+    navMenu?.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
 
