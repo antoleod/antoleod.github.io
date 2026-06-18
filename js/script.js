@@ -57,7 +57,9 @@
     navOverlay?.classList.add('open');
     navToggle?.setAttribute('aria-expanded', 'true');
     navMenu?.removeAttribute('aria-hidden');
+    navMenu?.setAttribute('aria-modal', 'true');
     document.body.style.overflow = 'hidden';
+    setTimeout(() => navClose?.focus(), 50);
   }
 
   function closeNav () {
@@ -65,8 +67,26 @@
     navOverlay?.classList.remove('open');
     navToggle?.setAttribute('aria-expanded', 'false');
     navMenu?.setAttribute('aria-hidden', 'true');
+    navMenu?.removeAttribute('aria-modal');
     document.body.style.overflow = '';
+    navToggle?.focus();
   }
+
+  // Focus trap inside drawer
+  navMenu?.addEventListener('keydown', e => {
+    if (e.key !== 'Tab' || !navMenu.classList.contains('open')) return;
+    const focusable = [...navMenu.querySelectorAll(
+      'a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])'
+    )].filter(el => !el.closest('[aria-hidden="true"]'));
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault(); first.focus();
+    }
+  });
 
   navToggle?.addEventListener('click',  openNav);
   navClose?.addEventListener('click',   closeNav);
@@ -75,9 +95,9 @@
   // Close on link click (mobile)
   $$('[data-nav]').forEach(link => link.addEventListener('click', closeNav));
 
-  // Close on Escape
+  // Close on Escape — return focus to trigger
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeNav();
+    if (e.key === 'Escape' && navMenu?.classList.contains('open')) closeNav();
   });
 
   /* ============================================================
@@ -202,13 +222,15 @@
       window.location.href = `mailto:jdioses@outlook.be?subject=${mailSubject}&body=${body}`;
       showStatus('info', 'Opening your email client… If nothing happens, email us directly: jdioses@outlook.be');
 
-      // Re-enable button
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML =
-          '<span class="btn-text">Send Message</span>' +
-          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
-      }
+      // Re-enable button after delay so "Opening email client…" state is visible
+      setTimeout(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML =
+            '<span class="btn-text">Send Message</span>' +
+            '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+        }
+      }, 1500);
     });
   }
 
@@ -294,8 +316,9 @@
           });
         }, { threshold: 0.1 });
         termIO.observe(terminalEl);
+      } else {
+        runAnimation();
       }
-      runAnimation();
     }
   }
   initTerminalAnimation();

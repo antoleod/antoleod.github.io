@@ -65,7 +65,10 @@
     container.innerHTML = data.projects.products.map((product, idx) => `
       <article class="product-card" data-reveal data-delay="${idx + 1}" ${product.disabled ? 'style="opacity:.7"' : ''} ${product.disabled ? `aria-label="${escapeHtml(product.ariaLabel)}"` : ''}>
         <span class="product-card__status status--${product.status === 'Live' ? 'live' : 'coming'}">${escapeHtml(product.status)}</span>
-        <span class="product-card__icon" aria-hidden="true">${escapeHtml(product.icon)}</span>
+        ${product.iconImg
+          ? `<img class="product-card__icon product-card__icon--img" src="${escapeHtml(product.iconImg)}" alt="${escapeHtml(product.title)} icon" width="48" height="48" loading="lazy" onerror="this.outerHTML='<span class=\\'product-card__icon\\' aria-hidden=\\'true\\'>${escapeHtml(product.icon)}</span>'">`
+          : `<span class="product-card__icon" aria-hidden="true">${escapeHtml(product.icon)}</span>`
+        }
         <h3 class="product-card__title">${escapeHtml(product.title)}</h3>
         <p class="product-card__desc">${escapeHtml(product.description)}</p>
         <div class="product-card__tags">
@@ -142,6 +145,13 @@
 
     prevBtn.addEventListener('click', () => goTo(currentIndex() - 1));
     nextBtn.addEventListener('click', () => goTo(currentIndex() + 1));
+
+    // Keyboard navigation — ArrowLeft / ArrowRight only when focus is inside the carousel
+    const carousel = document.getElementById('products-carousel');
+    carousel?.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(currentIndex() - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(currentIndex() + 1); }
+    });
 
     let scrollTimer;
     viewport.addEventListener('scroll', () => {

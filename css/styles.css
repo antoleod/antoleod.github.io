@@ -72,9 +72,13 @@
 }
 
 html {
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* Offset for sticky nav on deep-link targets */
+section[id] {
+  scroll-margin-top: var(--header-h);
 }
 
 body {
@@ -255,7 +259,7 @@ button {
 .nav__logo {
   display: flex;
   align-items: center;
-  gap: .3rem;
+  gap: .5rem;
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 1.125rem;
@@ -468,7 +472,7 @@ button {
   .nav__menu-logo {
     display: flex;
     align-items: center;
-    gap: .25rem;
+    gap: .5rem;
     font-family: var(--font-mono);
     font-size: .875rem;
     font-weight: 700;
@@ -1055,23 +1059,28 @@ button {
    PRODUCTS — CAROUSEL
    ============================================================ */
 
-/* Carousel wrapper */
-.carousel { position: relative; }
-
-.carousel__controls {
-  display: flex;
-  justify-content: flex-end;
-  gap: .5rem;
-  margin-bottom: 1.25rem;
+/* Carousel wrapper — grid layout: [btn] [viewport] [btn] / [dots] */
+.carousel {
+  display: grid;
+  grid-template-columns: 2.75rem 1fr 2.75rem;
+  grid-template-rows: auto auto;
+  column-gap: .75rem;
+  row-gap: 1.25rem;
+  align-items: center;
 }
 
+.carousel__btn--prev { grid-column: 1; grid-row: 1; }
+.carousel__viewport  { grid-column: 2; grid-row: 1; }
+.carousel__btn--next { grid-column: 3; grid-row: 1; }
+.carousel__dots      { grid-column: 1 / -1; grid-row: 2; }
+
 .carousel__btn {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: 50%;
   border: 1px solid var(--card-border);
   background: var(--card);
-  color: var(--text-1);
+  color: var(--text);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1087,7 +1096,7 @@ button {
 }
 
 .carousel__btn:disabled {
-  opacity: .3;
+  opacity: .25;
   cursor: default;
 }
 
@@ -1104,8 +1113,16 @@ button {
 
 .products__grid {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.25rem;
   width: max-content;
+}
+
+@media (max-width: 640px) {
+  .carousel {
+    grid-template-columns: 2.25rem 1fr 2.25rem;
+    column-gap: .5rem;
+  }
+  .carousel__btn { width: 2.25rem; height: 2.25rem; }
 }
 
 .product-card {
@@ -1118,12 +1135,12 @@ button {
   transition: all var(--t-slow);
   display: flex;
   flex-direction: column;
-  flex: 0 0 340px;
+  flex: 0 0 272px;
   scroll-snap-align: start;
 }
 
 @media (max-width: 480px) {
-  .product-card { flex: 0 0 min(340px, calc(100vw - 2.5rem)); }
+  .product-card { flex: 0 0 min(272px, calc(100vw - 5rem)); }
 }
 
 .product-card::before {
@@ -1207,6 +1224,16 @@ button {
   font-size: 2.5rem;
   margin-bottom: .875rem;
   display: block;
+}
+
+.product-card__icon--img {
+  font-size: unset;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm, 8px);
+  object-fit: contain;
+  background: rgba(255,255,255,.06);
+  padding: 4px;
 }
 
 .product-card__title {
@@ -1807,6 +1834,9 @@ button {
 }
 
 .footer__logo {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
   font-family: var(--font-mono);
   font-size: 1.0625rem;
   font-weight: 700;

@@ -8,7 +8,7 @@
   <!-- ── Primary Meta ── -->
   <title>Oryxen Labs — Mobile Apps &amp; Developer Studio</title>
   <meta name="description" content="Oryxen Labs builds mobile apps, automation tools &amp; open-source software. Belgium-based dev studio shipping quality digital products globally.">
-  <meta name="keywords" content="Oryxen Labs, mobile app development, developer studio, automation tools, open source software, PWA apps, Belgium software studio, PINBRIDGE vault app, AppLeo baby tracker, Lena kids game, JavaScript apps, React Native, Flutter, Android apps, web development Belgium, software engineer Belgium">
+  <meta name="keywords" content="Oryxen Labs, mobile app development, developer studio, automation tools, open source software, PWA apps, Belgium software studio, MyKit developer toolkit, Wash data sanitizer, Pilot MergePilot, Flowlyne workflow builder, Pulse analytics, Bot ServiceNow, LénaLand kids game, JavaScript apps, web development Belgium, software engineer Belgium">
   <meta name="author" content="Oryxen Labs">
   <meta name="copyright" content="© 2024–2026 Oryxen Labs">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -89,7 +89,9 @@
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://github.com">
   <link rel="preload" href="css/styles.css" as="style">
+  <link rel="preload" href="js/render.js" as="script">
   <link rel="preload" href="js/script.js" as="script">
+  <link rel="preload" href="data/projects.json" as="fetch" crossorigin>
 
   <!-- ── Stylesheets ── -->
   <link rel="stylesheet" href="css/styles.css">
@@ -148,71 +150,88 @@
     }
   </script>
 
-  <!-- ── JSON-LD: SoftwareApplication — PINBRIDGE ── -->
+  <!-- ── JSON-LD: SoftwareApplications ── -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "PINBRIDGE",
-      "url": "https://oryxen.tech/PINBRIDGE/",
-      "description": "A secure offline-first vault app. Store, encrypt, and sync your sensitive data with zero cloud dependency.",
-      "applicationCategory": "SecurityApplication",
-      "operatingSystem": "Web, Android",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "EUR"
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "MyKit",
+        "url": "https://oryxen.tech/mykit/",
+        "description": "Personal developer toolkit with snippets, shortcuts, and utilities — offline-ready.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "author": { "@id": "https://oryxen.tech/#organization" }
       },
-      "author": {
-        "@id": "https://oryxen.tech/#organization"
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Wash",
+        "url": "https://oryxen.tech/wash/",
+        "description": "La Lavadora de Datos — detect and mask PII & PCI data with reversible tokens. Local processing, zero data leakage.",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "author": { "@id": "https://oryxen.tech/#organization" }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Pilot",
+        "url": "https://oryxen.tech/pilot/",
+        "description": "MergePilot — streamline Git merge and review workflows.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "author": { "@id": "https://oryxen.tech/#organization" }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Flowlyne",
+        "url": "https://oryxen.tech/Flowlyne/",
+        "description": "Visual workflow and pipeline builder — drag, connect, and automate processes without configuration.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "author": { "@id": "https://oryxen.tech/#organization" }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Pulse",
+        "url": "https://oryxen.tech/pulse",
+        "description": "Real-time metrics and personal analytics dashboard.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "author": { "@id": "https://oryxen.tech/#organization" }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Bot",
+        "url": "https://oryxen.tech/bot/",
+        "description": "ServiceNow bookmarklet builder — create and install intelligent browser bots for ServiceNow workflows.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "author": { "@id": "https://oryxen.tech/#organization" }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "LénaLand",
+        "url": "https://oryxen.tech/lenaland",
+        "description": "An enchanted interactive world for kids — explore, discover and play in Léna's universe.",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Web",
+        "audience": { "@type": "Audience", "audienceType": "Children" },
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "author": { "@id": "https://oryxen.tech/#organization" }
       }
-    }
-  </script>
-
-  <!-- ── JSON-LD: SoftwareApplication — AppLeo ── -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "AppLeo",
-      "url": "https://oryxen.tech/AppLeo/",
-      "description": "A beautifully crafted baby tracking app. Monitor feeding schedules, sleep patterns, diaper changes and milestones.",
-      "applicationCategory": "HealthApplication",
-      "operatingSystem": "Web, Android",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "EUR"
-      },
-      "author": {
-        "@id": "https://oryxen.tech/#organization"
-      }
-    }
-  </script>
-
-  <!-- ── JSON-LD: SoftwareApplication — Lena ── -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Lena",
-      "url": "https://oryxen.tech/Lena/html/login.html",
-      "description": "A magical adventure game designed for young children. Choose your avatar, explore colourful worlds and embark on a journey full of wonder.",
-      "applicationCategory": "GameApplication",
-      "operatingSystem": "Web",
-      "audience": {
-        "@type": "Audience",
-        "audienceType": "Children"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "EUR"
-      },
-      "author": {
-        "@id": "https://oryxen.tech/#organization"
-      }
-    }
+    ]
   </script>
 
   <!-- ── JSON-LD: BreadcrumbList ── -->
@@ -255,6 +274,11 @@
     <nav class="nav container">
 
       <a href="#hero" class="nav__logo" aria-label="Oryxen Labs — home">
+        <svg width="26" height="26" viewBox="0 0 100 100" aria-hidden="true" style="flex-shrink:0;display:block">
+          <rect width="100" height="100" rx="22" fill="#6d28d9"/>
+          <circle cx="50" cy="50" r="26" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="8.5"/>
+          <line x1="40" y1="64" x2="60" y2="36" stroke="rgba(255,255,255,0.9)" stroke-width="6.5" stroke-linecap="round"/>
+        </svg>
         <span class="nav__logo-mark">ORYXEN</span><span class="nav__logo-sep">/</span><span>Labs</span>
       </a>
 
@@ -320,6 +344,11 @@
       <!-- Drawer Header -->
       <div class="nav__menu-header">
         <a href="#hero" class="nav__menu-logo" data-nav aria-label="Oryxen Labs — home">
+          <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true" style="flex-shrink:0;display:block">
+            <rect width="100" height="100" rx="22" fill="#6d28d9"/>
+            <circle cx="50" cy="50" r="26" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="8.5"/>
+            <line x1="40" y1="64" x2="60" y2="36" stroke="rgba(255,255,255,0.9)" stroke-width="6.5" stroke-linecap="round"/>
+          </svg>
           <span class="nav__logo-mark">ORYXEN</span><span class="nav__logo-sep">/</span><span>Labs</span>
         </a>
         <button class="nav__close" id="nav-close" aria-label="Close navigation menu">
@@ -510,7 +539,7 @@
 
           <div class="hero__stats">
             <div>
-              <span class="hero__stat-val">3+</span>
+              <span class="hero__stat-val">7</span>
               <span class="hero__stat-lbl">Live Products</span>
             </div>
             <div class="hero__stat-sep" aria-hidden="true"></div>
@@ -547,9 +576,12 @@
             <div class="t-line"><span class="t-out t-info">⟳ Compiling mobile apps…</span></div>
             <div class="t-line"><span class="t-out t-info">⟳ Bundling automation tools…</span></div>
             <div class="t-line"><span class="t-out t-info">⟳ Generating open-source packages…</span></div>
-            <div class="t-line"><span class="t-out t-success">✓ PINBRIDGE · Secure Vault — deployed</span></div>
-            <div class="t-line"><span class="t-out t-success">✓ AppLeo · Baby Tracker — deployed</span></div>
-            <div class="t-line"><span class="t-out t-success">✓ Lena · Kids Game — deployed</span></div>
+            <div class="t-line"><span class="t-out t-success">✓ MyKit · Dev Toolkit — deployed</span></div>
+            <div class="t-line"><span class="t-out t-success">✓ Wash · Data Sanitizer — deployed</span></div>
+            <div class="t-line"><span class="t-out t-success">✓ Pilot · MergePilot — deployed</span></div>
+            <div class="t-line"><span class="t-out t-success">✓ Flowlyne · Workflow Builder — deployed</span></div>
+            <div class="t-line"><span class="t-out t-success">✓ Bot · ServiceNow Tool — deployed</span></div>
+            <div class="t-line"><span class="t-out t-success">✓ LénaLand · Kids World — deployed</span></div>
             <div class="t-line" style="margin-top:.25rem"><span class="t-prompt">$</span><span class="t-cmd">oryxen ship
                 --all <span class="t-cursor" aria-hidden="true"></span></span></div>
           </div>
@@ -645,20 +677,18 @@
           <p class="section__subtitle">Real products, live in the wild — each solving a concrete problem for real people. Not demos. Not side projects. Production software.</p>
         </div>
 
-        <div class="carousel" id="products-carousel">
-          <div class="carousel__controls">
-            <button class="carousel__btn carousel__btn--prev" aria-label="Previous products" disabled>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-            <button class="carousel__btn carousel__btn--next" aria-label="Next products">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
-          </div>
+        <div class="carousel" id="products-carousel" role="region" aria-label="Products carousel">
+          <button class="carousel__btn carousel__btn--prev" aria-label="Previous products" disabled>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
           <div class="carousel__viewport">
             <div class="products__grid">
               <!-- Renderizado dinámicamente por render.js desde data/projects.json -->
             </div>
           </div>
+          <button class="carousel__btn carousel__btn--next" aria-label="Next products">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
           <div class="carousel__dots" id="carousel-dots" role="tablist" aria-label="Product carousel"></div>
         </div>
       </div>
@@ -845,7 +875,12 @@
         <!-- Brand -->
         <div class="footer__brand">
           <div class="footer__logo">
-            <span class="footer__logo-mark">ORYXEN</span> Labs
+            <svg width="28" height="28" viewBox="0 0 100 100" aria-hidden="true" style="flex-shrink:0;display:block">
+              <rect width="100" height="100" rx="22" fill="#6d28d9"/>
+              <circle cx="50" cy="50" r="26" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="8.5"/>
+              <line x1="40" y1="64" x2="60" y2="36" stroke="rgba(255,255,255,0.9)" stroke-width="6.5" stroke-linecap="round"/>
+            </svg>
+            <span><span class="footer__logo-mark">ORYXEN</span> Labs</span>
           </div>
           <p class="footer__tagline">Building mobile apps, automation tools, and open-source digital products — quietly
             and precisely.</p>
@@ -872,12 +907,12 @@
         <div>
           <span class="footer__col-title">Products</span>
           <ul class="footer__links">
-            <li><a href="https://oryxen.tech/PINBRIDGE/" target="_blank" rel="noopener noreferrer" class="footer__link"
-                id="footer-pinbridge">PINBRIDGE</a></li>
-            <li><a href="https://oryxen.tech/AppLeo/" target="_blank" rel="noopener noreferrer" class="footer__link"
-                id="footer-appleo">AppLeo</a></li>
-            <li><a href="https://oryxen.tech/Lena/html/login.html" target="_blank" rel="noopener noreferrer"
-                class="footer__link" id="footer-lena">Lena</a></li>
+            <li><a href="https://oryxen.tech/mykit/" target="_blank" rel="noopener noreferrer" class="footer__link" id="footer-mykit">MyKit</a></li>
+            <li><a href="https://oryxen.tech/wash/" target="_blank" rel="noopener noreferrer" class="footer__link" id="footer-wash">Wash</a></li>
+            <li><a href="https://oryxen.tech/pilot/" target="_blank" rel="noopener noreferrer" class="footer__link" id="footer-pilot">Pilot</a></li>
+            <li><a href="https://oryxen.tech/Flowlyne/" target="_blank" rel="noopener noreferrer" class="footer__link" id="footer-flowlyne">Flowlyne</a></li>
+            <li><a href="https://oryxen.tech/bot/" target="_blank" rel="noopener noreferrer" class="footer__link" id="footer-bot">Bot</a></li>
+            <li><a href="https://oryxen.tech/lenaland" target="_blank" rel="noopener noreferrer" class="footer__link" id="footer-lenaland">LénaLand</a></li>
           </ul>
         </div>
 
