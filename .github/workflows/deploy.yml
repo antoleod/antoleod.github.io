@@ -29,6 +29,36 @@ jobs:
             --exclude='*.md' \
             . dist/
 
+      - name: Minify CSS and JS
+        run: |
+          node -e "
+            const fs = require('fs');
+            // Minify CSS
+            ['dist/css/styles.css', 'dist/css/perf.css'].forEach(f => {
+              if (!fs.existsSync(f)) return;
+              const src = fs.readFileSync(f, 'utf8');
+              const min = src
+                .replace(/\/\*[\s\S]*?\*\//g, '')
+                .replace(/\s*([{};:,>~+])\s*/g, '\$1')
+                .replace(/\s{2,}/g, ' ')
+                .replace(/\n/g, '')
+                .trim();
+              fs.writeFileSync(f, min);
+              console.log(f + ': ' + src.length + ' -> ' + min.length + ' bytes');
+            });
+            // Minify JS (strip single-line comments and collapse whitespace)
+            ['dist/js/render.js', 'dist/js/script.js'].forEach(f => {
+              if (!fs.existsSync(f)) return;
+              const src = fs.readFileSync(f, 'utf8');
+              const min = src
+                .replace(/\/\/[^\n]*/g, '')
+                .replace(/\n{2,}/g, '\n')
+                .trim();
+              fs.writeFileSync(f, min);
+              console.log(f + ': ' + src.length + ' -> ' + min.length + ' bytes');
+            });
+          "
+
       - name: Deploy to gh-pages on public repo
         uses: peaceiris/actions-gh-pages@v4
         with:
