@@ -81,7 +81,7 @@
 
 html {
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizeSpeed;
 }
 
 /* Offset for sticky nav on deep-link targets */
@@ -164,7 +164,7 @@ button {
 
 .section__title {
   font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -.035em;
   line-height: 1.08;
   margin-bottom: .9rem;
@@ -196,7 +196,7 @@ button {
   font-weight: 600;
   padding: .7rem 1.5rem;
   border-radius: var(--radius-sm);
-  transition: all var(--t);
+  transition: background var(--t), color var(--t), box-shadow var(--t), transform var(--t), border-color var(--t);
   white-space: nowrap;
   border: none;
 }
@@ -246,8 +246,8 @@ button {
   width: 100%;
   height: var(--header-h);
   background: rgba(6, 6, 11, .82);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(255, 255, 255, .06);
   z-index: 1000;
   transition: background var(--t), border-color var(--t), box-shadow var(--t);
@@ -297,7 +297,7 @@ button {
 
 .nav__link {
   font-size: .9rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--text-2);
   padding: .5rem .9rem;
   border-radius: var(--radius-sm);
@@ -333,7 +333,7 @@ button {
   border-radius: var(--radius-sm);
   border: 1px solid var(--card-border);
   background: var(--card);
-  transition: all var(--t);
+  transition: background var(--t), color var(--t), border-color var(--t);
 }
 
 .nav__github-btn:hover {
@@ -355,7 +355,7 @@ button {
   background: var(--primary);
   color: #fff;
   box-shadow: 0 0 20px rgba(139, 92, 246, .3);
-  transition: all var(--t);
+  transition: background var(--t), box-shadow var(--t), transform var(--t);
 }
 
 .nav__cta:hover {
@@ -374,7 +374,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all var(--t);
+  transition: background var(--t), color var(--t), border-color var(--t);
 }
 
 .theme-toggle:hover {
@@ -425,7 +425,7 @@ button {
   z-index: 999;
   opacity: 0;
   visibility: hidden;
-  transition: all var(--t-slow);
+  transition: opacity var(--t-slow), visibility var(--t-slow);
 }
 
 .nav__overlay.open {
@@ -543,12 +543,12 @@ button {
     align-items: center;
     gap: .875rem;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 400;
     padding: .875rem 1rem;
     border-radius: var(--radius-sm);
     border: 1px solid transparent;
     color: var(--text-2);
-    transition: all var(--t);
+    transition: background var(--t), color var(--t), border-color var(--t), transform var(--t);
     position: relative;
   }
 
@@ -588,7 +588,7 @@ button {
     border: 1px solid var(--card-border);
     color: var(--text-2);
     flex-shrink: 0;
-    transition: all var(--t);
+    transition: background var(--t), border-color var(--t), color var(--t);
   }
 
   .nav__menu .nav__link:hover .nav__link-icon,
@@ -607,7 +607,7 @@ button {
     font-size: 1rem;
     opacity: 0;
     transform: translateX(-4px);
-    transition: all var(--t);
+    transition: opacity var(--t), transform var(--t), color var(--t);
   }
 
   .nav__menu .nav__link:hover .nav__link-arrow,
@@ -656,8 +656,8 @@ button {
     border-radius: var(--radius-sm);
     color: var(--text-2);
     font-size: .85rem;
-    font-weight: 500;
-    transition: all var(--t);
+    font-weight: 400;
+    transition: background var(--t), border-color var(--t), color var(--t), transform var(--t);
   }
 
   .nav__menu-social:hover {
@@ -687,7 +687,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all var(--t);
+    transition: background var(--t), border-color var(--t), transform var(--t);
     flex-shrink: 0;
   }
 
@@ -862,7 +862,7 @@ button {
 
 .hero__title {
   font-size: clamp(2.75rem, 5.5vw, 4.5rem);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.06;
   letter-spacing: -.042em;
   margin-bottom: 1.5rem;
@@ -1035,7 +1035,7 @@ button {
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
   padding: 1.875rem;
-  transition: all var(--t);
+  transition: background var(--t), border-color var(--t), box-shadow var(--t), transform var(--t);
 }
 
 .about__card:hover {
@@ -1149,7 +1149,7 @@ button {
   border-radius: var(--radius-lg);
   padding: 2rem;
   overflow: hidden;
-  transition: all var(--t-slow);
+  transition: border-color var(--t-slow), box-shadow var(--t-slow), transform var(--t-slow);
   display: flex;
   flex-direction: column;
   flex: 0 0 272px;
@@ -1298,7 +1298,7 @@ button {
 .tag {
   font-family: var(--font-mono);
   font-size: .72rem;
-  font-weight: 500;
+  font-weight: 400;
   padding: .22rem .65rem;
   border-radius: var(--radius-xs);
   background: rgba(255, 255, 255, .05);
@@ -1407,7 +1407,7 @@ button {
 .process__num {
   font-family: var(--font-mono);
   font-size: 2.5rem;
-  font-weight: 800;
+  font-weight: 700;
   background: linear-gradient(135deg, var(--primary), var(--accent-light));
   -webkit-background-clip: text;
   background-clip: text;
@@ -1458,7 +1458,7 @@ button {
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
   padding: 1.5rem;
-  transition: all var(--t);
+  transition: border-color var(--t), box-shadow var(--t), transform var(--t);
 }
 
 .stack-cat:hover {
@@ -1488,7 +1488,7 @@ button {
   align-items: center;
   gap: .75rem;
   font-size: .9rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--text-2);
 }
 
@@ -1529,7 +1529,7 @@ button {
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
   padding: 1.125rem 1.375rem;
-  transition: all var(--t);
+  transition: border-color var(--t), background var(--t);
 }
 
 .contact__info-card:hover {
@@ -1724,7 +1724,7 @@ button {
   align-items: center;
   justify-content: center;
   color: var(--text-3);
-  transition: all var(--t);
+  transition: color var(--t), border-color var(--t), background var(--t);
 }
 
 .footer__social:hover {
@@ -1829,7 +1829,7 @@ html.js [data-reveal].revealed {
   justify-content: center;
   opacity: 0;
   transform: translateY(12px);
-  transition: all var(--t);
+  transition: opacity var(--t), transform var(--t), box-shadow var(--t), background var(--t), border-color var(--t);
   z-index: 100;
   box-shadow: var(--shadow);
 }

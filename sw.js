@@ -5,7 +5,7 @@
    no user sessions to disrupt, always want latest assets.
    ============================================================ */
 
-const CACHE_NAME = 'oryxen-v2';
+const CACHE_NAME = 'oryxen-v3';
 
 const PRECACHE_URLS = [
   '/',
@@ -20,7 +20,6 @@ const PRECACHE_URLS = [
   '/manifest.json',
   '/favicon.ico',
   '/icon.svg',
-  '/assets/logo.png',
   '/data/projects.json',
   '/data/stack.json',
 ];
