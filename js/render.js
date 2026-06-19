@@ -158,11 +158,14 @@
     prevBtn.addEventListener('click', () => goTo(currentIdx - 1));
     nextBtn.addEventListener('click', () => goTo(currentIdx + 1));
 
-    // Keyboard navigation — ArrowLeft / ArrowRight only when focus is inside the carousel
+    // Keyboard navigation — ArrowLeft / ArrowRight, skip if focus is on a link or dot
     const carousel = document.getElementById('products-carousel');
     carousel?.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(currentIdx - 1); }
-      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(currentIdx + 1); }
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      const active = document.activeElement;
+      if (active?.matches('.product-card__link, .carousel__dot')) return;
+      e.preventDefault();
+      goTo(currentIdx + (e.key === 'ArrowRight' ? 1 : -1));
     });
 
     let scrollTimer;

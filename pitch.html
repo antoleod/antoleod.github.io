@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="theme-color" content="#0a0a0f">
     <script>(function(){var t=localStorage.getItem('oryxen-theme');var r=document.documentElement;r.classList.add('js');r.setAttribute('data-theme',t==='light'?'light':t==='dark'?'dark':window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');})();</script>
     <title>Work With Us | Oryxen Labs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -136,43 +137,6 @@
         font-size: .9375rem;
       }
 
-      /* ── Stats row ── */
-      .stats-row {
-        display: flex;
-        gap: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      .stat-card {
-        background: var(--card);
-        border: 1px solid var(--card-border);
-        border-radius: 14px;
-        padding: 1.75rem 2.5rem;
-        text-align: center;
-        flex: 1;
-        min-width: 160px;
-        transition: border-color .25s;
-      }
-      .stat-card:hover { border-color: var(--card-border-hover); }
-
-      .stat-number {
-        display: block;
-        font-family: var(--font-mono);
-        font-size: 2.25rem;
-        font-weight: 800;
-        color: var(--primary-light);
-        line-height: 1;
-        margin-bottom: .4rem;
-      }
-
-      .stat-label {
-        display: block;
-        font-size: .8125rem;
-        color: var(--text-2);
-        font-weight: 500;
-      }
-
       /* ── CTA ── */
       .cta-section {
         text-align: center;
@@ -186,7 +150,6 @@
       @media (max-width: 600px) {
         .pitch-header { padding: 1rem 1.25rem; }
         .pitch-container { padding: 2.5rem 1.25rem 4rem; gap: 2.5rem; }
-        .stat-card { padding: 1.25rem 1.5rem; }
         .cta-section { padding: 2.5rem 1.25rem; }
       }
     </style>
@@ -210,7 +173,7 @@
         </nav>
     </header>
 
-    <main id="main" tabindex="-1" class="pitch-container">
+    <main id="main" tabindex="-1"><div class="pitch-container">
 
         <div class="pitch-hero">
             <h1>Small studio.<br>Serious software.</h1>
@@ -241,7 +204,7 @@
             <a href="mailto:jdioses@outlook.be" class="btn btn--primary">Email Us — Reply Within 24h</a>
         </div>
 
-    </main>
+    </div></main>
 
     <!-- Scripts -->
     <script src="js/script.js" defer></script>
