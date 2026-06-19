@@ -1173,6 +1173,7 @@ button {
   background: radial-gradient(ellipse at top left, rgba(139, 92, 246, .1), transparent 55%);
   opacity: 0;
   transition: opacity var(--t);
+  pointer-events: none;
 }
 
 .product-card:hover::before {

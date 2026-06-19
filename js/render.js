@@ -172,66 +172,31 @@
       scrollTimer = setTimeout(() => updateState(derivedIndex()), 80);
     }, { passive: true });
 
-    // Touch/drag swipe support
+    // Touch/drag swipe — capture only after drag threshold so taps reach links
     let dragStartX = 0;
     let dragging = false;
+    let captured = false;
     viewport.addEventListener('pointerdown', e => {
       dragStartX = e.clientX;
       dragging = true;
-      viewport.setPointerCapture(e.pointerId);
+      captured = false;
+    });
+    viewport.addEventListener('pointermove', e => {
+      if (!dragging || captured) return;
+      if (Math.abs(e.clientX - dragStartX) > 8) {
+        viewport.setPointerCapture(e.pointerId);
+        captured = true;
+      }
     });
     viewport.addEventListener('pointerup', e => {
       if (!dragging) return;
       dragging = false;
+      captured = false;
       const delta = dragStartX - e.clientX;
-      if (Math.abs(delta) > 40) goTo(currentIndex() + (delta > 0 ? 1 : -1));
+      if (Math.abs(delta) > 40) goTo(currentIdx + (delta > 0 ? 1 : -1));
     });
 
     updateState(0);
-  }
-
-  function renderRepositories() {
-    const container = document.querySelector('.repo-grid');
-    if (!container) return;
-
-    const repos = data.projects?.repositories;
-    if (!Array.isArray(repos) || repos.length === 0) { container.innerHTML = FALLBACK_MSG; return; }
-
-    container.innerHTML = repos.map((repo, idx) => {
-      const soon = !!repo.comingSoon;
-      const inner = `
-        <div class="repo-card__header">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-            ${getRepoIcon(repo.icon)}
-          </svg>
-          <span class="repo-card__name">${escapeHtml(repo.name)}</span>
-        </div>
-        <p class="repo-card__desc">${escapeHtml(repo.description)}</p>
-        <div class="repo-card__meta">
-          <span class="repo-lang"><span class="lang-dot ${escapeHtml(repo.languageClass)}"></span>${escapeHtml(repo.language)}</span>
-          <span class="repo-stars">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-            </svg>
-            ${soon ? 'Soon' : 'Public'}
-          </span>
-        </div>`;
-      if (soon) {
-        return `<div role="article" aria-label="${escapeHtml(repo.name)} — coming soon" class="repo-card repo-card--soon" data-reveal data-delay="${idx + 1}" id="repo-${escapeHtml(repo.id)}">${inner}</div>`;
-      }
-      return `<a href="${escapeHtml(safeUrl(repo.url))}" target="_blank" rel="noopener noreferrer" class="repo-card" data-reveal data-delay="${idx + 1}" id="repo-${escapeHtml(repo.id)}">${inner}</a>`;
-    }).join('');
-    observeNewReveals(container);
-  }
-
-  function getRepoIcon(type) {
-    const icons = {
-      'file': '<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/>',
-      'lock': '<rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />',
-      'heart': '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />',
-      'play': '<polygon points="5 3 19 12 5 21 5 3" />'
-    };
-    return icons[type] || icons['file'];
   }
 
   function renderStack() {
@@ -253,6 +218,5 @@
   }
 
   renderProducts();
-  renderRepositories();
   renderStack();
 })();
