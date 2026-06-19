@@ -33,6 +33,9 @@
     const resolved = normalizeTheme(theme) || 'dark';
     root.setAttribute('data-theme', resolved);
     localStorage.setItem(THEME_KEY, resolved);
+    if (themeBtn) themeBtn.setAttribute('aria-pressed', resolved === 'light' ? 'true' : 'false');
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) metaTheme.setAttribute('content', resolved === 'light' ? '#ffffff' : '#0a0a0f');
   }
 
   applyTheme(getStoredTheme());
@@ -339,7 +342,7 @@
       window.scrollTo({ top, behavior: 'smooth' });
       // Move focus for skip-link and other programmatic targets
       if (target.hasAttribute('tabindex')) {
-        setTimeout(() => target.focus({ preventScroll: true }), 450);
+        setTimeout(() => target.focus({ preventScroll: true }), 50);
       }
     });
   });

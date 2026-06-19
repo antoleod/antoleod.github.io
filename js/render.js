@@ -105,9 +105,8 @@
     cards.forEach((_, i) => {
       const dot = document.createElement('button');
       dot.className = 'carousel__dot' + (i === 0 ? ' carousel__dot--active' : '');
-      dot.setAttribute('role', 'tab');
-      dot.setAttribute('aria-label', `Product ${i + 1}`);
-      dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      dot.setAttribute('aria-label', `Go to product ${i + 1}`);
+      dot.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
       dot.addEventListener('click', () => goTo(i));
       dotsWrap.appendChild(dot);
     });
@@ -129,11 +128,13 @@
     function updateState(idx) {
       const total = cards.length;
       prevBtn.disabled = idx <= 0;
+      prevBtn.tabIndex = idx <= 0 ? -1 : 0;
       nextBtn.disabled = idx >= total - 1;
+      nextBtn.tabIndex = idx >= total - 1 ? -1 : 0;
       dots().forEach((d, i) => {
         const active = i === idx;
         d.classList.toggle('carousel__dot--active', active);
-        d.setAttribute('aria-selected', active ? 'true' : 'false');
+        d.setAttribute('aria-pressed', active ? 'true' : 'false');
       });
     }
 
