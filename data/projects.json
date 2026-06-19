@@ -36,24 +36,24 @@
     {
       "id": "flowlyne",
       "status": "Live",
-      "icon": "🔄",
+      "icon": "🎮",
       "iconImg": "/Flowlyne/favicon.ico",
       "title": "Flowlyne",
-      "description": "Visual workflow and pipeline builder. Drag, connect, and automate your processes without writing a single line of configuration.",
-      "tags": ["Automation", "No-code", "JavaScript", "PWA"],
+      "description": "A fun, all-ages game playable in the browser. Jump in solo or with friends — no installs, no accounts, just play.",
+      "tags": ["Game", "All Ages", "Interactive", "JavaScript"],
       "url": "https://oryxen.tech/Flowlyne/",
-      "ariaLabel": "Visit Flowlyne — Visual Workflow Builder"
+      "ariaLabel": "Visit Flowlyne — All-Ages Browser Game"
     },
     {
       "id": "pulse",
       "status": "Live",
-      "icon": "💓",
+      "icon": "🎵",
       "iconImg": "/pulse/favicon.ico",
       "title": "Pulse",
-      "description": "Real-time metrics and personal analytics dashboard. Track what matters, spot trends, and keep your finger on the pulse.",
-      "tags": ["Analytics", "Dashboard", "JavaScript", "PWA"],
+      "description": "A clean, offline-ready music player for the web. Queue your tracks, control playback, and enjoy your music without distractions.",
+      "tags": ["Music", "Player", "PWA", "JavaScript"],
       "url": "https://oryxen.tech/pulse",
-      "ariaLabel": "Visit Pulse — Analytics Dashboard"
+      "ariaLabel": "Visit Pulse — Music Player"
     },
     {
       "id": "bot",
