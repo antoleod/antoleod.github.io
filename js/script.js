@@ -220,7 +220,7 @@
       const mailSubject = encodeURIComponent(subject || `[Oryxen Labs] Message from ${name}`);
       const body        = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
       window.location.href = `mailto:jdioses@outlook.be?subject=${mailSubject}&body=${body}`;
-      showStatus('info', 'Opening your email client… If nothing happens, email us directly: jdioses@outlook.be');
+      showStatus('info', 'Opening your email client… If nothing happens, <a href="mailto:jdioses@outlook.be" style="color:inherit;text-decoration:underline">email us directly</a>.');
 
       // Re-enable button after delay so "Opening email client…" state is visible
       setTimeout(() => {
@@ -236,11 +236,11 @@
 
   function showStatus (type, msg) {
     if (!statusEl) return;
-    statusEl.textContent = msg;
-    statusEl.className   = `form-status ${type}`;
+    statusEl.innerHTML = msg;
+    statusEl.className = `form-status ${type}`;
     setTimeout(() => {
-      statusEl.textContent = '';
-      statusEl.className   = 'form-status';
+      statusEl.innerHTML = '';
+      statusEl.className = 'form-status';
     }, 7000);
   }
 

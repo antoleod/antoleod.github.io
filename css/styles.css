@@ -1141,8 +1141,13 @@ button {
 }
 
 @media (max-width: 480px) {
-  /* Account for carousel side buttons (2×2.75rem) + grid gaps + container padding */
-  .product-card { flex: 0 0 min(272px, calc(100vw - 7.5rem)); }
+  /* 2×btn(2.75rem) + 2×col-gap(0.5rem) + 2×container-pad(1.125rem) + 2×viewport-pad(0.125rem) ≈ 9rem */
+  .product-card { flex: 0 0 min(272px, calc(100vw - 9rem)); }
+}
+
+@media (max-width: 375px) {
+  /* Tighter at iPhone SE — same formula with 1rem container padding */
+  .product-card { flex: 0 0 min(272px, calc(100vw - 9.5rem)); }
 }
 
 .product-card::before {
@@ -1313,6 +1318,7 @@ button {
 }
 
 .carousel__dot {
+  position: relative;
   width: .5rem;
   height: .5rem;
   border-radius: 100px;
@@ -1322,6 +1328,13 @@ button {
   padding: 0;
   transition: background var(--t), width var(--t);
   flex-shrink: 0;
+}
+
+/* Expand tap target to ~44px without changing visual size */
+.carousel__dot::before {
+  content: '';
+  position: absolute;
+  inset: -1.125rem;
 }
 
 .carousel__dot--active {
@@ -2156,10 +2169,23 @@ html.js [data-reveal].revealed {
     font-size: 1.25rem;
   }
 
-  /* Terminal â€” compact + scrollable instead of hidden */
+  /* Terminal — compact + scrollable, with right-edge fade to signal overflow */
   .hero__terminal {
     display: block;
     overflow-x: auto;
+    position: relative;
+  }
+
+  .hero__terminal::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 2.5rem;
+    background: linear-gradient(to left, rgba(8, 8, 14, .88), transparent);
+    pointer-events: none;
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
   }
 
   .terminal__body {
@@ -2175,10 +2201,6 @@ html.js [data-reveal].revealed {
   }
 
   /* Products */
-  .products__grid {
-    grid-template-columns: 1fr;
-  }
-
   .product-card {
     padding: 1.5rem;
   }
@@ -2247,8 +2269,8 @@ html.js [data-reveal].revealed {
   /* Eyebrow label — minimum 13px for monospace caps */
   .section__eyebrow { font-size: .8125rem; }
 
-  /* Footer link tap targets — add vertical padding */
-  .footer__link { display: inline-block; padding: .55rem 0; }
+  /* Footer link tap targets — ~44px touch height */
+  .footer__link { display: inline-block; padding: .875rem 0; }
 
   /* Form note legibility */
   .form-note { font-size: .875rem; }
