@@ -60,7 +60,6 @@
     navOverlay?.classList.add('open');
     navToggle?.setAttribute('aria-expanded', 'true');
     navMenu?.removeAttribute('aria-hidden');
-    navMenu?.setAttribute('aria-modal', 'true');
     document.body.style.overflow = 'hidden';
     document.getElementById('main')?.setAttribute('inert', '');
     document.querySelector('footer')?.setAttribute('inert', '');
@@ -72,7 +71,6 @@
     navOverlay?.classList.remove('open');
     navToggle?.setAttribute('aria-expanded', 'false');
     navMenu?.setAttribute('aria-hidden', 'true');
-    navMenu?.removeAttribute('aria-modal');
     document.body.style.overflow = '';
     document.getElementById('main')?.removeAttribute('inert');
     document.querySelector('footer')?.removeAttribute('inert');
@@ -363,10 +361,7 @@
         target.focus();
         return;
       }
-      const headerH = parseInt(
-        getComputedStyle(root).getPropertyValue('--header-h') || '72',
-        10
-      );
+      const headerH = document.getElementById('header')?.offsetHeight ?? 72;
       const top = target.getBoundingClientRect().top + window.scrollY - headerH;
       window.scrollTo({ top, behavior: 'smooth' });
     });

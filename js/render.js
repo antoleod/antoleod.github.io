@@ -42,7 +42,7 @@
 
   const data = await loadData();
   if (!data) {
-    document.querySelectorAll('.products__grid, .repo-grid, .stack__grid').forEach(el => {
+    document.querySelectorAll('.products__grid, .stack__grid').forEach(el => {
       el.innerHTML = FALLBACK_MSG;
     });
     return;
@@ -210,7 +210,7 @@
       <div class="stack-cat" data-reveal data-delay="${idx + 1}">
         <span class="stack-cat__label">${escapeHtml(cat.label)}</span>
         <div class="stack-items">
-          ${cat.items.map(item => `<div class="stack-item"><span class="stack-item-emoji">${escapeHtml(item.emoji)}</span> ${escapeHtml(item.text)}</div>`).join('')}
+          ${(cat.items || []).map(item => `<div class="stack-item"><span class="stack-item-emoji">${escapeHtml(item.emoji)}</span> ${escapeHtml(item.text)}</div>`).join('')}
         </div>
       </div>
     `).join('');

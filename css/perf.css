@@ -5,7 +5,7 @@
 
 /* Skip off-screen rendering for below-the-fold sections */
 .about,
-.opensource,
+#process,
 #stack,
 .contact,
 .footer {

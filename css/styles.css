@@ -1445,167 +1445,6 @@ button {
 }
 
 /* ============================================================
-   OPEN SOURCE
-   ============================================================ */
-.opensource {
-  background: var(--bg-2);
-}
-
-.github-banner {
-  background: linear-gradient(135deg, rgba(139, 92, 246, .12), rgba(59, 130, 246, .08));
-  border: 1px solid rgba(139, 92, 246, .22);
-  border-radius: var(--radius-lg);
-  padding: 2.25rem 2.5rem;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  margin-bottom: 2.5rem;
-  transition: all var(--t);
-}
-
-.github-banner:hover {
-  box-shadow: var(--shadow-glow);
-  border-color: rgba(139, 92, 246, .38);
-}
-
-.github-banner__icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 14px;
-  background: rgba(139, 92, 246, .15);
-  border: 1px solid rgba(139, 92, 246, .25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary-light);
-  flex-shrink: 0;
-}
-
-.github-banner__text h3 {
-  font-size: 1.125rem;
-  font-weight: 700;
-  margin-bottom: .4rem;
-}
-
-.github-banner__text p {
-  font-size: .9375rem;
-  color: var(--text-2);
-}
-
-.github-banner__cta {
-  margin-left: auto;
-  flex-shrink: 0;
-}
-
-.repo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.125rem;
-}
-
-.repo-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  transition: all var(--t);
-  display: flex;
-  flex-direction: column;
-  gap: .75rem;
-}
-
-.repo-card:hover {
-  border-color: rgba(139, 92, 246, .25);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow);
-}
-
-.repo-card--soon {
-  opacity: .7;
-  border-style: dashed;
-}
-
-.repo-card--soon:hover {
-  transform: none;
-  box-shadow: none;
-  border-color: var(--card-border);
-}
-
-.repo-card__header {
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-}
-
-.repo-card__header svg {
-  color: var(--text-3);
-  flex-shrink: 0;
-}
-
-.repo-card__name {
-  font-weight: 700;
-  font-size: .9375rem;
-}
-
-.repo-card__desc {
-  font-size: .875rem;
-  color: var(--text-2);
-  line-height: 1.65;
-  flex: 1;
-}
-
-.repo-card__meta {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-top: auto;
-}
-
-.repo-lang {
-  display: flex;
-  align-items: center;
-  gap: .375rem;
-  font-family: var(--font-mono);
-  font-size: .78rem;
-  color: var(--text-3);
-}
-
-.lang-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.lang-js {
-  background: #f7df1e;
-}
-
-.lang-ts {
-  background: #3178c6;
-}
-
-.lang-html {
-  background: #e34c26;
-}
-
-.lang-py {
-  background: #3572a5;
-}
-
-.lang-dart {
-  background: #00b4ab;
-}
-
-.repo-stars {
-  display: flex;
-  align-items: center;
-  gap: .3rem;
-  font-family: var(--font-mono);
-  font-size: .78rem;
-  color: var(--text-3);
-}
-
-/* ============================================================
    TECH STACK
    ============================================================ */
 .stack__grid {
@@ -2121,14 +1960,6 @@ html.js [data-reveal].revealed {
     grid-column: 1/-1;
   }
 
-  .github-banner {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .github-banner__cta {
-    margin-left: 0;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2244,12 +2075,6 @@ html.js [data-reveal].revealed {
   /* Products */
   .product-card {
     padding: 1.5rem;
-  }
-
-  /* Open Source */
-  .github-banner {
-    padding: 1.5rem;
-    gap: 1.25rem;
   }
 
   /* Stack â€” 2 cols on mobile */
