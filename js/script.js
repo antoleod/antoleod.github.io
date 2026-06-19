@@ -143,7 +143,7 @@
           revealIO.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.07 });
 
     revealEls.forEach(el => revealIO.observe(el));
     window.__revealIO = revealIO;

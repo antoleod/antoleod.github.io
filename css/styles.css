@@ -171,7 +171,7 @@ button {
 }
 
 .section__subtitle {
-  font-size: 1.0625rem;
+  font-size: clamp(.9375rem, 1.4vw + .2rem, 1.0625rem);
   color: var(--text-2);
   line-height: 1.75;
   max-width: 560px;
@@ -869,7 +869,7 @@ button {
 }
 
 .hero__subtitle {
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 1.6vw + .2rem, 1.125rem);
   color: var(--text-2);
   line-height: 1.75;
   max-width: 510px;
@@ -1776,20 +1776,42 @@ button {
 }
 
 /* ============================================================
+   HERO ENTRANCE (plays on page load, above the fold)
+   ============================================================ */
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+html.js .hero__eyebrow,
+html.js .hero__title,
+html.js .hero__subtitle,
+html.js .hero__ctas,
+html.js .hero__stats {
+  animation: heroIn .9s var(--ease) both;
+}
+
+html.js .hero__eyebrow  { animation-delay: 0s; }
+html.js .hero__title    { animation-delay: .12s; }
+html.js .hero__subtitle { animation-delay: .24s; }
+html.js .hero__ctas     { animation-delay: .36s; }
+html.js .hero__stats    { animation-delay: .5s; }
+
+/* ============================================================
    SCROLL REVEAL
    ============================================================ */
 [data-reveal] {
-  transition: opacity .65s var(--ease), transform .65s var(--ease);
+  transition: opacity .75s var(--ease), transform .75s var(--ease);
 }
 
 html.js [data-reveal] {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(28px) scale(0.97);
 }
 
 html.js [data-reveal].revealed {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 [data-delay="1"] {
@@ -1797,11 +1819,11 @@ html.js [data-reveal].revealed {
 }
 
 [data-delay="2"] {
-  transition-delay: .16s;
+  transition-delay: .17s;
 }
 
 [data-delay="3"] {
-  transition-delay: .24s;
+  transition-delay: .26s;
 }
 
 [data-delay="4"] {
@@ -1934,8 +1956,19 @@ html.js [data-reveal].revealed {
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-delay: 0ms !important;
   }
   [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+  html.js .hero__eyebrow,
+  html.js .hero__title,
+  html.js .hero__subtitle,
+  html.js .hero__ctas,
+  html.js .hero__stats {
+    animation: none;
     opacity: 1;
     transform: none;
   }
