@@ -68,14 +68,14 @@
   <link rel="preload" href="css/styles.css" as="style">
   <link rel="preload" href="js/render.js" as="script">
   <link rel="preload" href="js/script.js" as="script">
-  <link rel="preload" href="data/projects.json" as="fetch" crossorigin>
+  <link rel="preload" href="data/projects.json" as="fetch">
 
   <!-- ── Stylesheets ── -->
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/perf.css">
 
   <!-- ── JS theme bootstrap (no FOUC) ── -->
-  <script>(function(){var t=localStorage.getItem('oryxen-theme');var r=document.documentElement;r.classList.add('js');r.setAttribute('data-theme',t==='light'?'light':'dark');})();</script>
+  <script>(function(){var t=localStorage.getItem('oryxen-theme');var r=document.documentElement;r.classList.add('js');r.setAttribute('data-theme',t==='light'?'light':t==='dark'?'dark':window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');})();</script>
 
   <!-- ── JSON-LD: Organization ── -->
   <script type="application/ld+json">
@@ -316,7 +316,7 @@
     <div class="nav__overlay" id="nav-overlay" aria-hidden="true"></div>
 
     <!-- Mobile drawer — OUTSIDE nav so it never enters the flex layout -->
-    <nav class="nav__menu" id="nav-menu" aria-label="Mobile navigation">
+    <nav class="nav__menu" id="nav-menu" role="dialog" aria-label="Mobile navigation" aria-hidden="true">
 
       <!-- Drawer Header -->
       <div class="nav__menu-header">

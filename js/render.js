@@ -119,6 +119,8 @@
 
     const dots = () => dotsWrap.querySelectorAll('.carousel__dot');
 
+    let currentIdx = 0;
+
     function cardWidth() {
       const card = cards[0];
       if (!card || card.offsetWidth === 0) return 272;
@@ -127,7 +129,7 @@
       return card.offsetWidth + gap;
     }
 
-    function currentIndex() {
+    function derivedIndex() {
       const w = cardWidth();
       if (!w) return 0;
       return Math.round(viewport.scrollLeft / w);
@@ -135,6 +137,7 @@
 
     function updateState(idx) {
       const total = cards.length;
+      currentIdx = idx;
       prevBtn.disabled = idx <= 0;
       prevBtn.tabIndex = idx <= 0 ? -1 : 0;
       nextBtn.disabled = idx >= total - 1;
@@ -152,20 +155,21 @@
       updateState(clamped);
     }
 
-    prevBtn.addEventListener('click', () => goTo(currentIndex() - 1));
-    nextBtn.addEventListener('click', () => goTo(currentIndex() + 1));
+    prevBtn.addEventListener('click', () => goTo(currentIdx - 1));
+    nextBtn.addEventListener('click', () => goTo(currentIdx + 1));
 
     // Keyboard navigation — ArrowLeft / ArrowRight only when focus is inside the carousel
     const carousel = document.getElementById('products-carousel');
     carousel?.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(currentIndex() - 1); }
-      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(currentIndex() + 1); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(currentIdx - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(currentIdx + 1); }
     });
 
     let scrollTimer;
     viewport.addEventListener('scroll', () => {
       clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(() => updateState(currentIndex()), 80);
+      // Sync stored index from scroll (touch swipe / native scroll)
+      scrollTimer = setTimeout(() => updateState(derivedIndex()), 80);
     }, { passive: true });
 
     // Touch/drag swipe support

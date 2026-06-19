@@ -273,8 +273,14 @@
 
     const lastLine = lines[lines.length - 1];
     const lastLineCmd = lastLine.querySelector('.t-cmd');
-    const originalCmdText = lastLineCmd ? (lastLineCmd.textContent || '') : '';
-    const cursor = lastLine.querySelector('.t-cursor');
+    const cursor = lastLineCmd ? lastLineCmd.querySelector('.t-cursor') : null;
+    const originalCmdText = lastLineCmd
+      ? [...lastLineCmd.childNodes]
+          .filter(n => n.nodeType === Node.TEXT_NODE)
+          .map(n => n.textContent)
+          .join('')
+          .trim()
+      : '';
 
     let pendingRestartId = null;
 
@@ -283,7 +289,12 @@
 
       // 1. Reset state
       lines.forEach(line => line.style.opacity = '0');
-      if (lastLineCmd) lastLineCmd.textContent = '';
+      if (lastLineCmd) {
+        // Clear text nodes only, preserving cursor element
+        [...lastLineCmd.childNodes]
+          .filter(n => n.nodeType === Node.TEXT_NODE)
+          .forEach(n => n.remove());
+      }
       if (cursor) cursor.style.display = 'none';
 
       // 2. Animate lines
@@ -297,9 +308,12 @@
           if (index === lines.length - 1 && lastLineCmd && originalCmdText) {
             if (cursor) cursor.style.display = 'inline-block';
             let charIndex = 0;
+            // Insert text node before cursor so cursor stays at end
+            const textNode = document.createTextNode('');
+            lastLineCmd.insertBefore(textNode, cursor);
             const type = () => {
               if (charIndex < originalCmdText.length) {
-                lastLineCmd.textContent += originalCmdText[charIndex];
+                textNode.textContent += originalCmdText[charIndex];
                 charIndex++;
                 setTimeout(type, typeSpeed);
               }

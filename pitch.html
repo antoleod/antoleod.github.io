@@ -10,6 +10,7 @@
     <link rel="canonical" href="https://oryxen.tech/pitch.html">
     <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="manifest" href="manifest.json">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +21,7 @@
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/perf.css" />
     <!-- Theme bootstrap (no FOUC) -->
-    <script>(function(){var t=localStorage.getItem('oryxen-theme');var r=document.documentElement;r.classList.add('js');r.setAttribute('data-theme',t==='light'?'light':'dark');})();</script>
+    <script>(function(){var t=localStorage.getItem('oryxen-theme');var r=document.documentElement;r.classList.add('js');r.setAttribute('data-theme',t==='light'?'light':t==='dark'?'dark':window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');})();</script>
     <style>
       /* ── Pitch page layout ── */
       .pitch-page {
@@ -193,6 +194,8 @@
 
 <body class="pitch-page">
 
+    <a class="skip-link" href="#main">Skip to content</a>
+
     <header class="pitch-header">
         <div class="pitch-logo" style="display:flex;align-items:center;gap:.5rem">
           <svg width="26" height="26" viewBox="0 0 100 100" aria-hidden="true" style="flex-shrink:0;display:block">
@@ -207,7 +210,7 @@
         </nav>
     </header>
 
-    <div class="pitch-container">
+    <main id="main" tabindex="-1" class="pitch-container">
 
         <div class="pitch-hero">
             <h1>Small studio.<br>Serious software.</h1>
@@ -238,7 +241,7 @@
             <a href="mailto:jdioses@outlook.be" class="btn btn--primary">Email Us — Reply Within 24h</a>
         </div>
 
-    </div>
+    </main>
 
     <!-- Scripts -->
     <script src="js/script.js" defer></script>
