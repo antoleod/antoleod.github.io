@@ -33,7 +33,7 @@
     const resolved = normalizeTheme(theme) || 'dark';
     root.setAttribute('data-theme', resolved);
     localStorage.setItem(THEME_KEY, resolved);
-    if (themeBtn) themeBtn.setAttribute('aria-pressed', resolved === 'light' ? 'true' : 'false');
+    if (themeBtn) themeBtn.setAttribute('aria-label', resolved === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) metaTheme.setAttribute('content', resolved === 'light' ? '#ffffff' : '#0a0a0f');
   }
@@ -62,6 +62,8 @@
     navMenu?.removeAttribute('aria-hidden');
     navMenu?.setAttribute('aria-modal', 'true');
     document.body.style.overflow = 'hidden';
+    document.getElementById('main')?.setAttribute('inert', '');
+    document.querySelector('footer')?.setAttribute('inert', '');
     setTimeout(() => navClose?.focus(), 50);
   }
 
@@ -72,6 +74,8 @@
     navMenu?.setAttribute('aria-hidden', 'true');
     navMenu?.removeAttribute('aria-modal');
     document.body.style.overflow = '';
+    document.getElementById('main')?.removeAttribute('inert');
+    document.querySelector('footer')?.removeAttribute('inert');
     navToggle?.focus();
   }
 
@@ -196,8 +200,10 @@
       // Field-level validation
       let hasError = false;
       [['cf-name', name], ['cf-email', email], ['cf-message', message]].forEach(([id, val]) => {
-        const group = document.getElementById(id)?.closest('.form-group');
+        const input = document.getElementById(id);
+        const group = input?.closest('.form-group');
         if (group) group.classList.toggle('field-error', !val);
+        if (input) input.setAttribute('aria-invalid', val ? 'false' : 'true');
         if (!val) hasError = true;
       });
       if (hasError) {
@@ -205,13 +211,17 @@
         return;
       }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        const emailGroup = document.getElementById('cf-email')?.closest('.form-group');
-        emailGroup?.classList.add('field-error');
+        const emailEl = document.getElementById('cf-email');
+        emailEl?.closest('.form-group')?.classList.add('field-error');
+        emailEl?.setAttribute('aria-invalid', 'true');
         showStatus('error', '⚠ Please enter a valid email address.');
         return;
       }
       // Clear errors on successful validation
-      form.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
+      form.querySelectorAll('.field-error').forEach(el => {
+        el.classList.remove('field-error');
+        el.querySelector('input,textarea')?.setAttribute('aria-invalid', 'false');
+      });
 
       // UX: disable button while opening mailto
       if (submitBtn) {
@@ -334,16 +344,17 @@
       const target = document.querySelector(this.getAttribute('href'));
       if (!target) return;
       e.preventDefault();
+      // Skip link: just focus — browser scrolls to match without animation conflict
+      if (target.hasAttribute('tabindex')) {
+        target.focus();
+        return;
+      }
       const headerH = parseInt(
         getComputedStyle(root).getPropertyValue('--header-h') || '72',
         10
       );
       const top = target.getBoundingClientRect().top + window.scrollY - headerH;
       window.scrollTo({ top, behavior: 'smooth' });
-      // Move focus for skip-link and other programmatic targets
-      if (target.hasAttribute('tabindex')) {
-        setTimeout(() => target.focus({ preventScroll: true }), 50);
-      }
     });
   });
 

@@ -54,7 +54,7 @@
 
   --text: #0c0c13;
   --text-2: rgba(12, 12, 19, .68);
-  --text-3: rgba(12, 12, 19, .45);
+  --text-3: rgba(12, 12, 19, .60);
 
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, .06);
   --shadow: 0 8px 32px rgba(0, 0, 0, .08);
@@ -2310,7 +2310,7 @@ html.js [data-reveal].revealed {
   .section__eyebrow { font-size: .8125rem; }
 
   /* Footer link tap targets — ~44px touch height */
-  .footer__link { display: inline-block; padding: .875rem 0; }
+  .footer__link { display: inline-block; padding: .875rem .5rem; }
 
   /* Form note legibility */
   .form-note { font-size: .875rem; }

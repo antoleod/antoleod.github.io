@@ -62,8 +62,14 @@
     const container = document.querySelector('.products__grid');
     if (!container) return;
 
-    container.innerHTML = data.projects.products.map((product, idx) => `
-      <article class="product-card" data-reveal data-delay="${idx + 1}" ${product.disabled ? 'style="opacity:.7"' : ''} ${product.disabled ? `aria-label="${escapeHtml(product.ariaLabel)}"` : ''}>
+    const products = data.projects?.products;
+    if (!Array.isArray(products) || products.length === 0) {
+      container.innerHTML = FALLBACK_MSG;
+      return;
+    }
+
+    container.innerHTML = products.map((product, idx) => `
+      <article class="product-card" data-reveal data-delay="${idx + 1}" ${product.disabled ? 'style="opacity:.7"' : ''} aria-label="${escapeHtml(product.title)} — ${escapeHtml(product.status)}">
         <span class="product-card__status status--${product.status === 'Live' ? 'live' : 'coming'}">${escapeHtml(product.status)}</span>
         ${product.iconImg
           ? `<img class="product-card__icon product-card__icon--img" src="${escapeHtml(product.iconImg)}" alt="${escapeHtml(product.title)} icon" width="48" height="48" loading="lazy" onerror="this.outerHTML='<span class=\\'product-card__icon\\' aria-hidden=\\'true\\'>${escapeHtml(product.icon)}</span>'">`
@@ -115,14 +121,16 @@
 
     function cardWidth() {
       const card = cards[0];
-      if (!card) return 0;
+      if (!card || card.offsetWidth === 0) return 272;
       const style = getComputedStyle(document.querySelector('.products__grid'));
       const gap = parseFloat(style.gap) || 24;
       return card.offsetWidth + gap;
     }
 
     function currentIndex() {
-      return Math.round(viewport.scrollLeft / (cardWidth() || 1));
+      const w = cardWidth();
+      if (!w) return 0;
+      return Math.round(viewport.scrollLeft / w);
     }
 
     function updateState(idx) {
@@ -182,7 +190,10 @@
     const container = document.querySelector('.repo-grid');
     if (!container) return;
 
-    container.innerHTML = data.projects.repositories.map((repo, idx) => {
+    const repos = data.projects?.repositories;
+    if (!Array.isArray(repos) || repos.length === 0) { container.innerHTML = FALLBACK_MSG; return; }
+
+    container.innerHTML = repos.map((repo, idx) => {
       const soon = !!repo.comingSoon;
       const inner = `
         <div class="repo-card__header">
@@ -211,7 +222,7 @@
 
   function getRepoIcon(type) {
     const icons = {
-      'file': '<path d="M3 3h18v18H3z" />',
+      'file': '<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/>',
       'lock': '<rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />',
       'heart': '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />',
       'play': '<polygon points="5 3 19 12 5 21 5 3" />'
@@ -223,7 +234,10 @@
     const container = document.querySelector('.stack__grid');
     if (!container) return;
 
-    container.innerHTML = data.stack.categories.map((cat, idx) => `
+    const cats = data.stack?.categories;
+    if (!Array.isArray(cats) || cats.length === 0) { container.innerHTML = FALLBACK_MSG; return; }
+
+    container.innerHTML = cats.map((cat, idx) => `
       <div class="stack-cat" data-reveal data-delay="${idx + 1}">
         <span class="stack-cat__label">${escapeHtml(cat.label)}</span>
         <div class="stack-items">

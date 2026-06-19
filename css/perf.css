@@ -10,7 +10,7 @@
 .contact,
 .footer {
   content-visibility: auto;
-  contain-intrinsic-size: 0 600px;
+  contain-intrinsic-block-size: auto 600px;
 }
 
 /* Reduce repaints on animated/interactive elements */

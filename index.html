@@ -46,8 +46,6 @@
 
   <!-- ── Theme & Icons ── -->
   <meta name="theme-color" content="#0a0a0f">
-  <meta name="theme-color" content="#8b5cf6" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#7c3aed" media="(prefers-color-scheme: light)">
   <meta name="msapplication-TileColor" content="#8b5cf6">
   <meta name="application-name" content="Oryxen Labs">
   <meta name="apple-mobile-web-app-title" content="Oryxen">
@@ -769,12 +767,12 @@
                 <div class="form-group">
                   <label class="form-label" for="cf-name">Name *</label>
                   <input class="form-input" type="text" id="cf-name" name="name" placeholder="Your name" required
-                    autocomplete="name">
+                    autocomplete="name" aria-required="true" aria-describedby="form-status">
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="cf-email">Email *</label>
                   <input class="form-input" type="email" id="cf-email" name="email" placeholder="you@example.com"
-                    required autocomplete="email" inputmode="email">
+                    required autocomplete="email" inputmode="email" aria-required="true" aria-describedby="form-status">
                 </div>
               </div>
 
@@ -787,7 +785,8 @@
               <div class="form-group">
                 <label class="form-label" for="cf-message">Message *</label>
                 <textarea class="form-textarea" id="cf-message" name="message"
-                  placeholder="Tell us about your idea, project, or question…" required rows="5"></textarea>
+                  placeholder="Tell us about your idea, project, or question…" required rows="5"
+                  aria-required="true" aria-describedby="form-status"></textarea>
               </div>
 
               <button type="submit" class="btn btn--primary form-submit" id="contact-submit">
@@ -798,7 +797,7 @@
                   <polygon points="22 2 15 22 11 13 2 9 22 2" />
                 </svg>
               </button>
-              <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+              <p class="form-status" id="form-status" role="alert" aria-live="assertive"></p>
             </form>
           </div>
         </div>
