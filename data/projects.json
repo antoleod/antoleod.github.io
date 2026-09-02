@@ -44,27 +44,6 @@
       "ariaLabel": "Visit Flowlyne — All-Ages Browser Game"
     },
     {
-      "id": "pulse",
-      "status": "Live",
-      "icon": "🎵",
-      "iconImg": "https://oryxen.tech/pulse/favicon.ico",
-      "title": "Pulse",
-      "description": "A clean, offline-ready music player for the web. Queue your tracks, control playback, and enjoy your music without distractions.",
-      "tags": ["Music", "Player", "PWA", "JavaScript"],
-      "url": "https://oryxen.tech/pulse",
-      "ariaLabel": "Visit Pulse — Music Player"
-    },
-    {
-      "id": "bot",
-      "status": "Live",
-      "icon": "🤖",
-      "title": "Bot",
-      "description": "ServiceNow bookmarklet builder. Unlock, copy, and install intelligent browser bots that supercharge your ServiceNow workflows.",
-      "tags": ["ServiceNow", "Automation", "Bookmarklet", "JavaScript"],
-      "url": "https://oryxen.tech/bot/",
-      "ariaLabel": "Visit Bot — ServiceNow Bot Builder"
-    },
-    {
       "id": "lenaland",
       "status": "Live",
       "icon": "🌈",
