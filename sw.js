@@ -5,7 +5,7 @@
    no user sessions to disrupt, always want latest assets.
    ============================================================ */
 
-const CACHE_NAME = 'oryxen-v3';
+const CACHE_NAME = 'oryxen-v4';
 
 const PRECACHE_URLS = [
   '/',
