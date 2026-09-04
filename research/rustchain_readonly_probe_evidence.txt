@@ -1,0 +1,31 @@
+RustChain read-only probe validation evidence
+Date prepared: 2026-09-04
+
+Local deterministic validation
+------------------------------
+Command: python3 rustchain_readonly_probe.py --self-test
+Result: self-test: PASS
+Exit status: 0
+
+Command: python3 -m py_compile rustchain_readonly_probe.py
+Result: no output
+Exit status: 0
+
+Public endpoint shape checks
+----------------------------
+The three documented HTTPS GET surfaces were independently retrievable through a public web fetch:
+
+https://rustchain.org/health
+Observed JSON object keys included: ok, version, uptime_s, db_rw, backup_age_hours, tip_age_slots.
+
+https://rustchain.org/epoch
+Observed JSON object keys included: blocks_per_epoch, enrolled_miners, epoch, epoch_pot, slot, total_supply_rtc.
+
+https://rustchain.org/api/miners
+Observed top-level JSON shape was an object containing miners[] plus pagination{}, rather than the bare array still shown in docs/API.md at the time this note was prepared. The observed pagination object included count, limit, offset, total, and total_enrolled.
+
+Environment note
+----------------
+The execution sandbox used for the deterministic test had outbound DNS disabled, so the script's live urllib code path could not be executed from that sandbox. I therefore did not claim a sandbox-originated live run. Instead, transport availability and response shape were checked independently on the public HTTPS endpoints, while all parsing/normalization logic was executed locally with deterministic fixtures by --self-test.
+
+No write endpoint, wallet secret, mining action, or production state mutation was used.
