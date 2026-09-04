@@ -1,0 +1,26 @@
+[Unit]
+Description=RustChain Prometheus Exporter
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=rustchain-exporter
+Group=rustchain-exporter
+WorkingDirectory=/opt/rustchain-exporter
+Environment=RUSTCHAIN_NODE_URL=https://rustchain.org
+ExecStart=/usr/bin/python3 /opt/rustchain-exporter/rustchain_exporter.py --node-url ${RUSTCHAIN_NODE_URL} --listen-address 127.0.0.1 --port 9109 --timeout 5 --cache-ttl 15
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target
