@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420" role="img" aria-labelledby="title desc">
+  <title id="title">Observe RustChain Safely</title>
+  <desc id="desc">Cover image for a read-only RustChain observability tutorial.</desc>
+  <rect width="1000" height="420" fill="#111827"/>
+  <rect x="54" y="54" width="892" height="312" rx="28" fill="#172033" stroke="#6b7280" stroke-width="2"/>
+  <circle cx="105" cy="105" r="10" fill="#d1d5db"/>
+  <circle cx="139" cy="105" r="10" fill="#9ca3af"/>
+  <circle cx="173" cy="105" r="10" fill="#6b7280"/>
+  <path d="M104 178h106M104 211h162M104 244h132M104 277h190" stroke="#d1d5db" stroke-width="12" stroke-linecap="round" opacity="0.9"/>
+  <path d="M354 178h48l24 33 37-64 47 97 35-48 42 15h61" fill="none" stroke="#f3f4f6" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="648" cy="211" r="11" fill="#f3f4f6"/>
+  <text x="354" y="296" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700" fill="#f9fafb">Observe RustChain Safely</text>
+  <text x="354" y="335" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#d1d5db">Read-only Python probe • health • epoch • miners</text>
+</svg>
