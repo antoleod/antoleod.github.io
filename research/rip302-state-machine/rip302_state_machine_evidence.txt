@@ -1,0 +1,10 @@
+happy_path: PASS
+  status=completed poster=14.500000 worker=10.000000 community=0.500000 escrow=0.000000
+expiry_refund: PASS
+  status=expired poster=25.000000 escrow=0.000000
+invalid_transition: PASS
+  rejected=only claimed jobs can be delivered
+
+Validation also performed locally:
+python -m py_compile rip302_state_machine_lab.py
+Result: PASS (exit code 0)
