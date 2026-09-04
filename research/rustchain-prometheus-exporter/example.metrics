@@ -1,0 +1,47 @@
+# Example output generated from test_exporter.py fixtures (not a claimed live scrape).
+# HELP rustchain_exporter_info Static exporter build information.
+# TYPE rustchain_exporter_info gauge
+rustchain_exporter_info{version="0.1.0"} 1
+# HELP rustchain_exporter_endpoint_up Whether the upstream endpoint returned valid JSON.
+# TYPE rustchain_exporter_endpoint_up gauge
+rustchain_exporter_endpoint_up{endpoint="epoch"} 1
+rustchain_exporter_endpoint_up{endpoint="health"} 1
+rustchain_exporter_endpoint_up{endpoint="miners"} 1
+# HELP rustchain_node_up Whether the RustChain node reports ok=true.
+# TYPE rustchain_node_up gauge
+rustchain_node_up 1
+# HELP rustchain_node_uptime_seconds RustChain node uptime in seconds.
+# TYPE rustchain_node_uptime_seconds gauge
+rustchain_node_uptime_seconds 399149
+# HELP rustchain_node_tip_age_slots Age of the chain tip measured in slots.
+# TYPE rustchain_node_tip_age_slots gauge
+rustchain_node_tip_age_slots 0
+# HELP rustchain_epoch_number Current RustChain epoch number.
+# TYPE rustchain_epoch_number gauge
+rustchain_epoch_number 189
+# HELP rustchain_epoch_slot Current RustChain slot number.
+# TYPE rustchain_epoch_slot gauge
+rustchain_epoch_slot 27299
+# HELP rustchain_epoch_enrolled_miners Enrolled miners reported by /epoch.
+# TYPE rustchain_epoch_enrolled_miners gauge
+rustchain_epoch_enrolled_miners 3
+# HELP rustchain_epoch_pot_rtc RTC reward pot reported for the current epoch.
+# TYPE rustchain_epoch_pot_rtc gauge
+rustchain_epoch_pot_rtc 1.5
+# HELP rustchain_total_supply_rtc Total RTC supply reported by /epoch.
+# TYPE rustchain_total_supply_rtc gauge
+rustchain_total_supply_rtc 8.38861e+06
+# HELP rustchain_miners_reported Number of miner records returned by /api/miners.
+# TYPE rustchain_miners_reported gauge
+rustchain_miners_reported 3
+# HELP rustchain_miners_by_device_family Miner records grouped by device_family.
+# TYPE rustchain_miners_by_device_family gauge
+rustchain_miners_by_device_family{device_family="Apple Silicon"} 1
+rustchain_miners_by_device_family{device_family="x86"} 2
+# HELP rustchain_miners_by_antiquity_multiplier Miner records grouped by reported antiquity multiplier.
+# TYPE rustchain_miners_by_antiquity_multiplier gauge
+rustchain_miners_by_antiquity_multiplier{multiplier="0.8"} 2
+rustchain_miners_by_antiquity_multiplier{multiplier="1.2"} 1
+# HELP rustchain_scrape_success Whether all configured RustChain upstream endpoints succeeded.
+# TYPE rustchain_scrape_success gauge
+rustchain_scrape_success 1
