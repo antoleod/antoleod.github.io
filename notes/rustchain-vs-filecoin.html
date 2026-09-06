@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RustChain vs Filecoin: Hardware Age vs Storage Capacity — Oryxen Notes</title>
+  <meta name="description" content="A technical comparison of RustChain Proof-of-Antiquity and Filecoin proof-of-storage: what resource is scarce, how participation is verified, and how the hardware incentives differ.">
+  <meta name="author" content="Gean (antoleod)">
+  <link rel="canonical" href="https://oryxen.tech/notes/rustchain-vs-filecoin.html">
+  <style>
+    :root{color-scheme:light dark;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{max-width:820px;margin:0 auto;padding:32px 20px 72px;line-height:1.7}a{color:inherit;text-decoration-thickness:.08em;text-underline-offset:.16em}.eyebrow{font-size:.82rem;text-transform:uppercase;letter-spacing:.12em;opacity:.65}h1{font-size:clamp(2rem,6vw,3.5rem);line-height:1.05;margin:.4rem 0 1rem}h2{margin-top:2.2rem}p,li{font-size:1.04rem}.lede{font-size:1.22rem;opacity:.9}.note{border-left:3px solid currentColor;padding:.2rem 1rem;opacity:.8}table{width:100%;border-collapse:collapse;margin:1.5rem 0}th,td{text-align:left;vertical-align:top;padding:.7rem;border-bottom:1px solid color-mix(in srgb,currentColor 20%,transparent)}footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid color-mix(in srgb,currentColor 20%,transparent);opacity:.78}
+  </style>
+</head>
+<body>
+  <p><a href="https://oryxen.tech/">← Oryxen Labs</a></p>
+  <article>
+    <p class="eyebrow">Oryxen field note · 6 September 2026</p>
+    <h1>RustChain vs Filecoin: hardware age vs storage capacity</h1>
+    <p class="lede">Both RustChain and Filecoin try to attach blockchain rewards to physical infrastructure, but they choose very different scarce resources. Filecoin proves that storage providers hold data over time. RustChain’s experimental Proof-of-Antiquity design tries to prove that participation comes from a real machine and then gives protocol-defined weight to the machine’s age and hardware characteristics.</p>
+    <p><strong>By Gean (<a href="https://github.com/antoleod">@antoleod</a>).</strong> This is an independent technical comparison based on public project documentation. It is not investment advice.</p>
+
+    <h2>Filecoin turns storage commitments into cryptographic proofs</h2>
+    <p>Filecoin’s core idea is easy to explain without reducing it to “rent out a hard drive.” A storage provider commits sectors containing client data, then must prove that the data was replicated and remains available for the duration of the storage commitment. The Filecoin specification calls the first step Proof of Replication (PoRep): a provider proves that it created a unique replica of the data. The ongoing step is Proof of Spacetime (PoSt), which creates continuing evidence that the provider still stores the sectors it promised to store.</p>
+    <p>Filecoin’s documentation describes WindowPoSt as repeated Merkle-based proofs over a miner’s sectors, submitted as a SNARK. That history of successful proofs gives the network evidence that the provider has continued storing the pledged data. Storage power also participates in Filecoin’s block-production process through its power table and WinningPoSt.</p>
+    <p>The scarce economic resource is therefore useful storage capacity plus the ability to keep that storage online and prove it repeatedly. Hardware matters, but mainly because it enables reliable sealing, proving and storage operations.</p>
+
+    <h2>RustChain makes the machine itself part of the claim</h2>
+    <p>RustChain starts from a different question. Its <a href="https://github.com/Scottcjn/Rustchain">public repository</a> describes Proof of Antiquity as a mechanism for identifying real physical machines and rewarding older hardware more heavily. Instead of asking a provider to prove possession of a particular stored dataset, RustChain’s attestation layer looks at characteristics of the machine: clock or oscillator drift, cache timing, SIMD identity, thermal behavior, instruction-path jitter and anti-emulation checks are all documented as inputs to the physical-hardware fingerprint.</p>
+    <p>The project then applies hardware-age multipliers. The current README, for example, documents a PowerPC G4 at 2.5× and modern x86-64 at 0.8×. Those numbers are policy choices inside RustChain, not measurements of general computing value. They make the protocol’s incentive explicit: keeping an older, verifiable machine functioning can be rewarded more than replacing it with newer commodity hardware.</p>
+
+    <h2>Both are DePIN-like, but they verify different promises</h2>
+    <table>
+      <thead><tr><th>Question</th><th>Filecoin</th><th>RustChain</th></tr></thead>
+      <tbody>
+        <tr><td>What resource is scarce?</td><td>Committed storage capacity over time</td><td>Verified physical hardware, with age as an explicit reward input</td></tr>
+        <tr><td>What must a participant prove?</td><td>That data was replicated and continues to be stored</td><td>That the participant is a real machine matching its claimed hardware characteristics</td></tr>
+        <tr><td>Primary proof machinery</td><td>PoRep, WinningPoSt, WindowPoSt, Merkle proofs and SNARKs</td><td>Hardware telemetry and anti-emulation attestation defined by the project</td></tr>
+        <tr><td>Main hardware incentive</td><td>Reliable capacity and proving performance</td><td>Longevity, diversity and resistance to cheap virtualization</td></tr>
+        <tr><td>Maturity</td><td>Large production storage network with a formal proof system</td><td>Experimental, much smaller network and evolving attestation implementation</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The verification problem is fundamentally different</h2>
+    <p>Filecoin’s proofs are tied to data commitments. A verifier does not need to know whether a storage provider owns a fashionable server or a ten-year-old chassis; the relevant question is whether the cryptographic proof matches the committed data and protocol state. That keeps the proof close to the service being sold: storage.</p>
+    <p>RustChain’s claim is more physical. If rewards depend on the age and identity of the actual machine, then virtualization and spoofing become central threats. A participant that can convincingly imitate an old PowerPC machine from a modern VM could capture a reward intended for scarce real hardware. That is why RustChain spends so much of its design surface on anti-emulation and cross-checking architecture signals.</p>
+    <p>This is also where RustChain carries more implementation risk. Physical measurements are noisy. Operating systems expose different information. Real machines can have replaced components. Emulators improve. A good attestation system therefore has to distinguish “unusual but legitimate” from “synthetic and dishonest” without turning the network into a false-positive machine.</p>
+
+    <h2>Different environmental stories</h2>
+    <p>Filecoin’s sustainability argument is mostly about turning already-available storage infrastructure into a market for persistent data. RustChain’s environmental angle is more direct and narrower: it tries to extend the useful life of computers that might otherwise be retired. The protocol makes old hardware economically interesting by design.</p>
+    <p>Those stories should not be overstated. Running old hardware still consumes electricity, and storing data reliably at scale still requires substantial infrastructure. Neither system magically makes hardware impact disappear. The meaningful distinction is the incentive target: Filecoin pays for continued storage service; RustChain tries to pay for keeping verifiable physical machines, especially older ones, active.</p>
+
+    <h2>Which model is stronger?</h2>
+    <p>For a production storage market, Filecoin’s design is much more mature and much closer to the service being verified. The proofs answer a specific commercial question: did the provider keep storing the data? The protocol has a formalized proof stack and operational penalties when storage commitments are not maintained.</p>
+    <p>RustChain is more experimental but explores a less common design space. It asks whether hardware history itself can become an economic primitive. That is appealing for retro-computing and preservation because most computing markets reward replacement: faster CPUs, denser disks, newer GPUs. RustChain intentionally reverses part of that logic.</p>
+    <p>The hard question is whether physical fingerprinting can remain reliable when there is enough money to attack it. Filecoin’s proofs can be studied largely as cryptographic and systems mechanisms. RustChain also has to deal with measurement science, hardware quirks and adversarial emulation. If it succeeds, it could create a genuinely different kind of DePIN. If those checks are easy to spoof, the antiquity multiplier becomes exactly the thing attackers will target.</p>
+
+    <h2>My conclusion</h2>
+    <p>Filecoin and RustChain both connect rewards to real infrastructure, but their promises are almost orthogonal. Filecoin says: “prove you stored this data for the time you committed.” RustChain says: “prove this is the physical machine you claim it is, then let the protocol care how old and unusual that machine is.”</p>
+    <p>I would choose Filecoin’s model when the goal is dependable, economically enforced storage. I find RustChain’s model interesting when the goal is hardware preservation and Sybil-resistant physical identity. The second idea is less mature and harder to verify, but that difficulty is also where the research value is.</p>
+
+    <p class="note"><strong>Sources:</strong> <a href="https://docs.filecoin.io/basics/what-is-filecoin/blockchain">Filecoin Docs — Blockchain and proofs</a>; <a href="https://spec.filecoin.io/algorithms/pos/post/">Filecoin Specification — Proof of Spacetime</a>; <a href="https://github.com/Scottcjn/Rustchain">RustChain repository</a>; <a href="https://github.com/Scottcjn/Rustchain/blob/main/docs/WHITEPAPER.md">RustChain whitepaper</a>; <a href="https://rustchain.org/explorer/">RustChain explorer</a>.</p>
+  </article>
+  <footer>Independent field note published by Oryxen Labs. Last reviewed 6 September 2026.</footer>
+</body>
+</html>
