@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RustChain vs Bitcoin: What Should Mining Reward? — Oryxen Notes</title>
+  <meta name="description" content="A technical, non-hype comparison of Bitcoin proof-of-work and RustChain proof-of-antiquity: what each mechanism rewards, how miners prove participation, and where the trade-offs differ.">
+  <meta name="author" content="Gean (antoleod)">
+  <link rel="canonical" href="https://oryxen.tech/notes/rustchain-vs-bitcoin.html">
+  <style>
+    :root{color-scheme:light dark;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{max-width:820px;margin:0 auto;padding:32px 20px 72px;line-height:1.7}a{color:inherit;text-decoration-thickness:.08em;text-underline-offset:.16em}.eyebrow{font-size:.82rem;text-transform:uppercase;letter-spacing:.12em;opacity:.65}h1{font-size:clamp(2rem,6vw,3.5rem);line-height:1.05;margin:.4rem 0 1rem}h2{margin-top:2.2rem}p,li{font-size:1.04rem}.lede{font-size:1.22rem;opacity:.9}.note{border-left:3px solid currentColor;padding:.2rem 1rem;opacity:.8}table{width:100%;border-collapse:collapse;margin:1.5rem 0}th,td{text-align:left;vertical-align:top;padding:.7rem;border-bottom:1px solid color-mix(in srgb,currentColor 20%,transparent)}footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid color-mix(in srgb,currentColor 20%,transparent);opacity:.78}
+  </style>
+</head>
+<body>
+  <p><a href="https://oryxen.tech/">← Oryxen Labs</a></p>
+  <article>
+    <p class="eyebrow">Oryxen field note · 6 September 2026</p>
+    <h1>RustChain vs Bitcoin: what should mining reward?</h1>
+    <p class="lede">Bitcoin and RustChain both use the word “mining,” but they are trying to reward different things. Bitcoin rewards provable computational work in a global hash-rate competition. RustChain’s experimental Proof-of-Antiquity design tries to reward verified physical machines, with extra weight for older hardware. The interesting comparison is not which chain is “better”; it is what each one chooses to make scarce.</p>
+    <p><strong>By Gean (<a href="https://github.com/antoleod">@antoleod</a>).</strong> This is an independent technical comparison, not investment advice and not an endorsement of either asset.</p>
+
+    <h2>Bitcoin makes work the scarce resource</h2>
+    <p>Bitcoin’s proof-of-work mechanism is deliberately simple to state: miners repeatedly hash candidate block headers, searching for a result below the network target. The Bitcoin developer documentation describes miners handing an 80-byte block header and a target threshold to mining hardware, which iterates nonce values until it finds an acceptable hash. In pooled mining, lower-difficulty “shares” are used to estimate how much work each participant contributed.</p>
+    <p>That design makes computational work the basis of block production. If more hash power enters the network, difficulty adjusts over time so that valid blocks remain hard to find. The security argument comes from the cost of redoing proof-of-work: changing old transaction history would require recomputing the work for the affected block and the blocks after it, while competing with the honest chain.</p>
+    <p>In practice, this has also made Bitcoin mining highly specialized. The official Bitcoin developer guide explicitly describes modern mining hardware as ASICs. That is not an accident or a protocol bug; specialization is a predictable result when the competition rewards raw hashing efficiency.</p>
+
+    <h2>RustChain tries to make physical identity and longevity scarce</h2>
+    <p>RustChain takes a very different position. Its <a href="https://github.com/Scottcjn/Rustchain">public repository</a> describes Proof of Antiquity as a DePIN-style mechanism built around real-machine verification. The project documents six categories of hardware signals, including oscillator or clock drift, cache timing, SIMD identity, thermal behavior, instruction-path jitter and anti-emulation checks. The goal is to distinguish physical hardware from virtualized or emulated environments and then apply age-related reward multipliers.</p>
+    <p>The project’s current README gives a concrete example: a PowerPC G4 is documented at a 2.5× antiquity multiplier while modern x86-64 is documented below par at 0.8×. Those figures are RustChain’s own protocol parameters, not performance benchmarks and not a claim that an old G4 can out-hash an ASIC. The point is that RustChain intentionally changes what “competitive” means: age and verified substrate can matter more than raw throughput.</p>
+    <p>That is a much more ambitious identity problem than Bitcoin needs to solve. Bitcoin does not care whether a valid hash came from a garage ASIC, a warehouse, or rented capacity; the proof is the hash itself. RustChain does care where participation comes from, because the reward policy depends on the characteristics of the physical machine. That creates a richer verification surface and, correspondingly, more ways for implementation mistakes or spoofing attempts to matter.</p>
+
+    <h2>The core trade-off</h2>
+    <table>
+      <thead><tr><th>Question</th><th>Bitcoin</th><th>RustChain</th></tr></thead>
+      <tbody>
+        <tr><td>What is being proven?</td><td>Computational work on a block header</td><td>Participation by a verified physical machine plus protocol-defined hardware characteristics</td></tr>
+        <tr><td>What wins economically?</td><td>Efficient hash production</td><td>Verified hardware, with explicit antiquity weighting</td></tr>
+        <tr><td>Hardware trend</td><td>Specialization toward ASIC mining</td><td>Deliberate support for diverse and older architectures</td></tr>
+        <tr><td>Verification complexity</td><td>Low at the proof level: validate the hash and block rules</td><td>Higher: hardware attestation signals must be collected and checked correctly</td></tr>
+        <tr><td>Maturity</td><td>Battle-tested global network with a long operating history</td><td>Experimental project with a much smaller ecosystem</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Where Bitcoin is stronger</h2>
+    <p>Bitcoin has the enormous advantage of time, adversarial exposure and a narrow proof primitive. A node can independently validate whether a block satisfies consensus rules without believing a miner’s story about its hardware. The mining ecosystem is mature, the protocol has been observed under sustained economic attack, and the chain’s security model is widely studied.</p>
+    <p>RustChain cannot claim comparable maturity. Its hardware-attestation thesis is interesting precisely because it introduces questions Bitcoin mostly avoids: How reliable are physical fingerprints across operating systems? How do measurements behave under noise? Which signals can be virtualized? What happens when legitimate machines produce unusual telemetry? Those are engineering and research questions, not marketing details.</p>
+
+    <h2>Where RustChain is more interesting</h2>
+    <p>RustChain is more interesting when the objective is not “maximize secure hash expenditure” but “create an economic reason to keep unusual hardware alive.” Its design deliberately treats a functioning old machine as a scarce resource. That gives the protocol a preservation angle Bitcoin does not have: keeping a PowerPC, SPARC, MIPS or other aging system operational can be economically preferable to replacing it with the newest hardware, at least within RustChain’s own reward rules.</p>
+    <p>It also connects mining to identity. If the attestation works as intended, a physical machine can become a persistent substrate for an agent or service rather than merely a source of anonymous compute. RustChain’s <a href="https://rustchain.org/explorer/">explorer</a> and repository show that this is being treated as a live experiment, not merely a whitepaper concept.</p>
+
+    <h2>My conclusion</h2>
+    <p>Bitcoin and RustChain are not really competing to solve the same optimization problem. Bitcoin asks, “Can you prove that enough computational work was spent to extend this chain?” RustChain asks something closer to, “Can you prove that this is a real physical machine, and should its age or hardware history affect its reward?”</p>
+    <p>I would trust Bitcoin’s proof-of-work model far more for a mature monetary network today because it has decades more validation, a simpler proof boundary and vastly deeper scrutiny. I find RustChain more provocative as a research experiment because it treats hardware longevity as an economic primitive rather than a handicap. Whether that idea survives adversarial pressure depends on the quality of its attestation implementation, and that is the part worth watching.</p>
+
+    <p class="note"><strong>Sources:</strong> <a href="https://developer.bitcoin.org/devguide/mining.html">Bitcoin Developer Guide — Mining</a>; <a href="https://github.com/Scottcjn/Rustchain">RustChain repository</a>; <a href="https://github.com/Scottcjn/Rustchain/blob/main/docs/WHITEPAPER.md">RustChain whitepaper</a>; <a href="https://rustchain.org/explorer/">RustChain explorer</a>.</p>
+  </article>
+  <footer>Independent field note published by Oryxen Labs. Last reviewed 6 September 2026.</footer>
+</body>
+</html>
