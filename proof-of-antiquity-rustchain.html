@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proof-of-Antiquity: Why RustChain Rewards Hardware History</title>
+  <meta name="description" content="A practical explanation of RustChain Proof-of-Antiquity, hardware fingerprinting, one-CPU-one-vote, antiquity multipliers, and how it differs from Proof-of-Work and Proof-of-Stake.">
+  <style>
+    body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.7;max-width:820px;margin:0 auto;padding:40px 22px;color:#171717;background:#fff}h1{line-height:1.15}h2{margin-top:2rem}a{color:inherit}code{background:#f4f4f4;padding:.1rem .3rem;border-radius:4px}.note{border-left:4px solid #999;padding:.5rem 1rem;background:#f7f7f7}footer{margin-top:3rem;padding-top:1rem;border-top:1px solid #ddd;font-size:.92rem;color:#555}
+  </style>
+</head>
+<body>
+<article>
+<h1>Proof-of-Antiquity: Why RustChain Rewards Hardware History</h1>
+<p><strong>Published September 6, 2026.</strong></p>
+
+<p>Most blockchain consensus systems reward one of two things: computational work or capital. Proof-of-Work makes participants spend compute and electricity to compete for blocks, while Proof-of-Stake gives influence to participants who lock economic value. RustChain experiments with a different idea called <strong>Proof-of-Antiquity (PoA)</strong>: make the identity and history of a physical computer part of the consensus and reward model.</p>
+
+<p>The basic intuition is unusual but easy to understand. A twenty-year-old PowerPC machine is scarce in a way that a newly created cloud virtual machine is not. You can spin up hundreds of VMs in minutes, but you cannot instantly manufacture hundreds of genuinely old computers with the timing quirks, architecture characteristics and physical history of real vintage hardware. RustChain tries to turn that physical scarcity into a useful anti-Sybil signal.</p>
+
+<h2>What “1 CPU = 1 Vote” means</h2>
+
+<p>RustChain describes its model as <strong>one CPU, one vote</strong>. The phrase does not mean that the network simply trusts a CPU model string sent by a miner. That would be trivial to spoof. Instead, the project combines hardware fingerprinting checks intended to distinguish physical machines and their architectures from duplicated or emulated identities.</p>
+
+<p>According to the RustChain project documentation, the fingerprinting layer looks at signals such as oscillator or clock drift, cache timing, SIMD capabilities, thermal behavior, instruction-path jitter and anti-emulation checks. The server then cross-checks the submitted observations against the hardware identity being claimed. The goal is to make “create another voter” closer to “bring another real machine” than “copy another software instance.”</p>
+
+<p>This is the important difference between a logical identity and a physical identity. A public key is cheap to create, so one person can generate thousands of keys. An IP address is also a weak identity because cloud infrastructure makes addresses and instances plentiful. A hardware-attested identity is intended to raise the cost of creating convincing duplicates. It should still be treated as an engineering defense rather than a magical guarantee: fingerprinting systems need continual testing as emulation and virtualization improve.</p>
+
+<h2>Why old hardware earns a larger multiplier</h2>
+
+<p>The second half of Proof-of-Antiquity is the <strong>antiquity multiplier</strong>. RustChain deliberately assigns higher reward multipliers to selected older or rarer hardware classes. The current project documentation, for example, lists a PowerPC G4 at 2.5× while modern x86_64 hardware is listed at 0.8×. Other vintage architectures receive different multipliers based on the project’s hardware tiers.</p>
+
+<p>That flips the normal mining incentive. In traditional Proof-of-Work, older hardware becomes less competitive as faster and more efficient equipment appears. RustChain instead wants keeping an old, working machine online to be economically meaningful. In that model, age and rarity are not merely disadvantages; they become part of what the network values.</p>
+
+<p>The project sometimes describes these computing eras as a kind of “silicon stratigraphy”: layers of hardware history represented by surviving machines. A PowerPC, SPARC, 68K, MIPS or other less-common architecture can provide diversity that a fleet made entirely of commodity cloud x86 instances cannot.</p>
+
+<h2>How PoA differs from PoW and PoS</h2>
+
+<p>Proof-of-Work asks, “Who can demonstrate the required computational work?” Proof-of-Stake asks, “Who has economic value at risk?” Proof-of-Antiquity adds a different question: “What real machine is participating, and how credible is its physical hardware identity?”</p>
+
+<p>This does not automatically make PoA better than PoW or PoS; the systems optimize for different constraints and have different attack surfaces. PoW has decades of research around hash-based economic security. PoS has mature mechanisms around stake, slashing and validator economics. PoA depends more heavily on the quality of hardware attestation, fingerprint validation and the rules that assign hardware multipliers. Those components therefore deserve careful public testing.</p>
+
+<h2>Why the anti-emulation idea matters</h2>
+
+<p>If a network rewards a specific hardware class, an obvious attack is to emulate that class. A miner could claim to operate ten vintage machines while actually running ten virtual copies on one modern server. RustChain’s fingerprinting and anti-emulation checks are intended to make that harder by looking beyond the reported CPU name at physical behavior and architecture-specific characteristics.</p>
+
+<p>The security objective is not “a VM can never imitate hardware.” Absolute claims like that are difficult to justify. A more realistic objective is to make convincing emulation expensive, detectable, or inconsistent enough that mass-produced fake identities become unattractive. That is the part of Proof-of-Antiquity I find most interesting: it treats hardware provenance as a continuously tested security signal rather than a static label.</p>
+
+<h2>A preservation incentive disguised as consensus</h2>
+
+<p>There is also a non-cryptographic side to the experiment. A reward system for older machines gives owners a reason to repair and retain hardware that might otherwise be discarded. Whether the economics ultimately create a meaningful environmental benefit is an empirical question, but the incentive is notably different from mining systems that push participants toward frequent hardware upgrades.</p>
+
+<p>For developers, the interesting question is whether physical-machine identity can become a robust primitive for decentralized networks and autonomous agents. For vintage-computing enthusiasts, the appeal is simpler: hardware that has survived for decades can participate because of its history rather than in spite of it.</p>
+
+<p>You can inspect the implementation and current documentation directly in the <a href="https://github.com/Scottcjn/Rustchain">RustChain GitHub repository</a> and follow the public network information at <a href="https://rustchain.org">rustchain.org</a>.</p>
+
+<div class="note"><strong>Disclosure:</strong> This article was prepared for an open RustChain writing bounty. It summarizes the project’s published design and does not constitute an endorsement, investment recommendation, or independent validation of every technical claim.</div>
+</article>
+<footer>Independent technical notes by Oryxen.</footer>
+</body>
+</html>
